@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100&display=swap');
+
+$blue1: #2F80ED;
+$gray5: #e0e0e0;
+$gray2: #4f4f4f;
+$green2: #27AE60;
+$bg-color: #f5f5f5;
+$orange: #F2994A;
+$red: #EB5757;
+$bg-white: #ffffff;
+
+
+$poppins:  'Poppins', sans-serif;
+
+/* Text/H6 */
+.text-h6 {
+  @include text($poppins,normal,400,12px,150%)
+}
+/* Text/H8 */
+.text-h8 {
+  @include text($poppins,normal,500,8px,150%)
+}
+/* Text/H7 */
+.text-h8 {
+  @include text($poppins, normal, 500, 10px, 150%);
+}
+
+

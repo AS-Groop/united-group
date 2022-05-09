@@ -1,30 +1,28 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <component :is="layout">
+    <router-view/>
+  </component>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import MainLayout from "./layaout/Main-Layaout";
+import EmptyLayout from "./layaout/EmptyLayout";
+import UiLayout from "./layaout/Ui-Layaout";
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  components: {MainLayout,EmptyLayout,UiLayout},
+  computed:{
+    layout(){
+      return (this.$route.meta.layout || 'Main') + 'Layout'
     }
+  },
+  mounted() {
+    console.log(this.$route.meta)
   }
-}
+};
+
+</script>
+
+<style lang="scss">
+
 </style>

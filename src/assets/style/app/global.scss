@@ -1,0 +1,41 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  max-width: 1440px;
+  width: 100%;
+  margin: auto;
+  padding: 0 15px;
+}
+#app{
+  background: $bg-color;
+}
+.ui-layout{
+  background: $bg-color;
+  padding: 15px 0;
+
+}
+.ui-section{
+  padding: 30px;
+  margin-bottom: 20px;
+  background: #becede;
+  border-radius: 12px;
+  &-title{
+    margin-bottom: 12px;
+    font-size: 24px;
+    font-weight: 700;
+  }
+  &-content{
+    border-radius: 12px;
+    padding: 4px;
+    background: white;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    .btn, span{
+      margin: 8px;
+    }
+  }
+}

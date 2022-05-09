@@ -1,0 +1,189 @@
+{
+  "header_links": {
+    "link_1": "Do'kon haqida",
+    "link_2": "Katalog",
+    "link_3": "Buyurtmani topish"
+  },
+  "useSorting": {
+    "all": "Barcha mahsulotlar",
+    "new": "Yangi mahsulotlar",
+    "sale": "Chegirmalar"
+  },
+  "card_notification": {
+    "empty": "mavjud emas",
+    "used": "Б/у"
+  },
+  "card_price": {
+    "from": "dan",
+    "before": "gacha"
+  },
+  "currency": " so'm",
+  "copyright": "© Telemag da qilingan, 2021",
+  "about_info": {
+    "region_title": "Ish joylari:"
+  },
+  "about_contact": {
+    "contact_info": "Aloqa ma'lumotlari",
+    "call_user": "Sotuvchiga aloqaga chiqish"
+  },
+  "about_address": {
+    "shops": "Do'konlar",
+    "search_shop": "Do'konlarni qidirish",
+    "show_map": "Xaritada ko'rsatish"
+  },
+  "cart": {
+    "title": "Savat",
+    "checkout": "Buyurtma berish",
+    "show_map": "Xaritada ko'rsatish",
+    "empty": "Sizning savatingiz bo'm bo'sh :(",
+    "back_product": "Tovarlarga qaytish"
+  },
+  "cart_prices": {
+    "products": "Umumiy qiymati",
+    "products_quantity": "Soni",
+    "delivery": "Yetkazib berish narxi",
+    "totals": "Jami xarajat"
+  },
+  "checkout": {
+    "title": "Buyurtma qilish",
+    "checkout": "Buyurtma berish"
+  },
+  "checkout_common": {
+    "common": "Umumiy ma'lumotlar",
+    "name": "Ism",
+    "required_name": "Ismingizni kiriting",
+    "last_name": "Familiya",
+    "required_last_name": "Iltimos, familiyangizni kiriting",
+    "phone_number": "Telefon raqami",
+    "required_phone_number": "Telefon raqamini kiriting",
+    "minLength_phone_number": "To'g'ri telefon raqamini kiriting"
+  },
+  "checkout_delivery": {
+    "delivery": "Etkazib berish",
+    "shop_delivery": "Sotuvchi etkazib berishi",
+    "self": "Uzi olib ketish",
+    "region": "Shahar",
+    "selected_region": "Mintaqangizni tanlang",
+    "address_to_map": "Xaritada manzilni ko'rsating",
+    "shops": "Do'konlar",
+    "show_maps": "Xaritada ko'rsatish"
+  },
+  "checkout_payment": {
+    "title": "To'lov usullari",
+    "payment": "To'lov <strong>y.e.</strong> da",
+    "payment_uzs": "To'lov <strong>so'm</strong> da",
+    "cash": "Naqd pul"
+  },
+  "checkout_comments": {
+    "title": "Qo'shimcha izoh",
+    "typed_comment": "Xabaringizni kiriting"
+  },
+  "checkout_items": {
+    "title": "Buyurtmadagi mahsulotlar",
+    "cnt": "dona."
+  },
+  "product_information": {
+    "purchase_cnt": "Buyurtmalar soni:",
+    "add_cart": "Savatga qo'shish",
+    "call_customer": "Sotuvchiga aloqaga chiqish"
+  },
+  "product_description": {
+    "title": "Tavsif",
+    "show": "boshqalar",
+    "hide": "yashirish"
+  },
+  "product_methods": {
+    "payment": "To'lov usuli:",
+    "payment_cash": "Naqd pul",
+    "delivery": "Yetkazib berish usuli:",
+    "self": "Uzi olib ketish",
+    "free": "Bepul",
+    "shop_delivery": "Sotuvchi etkazib berishi",
+    "free_from": " dan keyin bepul",
+    "contract": "Kelishiladi"
+  },
+  "product_count": {
+    "count":"Omborda",
+    "in_stock_cnt":"{count} dona mavjud",
+    "zero_stock_cnt":"mavjud emas"
+  },
+  "modal_doneCheckout": {
+    "title": "Buyurtma yaratildi",
+    "message": "Buyurtma uchun rahmat! Ma'lumotlaringizni tasdiqlash va to'lovni tashkil qilish uchun siz bilan bog'lanamiz. Kuningiz yaxshi o'tsin \uD83D\uDE0A",
+    "order": "Buyurtma",
+    "copy": "Nusxa olindi",
+    "copy_error": "Nusxa ko'chirib bo'lmadi",
+    "total": "Jami",
+    "call_seller": "Sotuvchiga aloqaga chiqish",
+    "contact": "Aloqa ma'lumotlari",
+    "methods_delivery": "Yetkazib berish usuli",
+    "shop_delivery": "Sotuvchi etkazib berishi",
+    "self": "Uzi olib ketish",
+    "show_map": "Xaritaga ko'rish",
+    "comment": "Izohlar",
+    "products": "Mahsulotlar",
+    "check": "Chek",
+    "methods_payment": "To'lov usuli",
+    "cash": "Naqd pul",
+    "delivery": "Yetkazib berish",
+    "contract": "Kelishiladi",
+    "close": "Yopish"
+  },
+  "map": {
+    "your_address": "Sizni manzilingiz",
+    "cancel": "Bekor qilish",
+    "save": "Saqlash"
+  },
+  "search": {
+    "title": "Qidirish",
+    "search_products": "Mahsulot qidirish",
+    "search_no_result": "Afsuski, sizning so'rovingiz bo'yicha hech narsa topilmadi"
+  },
+  "products": {
+    "search_no_result": "Afsuski, ushbu turkumda hech qanday mahsulot yo'q"
+  },
+  "page_404": {
+    "search_no_result": "Ups!.. Bunday sahifa topilmadi. Ehtimol, u olib tashlangan",
+    "search_no_result_desc": "Iltimos, orqaga qayting va havolaga qayta urinib ko'ring yoki saytda ko'proq mos keladigan narsalarni qidirishga harakat qiling",
+    "serverError": "Ups! <br> biror narsa noto'g'ri ketdi :(",
+    "reload": "Yangilash"
+  },
+
+
+  "modal_doneCheckout_payment": {
+    "message":"Siz <b>{type}</b> orqali to'lov usulini tanladingiz. Buyurtmani to'lash uchun quyidagi havolani bosing:",
+    "total":"To'lanadigan summa ",
+    "ye_cash":"* y.e. valyutasi bo'yicha to'lov naqd pulda amalga oshiriladi.",
+    "confirm":"To'lovni tasdiqlash uchun <strong> kartangizni oxirgi 4 ta raqamini kiriting:</strong>",
+    "submit":"To'lovni tasdiqlash",
+    "error":"Kartangizni oxirgi 4 ta raqamini kiriting"
+  },
+
+  "delete_cart": {
+    "title":"Tasdiqlash",
+    "text":"Haqiqatdan ham savatdan {name} mahsulotni o'chirmoqchimisiz  ",
+    "cancel":"Bekor qilish",
+    "confirm":"Ha, o'chirish"
+  },
+  "search_order": {
+    "title": "Buyurtmani topish",
+    "error": "Bunday buyurtma mavjud emas",
+    "label": "Track kodini kiriting",
+    "history": "Tarix",
+    "order": "Buyurtma",
+    "tracker_id": "Trek-kod:",
+    "no-history": "Buyurtma tarixingiz bo'sh, buyurtmani muvaffaqiyatli ro'yxatdan o'tkazganingizdan so'ng ularni bu erda kuzatib borishingiz mumkin"
+  },
+  "status_text": {
+    "title": "Buyurtma holati",
+    "NEED_PAYMENT": "To'lov kutilmoqda",
+    "NEED_CONFIRMATION": "Tasdiqlash kutilmoqda",
+    "IN_PREPARATION": "Jarayonda",
+    "IN_DELIVERY": "Yetkazib berishda",
+    "DELIVERED": "Yetkazib berildi",
+    "CANCELLED": "Bekor qilindi"
+  },
+  "delete_history": {
+    "text": "Bu buyurtma tarixini oʻchirib tashlamoqchimisiz?"
+  }
+}

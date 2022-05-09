@@ -1,0 +1,84 @@
+.btn {
+  @include text($poppins, normal, 400, 12px, 150%);
+  display: inline-block;
+  border: 1px solid $blue1;
+  color: $bg-white;
+  background: $blue1;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s linear;
+  &:hover{
+    box-shadow: 4px 4px 10px rgba(0,0,0, 0.3);
+  }
+  &:active{
+    opacity: 0.7;
+    user-select: none;
+  }
+  &-lg{
+    @include text($poppins, normal, 400, 12px, 150%);
+    padding: 11px 16px;
+  }
+  &-md{
+    @include text($poppins, normal, 500, 10px, 150%);
+    padding: 8px 16px;
+  }
+  &-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+  }
+  &-outline {
+    background: transparent;
+    border-color: $gray5;
+    color: $blue1;
+  }
+  &-light {
+    background: $gray5;
+    border-color: $gray5;
+    color: $gray2;
+  }
+  &-edit {
+    background: transparent;
+    border-color: $blue1;
+    color: $blue1;
+    @include text($poppins, normal, 500, 10px, 150%);
+    padding: 8px 16px;
+    border-radius: 8px;
+    &:hover{
+      box-shadow: none;
+      background: $blue1;
+      border-color: $bg-white;
+      color: $bg-white;
+    }
+  }
+  &-100{
+    width: 100%;
+  }
+  svg {
+    fill: currentColor;
+    margin-right: 4px;
+  }
+}
+
+.progress-span {
+  display: flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  &.full {
+    background-color: rgba($green2, 0.2);
+    color: $green2;
+  }
+  &.half {
+    background-color: rgba($orange, 0.2);
+    color: $orange;
+  }
+  &.null {
+    background-color: rgba($red, 0.2);
+    color: $red;
+  }
+
+}
