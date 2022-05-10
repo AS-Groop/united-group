@@ -1,36 +1,19 @@
 <template>
   <div class="container">
-    <!----Loader---->
-<!--  <Preloader v-if="load" />-->
-  <!--App Start-->
-    <!--Page-->
     <div class="main__layout">
-
-        <Sidebar></Sidebar>
-
-      <!--///////////Page content wrapper///////////////-->
-      <main class="page-content d-flex flex-column flex-row-fluid">
-
-        <!----Header---->
-<!--        <HeaderDefault />-->
-
+      <Sidebar></Sidebar>
+      <main class="page__content">
         <!----Router---->
-          <router-view></router-view>
-
-
-        <!----Footer---->
-<!--        <Footer />-->
+        <router-view></router-view>
       </main>
-      <!--///////////Page content wrapper End///////////////-->
     </div>
   </div>
 
 </template>
 
 <script>
+import Sidebar from "@/components/app/Sidebar";
 
-
-import Sidebar from "@/components/app/sidebar";
 export default {
   components: {Sidebar}
 }

@@ -65,10 +65,19 @@
       <v-btn type="edit"> Edit </v-btn>
     </div>
   </div>
+  <div class="ui-section">
+    <div class="ui-section-title">
+      Search
+    </div>
+    <div class="ui-section-content">
+      <v-search/>
+    </div>
+  </div>
 </template>
 <script>
 import VBtn from "@/components/ui/vBtn";
+import VSearch from "@/components/ui/vSearch";
 export default {
-  components: {VBtn}
+  components: {VSearch, VBtn}
 }
 </script>

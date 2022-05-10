@@ -1,0 +1,18 @@
+.filter{
+  &__bar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 15px;
+    border-radius: 20px 20px 0px 0px;
+    background: $bg-white;
+  }
+  &__btns{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    .btn{
+      margin-left: 15px;
+    }
+  }
+}

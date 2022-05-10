@@ -16,12 +16,6 @@ Components.forEach(component => {
 app.component(component.name, component)
 });
 
-///Lazy
-// import VueLazyLoad from 'vue3-lazyload'
-// app.use(VueLazyLoad, {
-//     loading: require('../assets/images/loading.gif'),
-//     error: require('../assets/images/no-image.png'),
-// })
 
 /// i18n
 
