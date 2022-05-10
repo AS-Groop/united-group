@@ -1,7 +1,7 @@
 <template>
   <div class="section__page">
     <FilterBar>
-      <v-btn type="outline" svg="filter">Add driver</v-btn>
+      <v-btn type="outline" svg="filter">Filter</v-btn>
       <v-btn svg="plus">Add driver</v-btn>
     </FilterBar>
 <!--    <TableDrivers />-->
