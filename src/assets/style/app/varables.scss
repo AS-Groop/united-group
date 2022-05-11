@@ -7,6 +7,7 @@ $gray2: #4f4f4f;
 $gray3: #828282;
 $gray4: #BDBDBD;
 $gray5: #e0e0e0;
+$gray6: #F2F2F2;
 
 $green2: #27AE60;
 
@@ -15,6 +16,8 @@ $red: #EB5757;
 
 $bg-white: #ffffff;
 $bg-color: #f5f5f5;
+
+$fsm-text: #4C4357;
 
 
 $effect-mini-cart:  0px 0px 4px rgba(0, 0, 0, 0.1);
@@ -36,5 +39,10 @@ $poppins:  'Poppins', sans-serif;
 
 /* Text/H4 */
 .text-h4 {
-  @include text($poppins, normal, 400, 14px, 21%);
+  @include text($poppins, normal, 400, 14px, 21px);
+}
+
+/* Text/H42/Medium */
+.text-h2-med {
+  @include text($poppins, normal, 500, 12px, 18px);
 }

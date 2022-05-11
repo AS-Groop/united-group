@@ -1,13 +1,13 @@
 <template>
   <div class="section">
     <HeaderDefault />
-    <DriversMainPage/>
+    <TrucksMainPage/>
   </div>
 </template>
 <script>
 import HeaderDefault from "@/components/app/header/HeaderDefault";
-import DriversMainPage from "@/components/views/drivers/DriversMainPage";
+import TrucksMainPage from "@/components/views/trucks/TrucksMainPage";
 export default {
-  components: {DriversMainPage, HeaderDefault}
+  components: {TrucksMainPage, HeaderDefault}
 }
 </script>

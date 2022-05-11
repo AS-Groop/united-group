@@ -1,5 +1,4 @@
 <template>
-<!--  // buttons -->
   <div class="ui-section">
     <div class="ui-section-title">
       Buttons
@@ -46,7 +45,6 @@
       </v-btn>
     </div>
   </div>
-  <!--  // buttons -->
   <div class="ui-section">
     <div class="ui-section-title">
       Progress span
@@ -55,6 +53,16 @@
       <span class="progress-span text-h8 full">100%</span>
       <span class="progress-span text-h8 half">35%</span>
       <span class="progress-span text-h8 null">0%</span>
+    </div>
+  </div>
+  <div class="ui-section">
+    <div class="ui-section-title">
+      Status
+    </div>
+    <div class="ui-section-content">
+      <span class="status-btn text-h8 full">100%</span>
+      <span class="status-btn text-h8 half">35%</span>
+      <span class="status-btn text-h8 null">0%</span>
     </div>
   </div>
   <div class="ui-section">

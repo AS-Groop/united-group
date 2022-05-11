@@ -8,18 +8,22 @@
   cursor: pointer;
   transition: all 0.3s linear;
   &:hover{
-    box-shadow: 4px 4px 10px rgba(0,0,0, 0.3);
+    box-shadow: 4px 4px 10px rgba(0,0,0, 0.2);
   }
   &:active{
-    opacity: 0.7;
+    box-shadow: inset 4px 4px 10px rgba(0,0,0, 0.2);
     user-select: none;
   }
   &-lg{
+    .btn-content{
     @include text($poppins, normal, 400, 12px, 150%);
+    }
     padding: 11px 16px;
   }
   &-md{
+    .btn-content{
     @include text($poppins, normal, 500, 10px, 150%);
+    }
     padding: 8px 16px;
   }
   &-content{
@@ -83,6 +87,31 @@
 
 }
 
+.status-btn {
+  padding: 3px 8px;
+  min-width: 64px;
+  border-radius: 8px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.full {
+    background-color: rgba($green2, 0.2);
+    color: $green2;
+  }
+
+  &.half {
+    background-color: rgba($orange, 0.2);
+    color: $orange;
+  }
+
+  &.null {
+    background-color: rgba($red, 0.2);
+    color: $red;
+  }
+}
+
 .search{
   &__input{
     position: relative;
@@ -106,4 +135,68 @@
       top: 8px;
     }
   }
+}
+
+
+
+/* This css is for normalizing styles. You can skip this. */
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.form-group {
+  display: block;
+}
+
+.form-group input {
+  padding: 0;
+  height: initial;
+  width: initial;
+  margin-bottom: 0;
+  display: none;
+  cursor: pointer;
+}
+
+.form-group label {
+  position: relative;
+  cursor: pointer;
+}
+
+.form-group label:before {
+  content:'';
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: 1px solid $gray5;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+  padding: 7px;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-right: 5px;
+  border-radius: 2px;
+}
+
+.form-group input:checked + label:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  width: 4px;
+  height: 8px;
+  border: solid #ffffff;
+  border-width: 0 1px 1px 0;
+  transform: rotate(45deg);
+}
+.form-group input:checked + label:before {
+  border: 1px solid $blue1;
+  background: $blue1;
+
 }
