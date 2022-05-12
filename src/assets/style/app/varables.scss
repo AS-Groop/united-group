@@ -16,6 +16,7 @@ $red: #EB5757;
 
 $bg-white: #ffffff;
 $bg-color: #f5f5f5;
+$bg-bg: #f5f5f5;
 
 $fsm-text: #4C4357;
 
@@ -35,6 +36,10 @@ $poppins:  'Poppins', sans-serif;
 /* Text/H7 */
 .text-h7 {
   @include text($poppins, normal, 500, 10px, 150%);
+}
+/* Text/H3 */
+.text-h3 {
+  @include text($poppins, normal, 400, 16px, 24px);
 }
 
 /* Text/H4 */

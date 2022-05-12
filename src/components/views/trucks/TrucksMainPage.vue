@@ -21,13 +21,12 @@
                           :id="index"
                           :col1="{name:i.col1,type:'def'}"
                           :col2="{name:i.col2,type:'def'}"
-                          :col3="{name:i.col3,type:'progress',size:'full'}"
-                          :col4="{name:i.col4,type:'progress',size:'half'}"
-                          :col5="{name:i.col5,type:'progress',size:'null'}"
-                          :col6="{name:i.col6,type:'progress',size:'null'}"
+                          :col3="{name:i.col3,type:'def'}"
+                          :col4="{name:i.col4,type:'def'}"
+                          :col5="{name:i.col5,type:'def'}"
+                          :col6="{name:i.col7,type:'def'}"
                           :col7="{name:i.col7,type:'def'}"
-                          :col8="{name:i.col8,type:'def'}"
-                          :col9="{name:i.col9,type:'status',size:'full'}"
+                          :col8="{name:i.col8,type:'status',size:'full'}"
         />
       </template>
     </vTable>
@@ -44,110 +43,92 @@ import TableBRowDrivers from "@/components/app/table/TableBRowDrivers";
 
 export default {
   components: {TableBRowDrivers, TableHRowDrivers, TableTool, vTable, VBtn, FilterBar},
-  data(){
+  data() {
     return {
-      data_head:[
-          'Driver Name',
-          'Date On Board',
-          'Human Resources',
-          'Safety',
-          'Dispatch Orientation',
-          'Fleet',
-          'Assigned Truck',
-          'Assigned Trailer',
-          'Status',
+      data_head: [
+        'Truck Number',
+        'Make',
+        'Model',
+        'Year Made',
+        'Milage',
+        'Assigned Driver',
+        'With Driver Since',
+        'Status',
       ],
-      data_body:[{
-        col1: 'Ahmad Zakirov',
-        col2: '12.02.2022',
-        col3: '100%',
-        col4: '35%',
-        col5: '0%',
-        col6: '0%',
+      data_body: [{
+        col1: '#120',
+        col2: 'Volvo',
+        col3: 'VNL',
+        col4: '2020',
+        col5: '350,000',
+        col6: '-',
         col7: '-',
-        col8: '-',
-        col9: 'Active',
+        col8: 'Active',
       }, {
-        col1: 'Ahmad Zakirov',
-        col2: '12.02.2022',
-        col3: '100%',
-        col4: '35%',
-        col5: '0%',
-        col6: '0%',
+        col1: '#120',
+        col2: 'Volvo',
+        col3: 'VNL',
+        col4: '2020',
+        col5: '350,000',
+        col6: '-',
         col7: '-',
-        col8: '-',
-        col9: 'Active',
+        col8: 'Active',
       }, {
-        col1: 'Ahmad Zakirov',
-        col2: '12.02.2022',
-        col3: '100%',
-        col4: '35%',
-        col5: '0%',
-        col6: '0%',
+        col1: '#120',
+        col2: 'Volvo',
+        col3: 'VNL',
+        col4: '2020',
+        col5: '350,000',
+        col6: '-',
         col7: '-',
-        col8: '-',
-        col9: 'Active',
+        col8: 'Active',
       }, {
-        col1: 'Ahmad Zakirov',
-        col2: '12.02.2022',
-        col3: '100%',
-        col4: '35%',
-        col5: '0%',
-        col6: '0%',
+        col1: '#120',
+        col2: 'Volvo',
+        col3: 'VNL',
+        col4: '2020',
+        col5: '350,000',
+        col6: '-',
         col7: '-',
-        col8: '-',
-        col9: 'Active',
+        col8: 'Active',
       }, {
-        col1: 'Ahmad Zakirov',
-        col2: '12.02.2022',
-        col3: '100%',
-        col4: '35%',
-        col5: '0%',
-        col6: '0%',
+        col1: '#120',
+        col2: 'Volvo',
+        col3: 'VNL',
+        col4: '2020',
+        col5: '350,000',
+        col6: '-',
         col7: '-',
-        col8: '-',
-        col9: 'Active',
+        col8: 'Active',
       }, {
-        col1: 'Ahmad Zakirov',
-        col2: '12.02.2022',
-        col3: '100%',
-        col4: '35%',
-        col5: '0%',
-        col6: '0%',
+        col1: '#120',
+        col2: 'Volvo',
+        col3: 'VNL',
+        col4: '2020',
+        col5: '350,000',
+        col6: '-',
         col7: '-',
-        col8: '-',
-        col9: 'Active',
+        col8: 'Active',
       }, {
-        col1: 'Ahmad Zakirov',
-        col2: '12.02.2022',
-        col3: '100%',
-        col4: '35%',
-        col5: '0%',
-        col6: '0%',
+        col1: '#120',
+        col2: 'Volvo',
+        col3: 'VNL',
+        col4: '2020',
+        col5: '350,000',
+        col6: '-',
         col7: '-',
-        col8: '-',
-        col9: 'Active',
+        col8: 'Active',
       }, {
-        col1: 'Ahmad Zakirov',
-        col2: '12.02.2022',
-        col3: '100%',
-        col4: '35%',
-        col5: '0%',
-        col6: '0%',
+        col1: '#120',
+        col2: 'Volvo',
+        col3: 'VNL',
+        col4: '2020',
+        col5: '350,000',
+        col6: '-',
         col7: '-',
-        col8: '-',
-        col9: 'Active',
+        col8: 'Active',
       }
-      ,{
-          col1: 'Ahmad Zakirov',
-          col2: '12.02.2022',
-          col3: '100%',
-          col4: '35%',
-          col5: '0%',
-          col6: '0%',
-          col7: '-',
-          col8: '-',
-          col9: 'Active',}]
+      ]
     }
   }
 }

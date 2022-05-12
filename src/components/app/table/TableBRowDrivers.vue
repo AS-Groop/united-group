@@ -1,6 +1,6 @@
 <template>
   <tr>
-    <td v-if="icon">
+    <td @click.stop v-if="icon">
       <v-checked :id="id"/>
     </td>
     <td v-if="col1">
@@ -54,15 +54,6 @@
         <span v-if="col6.type==='status'" class="status-btn text-h8" :class="col6.size" >{{col6.name}}</span>
         <template v-if="col6.type==='def'">
           {{col6.name}}
-        </template>
-      </div>
-    </td>
-    <td v-if="col4">
-      <div :class="col4.type==='progress' && 'center'">
-        <span v-if="col4.type==='progress'" class="progress-span text-h8" :class="col4.size" >{{col4.name}}</span>
-        <span v-if="col4.type==='status'" class="status-btn text-h8" :class="col4.size" >{{col4.name}}</span>
-        <template v-if="col4.type==='def'">
-          {{col4.name}}
         </template>
       </div>
     </td>

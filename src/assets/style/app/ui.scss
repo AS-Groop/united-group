@@ -187,13 +187,18 @@
   content: "";
   display: block;
   position: absolute;
-  top: 3px;
+  top: 7px;
   left: 6px;
   width: 4px;
   height: 8px;
   border: solid #ffffff;
   border-width: 0 1px 1px 0;
   transform: rotate(45deg);
+}
+.table{
+  .form-group input:checked + label:after{
+    top: 3px;
+  }
 }
 .form-group input:checked + label:before {
   border: 1px solid $blue1;

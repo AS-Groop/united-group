@@ -8,6 +8,12 @@ const routes = [
         meta: {auth:true, layout: 'Main'},
     },
     {
+        path: '/drivers/:id',
+        name: 'DriversDetail',
+        component: ()=>import('../views/driversDetail'),
+        meta: {auth:true, layout: 'Main'},
+    },
+    {
         path: '/trucks',
         name: 'Trucks',
         component: ()=>import('../views/trucks'),
@@ -22,8 +28,8 @@ const routes = [
     {
         path: '/',
         name: 'Ui',
-        component: ()=>import('../views/ui'),
-        meta: {auth:true, layout: 'Ui'},
+        component: ()=>import('../views/trucks'),
+        meta: {auth:true, layout: 'Main'},
     },
 ]
 

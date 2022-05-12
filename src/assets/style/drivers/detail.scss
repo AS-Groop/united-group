@@ -1,0 +1,43 @@
+.drivers {
+  &__detail {
+    &-tab {
+      display: flex;
+      padding: 15px 15px 0 15px;
+      color: $gray3;
+      background: $bg-white;
+      border-top: 1px solid $gray6;
+      border-bottom: 1px solid $gray6;
+
+      .tab-item {
+        padding: 0 20px 4px 20px;
+        transition: all 0.3s linear;
+        margin-right: 10px;
+        cursor: pointer;
+
+        &.active,
+        &:hover {
+          border-bottom: 2px solid $blue1;
+          color: $blue1;
+
+        }
+      }
+    }
+    &-item {
+      padding: 10px 15px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      background: $bg-white;
+      color: $gray2;
+      border-bottom: 1px solid $gray6;
+      transition: all 0.3s ease;
+      &:hover{
+        background: $bg-bg;
+      }
+      .check {
+        margin-right: 16px;
+      }
+    }
+  }
+}

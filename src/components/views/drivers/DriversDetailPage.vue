@@ -1,36 +1,15 @@
 <template>
-  <div class="section__page">
-    <FilterBar>
-      <v-btn type="outline" svg="filter">Filter</v-btn>
-      <v-btn svg="plus">Add driver</v-btn>
-    </FilterBar>
-    <vTable>
-      <template v-slot:tool>
-        <TableTool >
-          <v-btn type="edit" size="md">Edit</v-btn>
-          <v-btn type="edit" size="md">Print All Info</v-btn>
-          <v-btn type="edit" size="md">Print Docs</v-btn>
-        </TableTool>
-      </template>
-      <template v-slot:head-row>
-        <TableHRowDrivers icon="true" :data="data_head"/>
-      </template>
-      <template v-slot:body-row>
-        <TableBRowDrivers @click="location(index)" v-for="(i,index) in data_body"
-                          icon="true"
-                          :id="index"
-                          :col1="{name:i.col1,type:'def'}"
-                          :col2="{name:i.col2,type:'def'}"
-                          :col3="{name:i.col3,type:'progress',size:'full'}"
-                          :col4="{name:i.col4,type:'progress',size:'half'}"
-                          :col5="{name:i.col5,type:'progress',size:'null'}"
-                          :col6="{name:i.col6,type:'progress',size:'null'}"
-                          :col7="{name:i.col7,type:'def'}"
-                          :col8="{name:i.col8,type:'def'}"
-                          :col9="{name:i.col9,type:'status',size:'full'}"
-        />
-      </template>
-    </vTable>
+  <div class="section__page drivers">
+    <DetailNav>
+      <DeatilNavBack/>
+      <span class="detail__nav-item text-h6">
+        <v-svg id="icon-phone" width="18" height="18" />+1 773 217 77 77
+      </span>
+      <span class="detail__nav-item text-h6">
+        <v-svg id="icon-massage" width="18" height="18" />akhmad7721@gmail.com
+      </span>
+    </DetailNav>
+    <DriversDetailContent/>
   </div>
 </template>
 
@@ -41,9 +20,15 @@ import vTable from "@/components/app/table/vTable";
 import TableTool from "@/components/app/table/TableTool";
 import TableHRowDrivers from "@/components/app/table/TableHRowDrivers";
 import TableBRowDrivers from "@/components/app/table/TableBRowDrivers";
+import DetailNav from "@/components/app/deatailNav/DetailNav";
+import VSvg from "@/components/ui/vSvg";
+import DeatilNavBack from "@/components/app/deatailNav/DeatilNavBack";
+import DriversDetailContent from "@/components/views/drivers/DriversDetailContent";
 
 export default {
-  components: {TableBRowDrivers, TableHRowDrivers, TableTool, vTable, VBtn, FilterBar},
+  components: {
+    DriversDetailContent,
+    DeatilNavBack, VSvg, DetailNav, TableBRowDrivers, TableHRowDrivers, TableTool, vTable, VBtn, FilterBar},
   data(){
     return {
       data_head:[
@@ -66,7 +51,8 @@ export default {
         col6: '0%',
         col7: '-',
         col8: '-',
-        col9: 'Active'}, {
+        col9: 'Active',
+      }, {
         col1: 'Ahmad Zakirov',
         col2: '12.02.2022',
         col3: '100%',
@@ -75,7 +61,8 @@ export default {
         col6: '0%',
         col7: '-',
         col8: '-',
-        col9: 'Active'}, {
+        col9: 'Active',
+      }, {
         col1: 'Ahmad Zakirov',
         col2: '12.02.2022',
         col3: '100%',
@@ -84,7 +71,8 @@ export default {
         col6: '0%',
         col7: '-',
         col8: '-',
-        col9: 'Active'}, {
+        col9: 'Active',
+      }, {
         col1: 'Ahmad Zakirov',
         col2: '12.02.2022',
         col3: '100%',
@@ -93,7 +81,8 @@ export default {
         col6: '0%',
         col7: '-',
         col8: '-',
-        col9: 'Active'}, {
+        col9: 'Active',
+      }, {
         col1: 'Ahmad Zakirov',
         col2: '12.02.2022',
         col3: '100%',
@@ -102,7 +91,8 @@ export default {
         col6: '0%',
         col7: '-',
         col8: '-',
-        col9: 'Active'}, {
+        col9: 'Active',
+      }, {
         col1: 'Ahmad Zakirov',
         col2: '12.02.2022',
         col3: '100%',
@@ -111,7 +101,8 @@ export default {
         col6: '0%',
         col7: '-',
         col8: '-',
-        col9: 'Active'}, {
+        col9: 'Active',
+      }, {
         col1: 'Ahmad Zakirov',
         col2: '12.02.2022',
         col3: '100%',
@@ -120,7 +111,8 @@ export default {
         col6: '0%',
         col7: '-',
         col8: '-',
-        col9: 'Active'}, {
+        col9: 'Active',
+      }, {
         col1: 'Ahmad Zakirov',
         col2: '12.02.2022',
         col3: '100%',
@@ -129,7 +121,9 @@ export default {
         col6: '0%',
         col7: '-',
         col8: '-',
-        col9: 'Active'},{
+        col9: 'Active',
+      }
+        ,{
           col1: 'Ahmad Zakirov',
           col2: '12.02.2022',
           col3: '100%',
@@ -139,11 +133,6 @@ export default {
           col7: '-',
           col8: '-',
           col9: 'Active',}]
-    }
-  },
-  methods:{
-    location(id){
-      this.$router.push('/drivers/'+id)
     }
   }
 }
