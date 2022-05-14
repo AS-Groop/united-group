@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="(item,i) in items" class="drivers__detail-item" @click="$emit('click')">
+    <div v-for="(item,i) in items" class="drivers__detail-item" @click="$emit('click',item)">
       <v-checked :id="item.name" class-name="check"/>
       {{ item.name }}
     </div>

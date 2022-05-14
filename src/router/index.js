@@ -4,20 +4,30 @@ const routes = [
     {
         path: '/drivers',
         name: 'Drivers',
-        component: ()=>import('../views/drivers'),
-        meta: {auth:true, layout: 'Main'},
-    },
-    {
-        path: '/drivers/:id',
-        name: 'DriversDetail',
-        component: ()=>import('../views/driversDetail'),
-        meta: {auth:true, layout: 'Main'},
+        component: ()=>import('../layaout/Main-Layaout'),
+        children:[
+            {
+                path: '',
+                component: ()=>import('../views/drivers'),
+            },
+            {
+                path: ':id',
+                component: ()=>import('../views/driversDetail'),
+            },
+
+        ]
     },
     {
         path: '/trucks',
         name: 'Trucks',
-        component: ()=>import('../views/trucks'),
-        meta: {auth:true, layout: 'Main'},
+        component: ()=>import('../layaout/Main-Layaout'),
+        children:[
+            {
+                path: '',
+                component: ()=>import('../views/trucks'),
+            },
+
+        ]
     },
     {
         path: '/ui',
@@ -28,8 +38,12 @@ const routes = [
     {
         path: '/',
         name: 'Ui',
-        component: ()=>import('../views/trucks'),
-        meta: {auth:true, layout: 'Main'},
+        component: ()=>import('../layaout/Main-Layaout'),
+    },
+    {
+        path: '/*',
+        name: 'Ui',
+        component: ()=>import('../layaout/Main-Layaout'),
     },
 ]
 

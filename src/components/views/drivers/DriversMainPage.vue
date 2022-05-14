@@ -143,7 +143,7 @@ export default {
   },
   methods:{
     location(id){
-      this.$router.push('/drivers/'+id)
+      this.$router.push(`/drivers/${id}`)
     }
   }
 }
