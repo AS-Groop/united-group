@@ -14,13 +14,13 @@
         @clicks="e=>index=e"
     />
     <TransitionGroup mode="none" name="slide">
-      <DriversTabItems @click="()=>modal=true" :items="items0" v-if="index === 0" />
-      <DriversTabItems @click="()=>modal=true" :items="items1" v-else-if="index === 1" />
-      <DriversTabItems @click="()=>modal=true" :items="items2" v-else-if="index === 2" />
-      <DriversTabItems @click="()=>modal=true" :items="items3" v-else-if="index === 3" />
+      <DriversTabItems @update="(val)=>modal_data=val" :items="items0" v-if="index === 0" />
+      <DriversTabItems @update="(val)=>modal_data=val" :items="items1" v-else-if="index === 1" />
+      <DriversTabItems @update="(val)=>modal_data=val" :items="items2" v-else-if="index === 2" />
+      <DriversTabItems @update="(val)=>modal_data=val" :items="items3" v-else-if="index === 3" />
     </TransitionGroup>
   </div>
-  <ModalDrivers v-if="modal" @close="modal = false"/>
+  <ModalDrivers v-if="modal_data" :modal_data="modal_data" title="Recruited By" @close="modal_data = null"/>
 </template>
 
 <script>
@@ -37,152 +37,47 @@ export default {
   components: {
     DriversDetailContent,DriversTabMenu,ModalDrivers,
     DeatilNavBack,DriversTabItems, VSvg,TableTool, DetailNav},
-  data(){
-    return {
-      data_head:[
-        'Driver Name',
-        'Date On Board',
-        'Human Resources',
-        'Safety',
-        'Dispatch Orientation',
-        'Fleet',
-        'Assigned Truck',
-        'Assigned Trailer',
-        'Status',
-      ],
-      data_body:[{
-        col1: 'Ahmad Zakirov',
-        col2: '12.02.2022',
-        col3: '100%',
-        col4: '35%',
-        col5: '0%',
-        col6: '0%',
-        col7: '-',
-        col8: '-',
-        col9: 'Active',
-      }, {
-        col1: 'Ahmad Zakirov',
-        col2: '12.02.2022',
-        col3: '100%',
-        col4: '35%',
-        col5: '0%',
-        col6: '0%',
-        col7: '-',
-        col8: '-',
-        col9: 'Active',
-      }, {
-        col1: 'Ahmad Zakirov',
-        col2: '12.02.2022',
-        col3: '100%',
-        col4: '35%',
-        col5: '0%',
-        col6: '0%',
-        col7: '-',
-        col8: '-',
-        col9: 'Active',
-      }, {
-        col1: 'Ahmad Zakirov',
-        col2: '12.02.2022',
-        col3: '100%',
-        col4: '35%',
-        col5: '0%',
-        col6: '0%',
-        col7: '-',
-        col8: '-',
-        col9: 'Active',
-      }, {
-        col1: 'Ahmad Zakirov',
-        col2: '12.02.2022',
-        col3: '100%',
-        col4: '35%',
-        col5: '0%',
-        col6: '0%',
-        col7: '-',
-        col8: '-',
-        col9: 'Active',
-      }, {
-        col1: 'Ahmad Zakirov',
-        col2: '12.02.2022',
-        col3: '100%',
-        col4: '35%',
-        col5: '0%',
-        col6: '0%',
-        col7: '-',
-        col8: '-',
-        col9: 'Active',
-      }, {
-        col1: 'Ahmad Zakirov',
-        col2: '12.02.2022',
-        col3: '100%',
-        col4: '35%',
-        col5: '0%',
-        col6: '0%',
-        col7: '-',
-        col8: '-',
-        col9: 'Active',
-      }, {
-        col1: 'Ahmad Zakirov',
-        col2: '12.02.2022',
-        col3: '100%',
-        col4: '35%',
-        col5: '0%',
-        col6: '0%',
-        col7: '-',
-        col8: '-',
-        col9: 'Active',
-      }
-        ,{
-          col1: 'Ahmad Zakirov',
-          col2: '12.02.2022',
-          col3: '100%',
-          col4: '35%',
-          col5: '0%',
-          col6: '0%',
-          col7: '-',
-          col8: '-',
-          col9: 'Active',}]
-    }
-  },
   setup(){
     const index = ref(0)
+    const modal_data = ref(null)
     const modal = ref(false)
     const tabContents = ['DriversTabItems', 'TableTool', 'DriversTabIt', 'DriversTabI'];
 
     const items0=[
-      {name:'Recruited By'},
-      {name:'Approved MVR'},
-      {name:'Company Name'},
-      {name:'Accepted Clearing House Consent'},
-      {name:'PSP'},
-      {name:'Driver Scheduled For Drug Test'},
-      {name:'Experience'},
-      {name:'Truck Number'},
-      {name:'Driver Type'},
-      {name:'Pay:'},
+      {select_name:'Select Recruiter',id: 'Recruited',name:'Recruited By'},
+      {select_name:'',id: 'Approved',name:'Approved MVR'},
+      {select_name:'Select Company',id: 'Company',name:'Company Name'},
+      {select_name:'',id: 'Accepted',name:'Accepted Clearing House Consent'},
+      {select_name:'',id: 'PSP',name:'PSP'},
+      {select_name:'',id: 'Driver',name:'Driver Scheduled For Drug Test'},
+      {select_name:'Experience',id: 'Experience',name:'Experience'},
+      {select_name:'',id: 'Truck',name:'Truck Number'},
+      {select_name:'',id: 'Driver',name:'Driver Type'},
+      {select_name:'',id: 'Pay',name:'Pay:'},
     ]
     const items1=[
-      {name:'Accepted Clearing House Consent'},
-      {name:'PSP'},
-      {name:'Driver Scheduled For Drug Test'},
-      {name:'Experience'},
-      {name:'Truck Number'},
-      {name:'Driver Type'},
-      {name:'Pay:'},
+      {select_name:'',id: 'Accepted',name:'Accepted Clearing House Consent'},
+      {select_name:'',id: 'PSP',name:'PSP'},
+      {select_name:'',id: 'Driver',name:'Driver Scheduled For Drug Test'},
+      {select_name:'',id: 'Experience',name:'Experience'},
+      {select_name:'',id: 'Truck',name:'Truck Number'},
+      {select_name:'',id: 'Driver',name:'Driver Type'},
+      {select_name:'',id: 'Pay',name:'Pay:'},
     ]
     const items2=[
-      {name:'Driver Scheduled For Drug Test'},
-      {name:'Experience'},
-      {name:'Truck Number'},
-      {name:'Driver Type'},
-      {name:'Pay:'},
+      {select_name:'',id: 'Driver',name:'Driver Scheduled For Drug Test'},
+      {select_name:'',id: 'Experience',name:'Experience'},
+      {select_name:'',id: 'Truck',name:'Truck Number'},
+      {select_name:'',id: 'Driver',name:'Driver Type'},
+      {select_name:'',id: 'Pay',name:'Pay:'},
     ]
     const items3=[
-      {name:'Company Name'},
-      {name:'Truck Number'},
-      {name:'Driver Type'},
-      {name:'Pay:'},
+      {select_name:'',id: 'Company',name:'Company Name'},
+      {select_name:'',id: 'Truck',name:'Truck Number'},
+      {select_name:'',id: 'Driver',name:'Driver Type'},
+      {select_name:'',id: 'Pay',name:'Pay:'},
     ]
-    return{tabContents,index,items1,items0,items2,items3,modal}
+    return{tabContents,index,items1,items0,items2,items3,modal,modal_data}
   }
 }
 </script>

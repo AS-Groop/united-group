@@ -55,6 +55,12 @@
 
   }
 
+  tr{
+    &.pointer{
+      cursor: pointer;
+    }
+  }
+
   th {
     & > div {
       @include text($poppins, normal, 500, 12px, 18px);

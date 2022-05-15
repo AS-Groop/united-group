@@ -1,5 +1,5 @@
 <template>
-  <div :class="className"  class="form-group">
+  <div :class="className" @click.stop  class="form-group">
     <input type="checkbox" @click.stop="eventd"  :id="id">
     <label :for="id">{{label}}</label>
   </div>

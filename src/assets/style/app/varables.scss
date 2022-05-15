@@ -18,10 +18,30 @@ $bg-white: #ffffff;
 $bg-color: #f5f5f5;
 $bg-bg: #f5f5f5;
 
+$gr-blue: linear-gradient(135deg, #2FA9ED 0.83%, #276DAE 100.83%);;
+
 $fsm-text: #4C4357;
 
 
 $effect-mini-cart:  0px 0px 4px rgba(0, 0, 0, 0.1);
+
+
+
+$count : 4px;
+$count2 : $count * 2;
+$count3 : $count * 3;
+$count4 : $count * 4;
+$count5 : $count * 5;
+$count6 : $count * 6;
+$count7 : $count * 7;
+$count8 : $count * 8;
+$count9 : $count * 9;
+$count10 : $count * 10;
+$count11 : $count * 11;
+$count12 : $count * 12;
+$count13 : $count * 13;
+
+
 
 $poppins:  'Poppins', sans-serif;
 
@@ -40,6 +60,14 @@ $poppins:  'Poppins', sans-serif;
 /* Text/H3 */
 .text-h3 {
   @include text($poppins, normal, 400, 16px, 24px);
+}
+/* Text/H1 */
+.text-h1 {
+  @include text($poppins, normal, 400, 20px, 30px);
+}
+/* Text/H2 */
+.text-h2 {
+  @include text($poppins, normal, 400, 18px, 27px);
 }
 
 /* Text/H4 */

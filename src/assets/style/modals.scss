@@ -10,10 +10,87 @@
   bottom: 0;
   right: 0;
   z-index: 100;
-  &__drivers{
+
+  &__drivers {
     max-width: 830px;
     width: 100%;
   }
+
+
+
+  &__added {
+    max-width: 735px;
+    width: 100%;
+
+    &-image {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      label {
+        cursor: pointer;
+
+        input {
+          display: none;
+        }
+      }
+
+      .img {
+        //width: 175px;
+        //height: 175px;
+
+        img {
+          //width: 100%;
+          //height: 100%;
+          object-fit: contain;
+        }
+      }
+    }
+
+    &-content {
+      padding: 16px 15px;
+      border: 1px solid $gray5;
+      border-radius: 14px;
+
+      .form__control:not(:last-child) {
+        margin-bottom: $count4;
+      }
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -5px;
+    }
+
+    .col {
+      flex: 1 0 50%;
+      padding: 0 5px;
+    }
+
+    .buttons {
+      margin-top: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      .btn {
+        min-width: 140px;
+        margin-left: 16px;
+
+        &-outline {
+          color: $gray2;
+        }
+      }
+    }
+
+    .modal__body {
+      padding: 17px 32px 32px;
+    }
+  }
+
   &__wrapper {
     position: absolute;
     width: 100%;
@@ -23,7 +100,7 @@
     bottom: 0;
     right: 0;
     z-index: -1;
-    background: rgba(0,0,0,0.3);
+    background: rgba(0, 0, 0, 0.3);
   }
 
   &__content {
@@ -35,5 +112,192 @@
     padding: 15px;
     border-radius: 20px;
     background: $bg-white;
+    max-height: calc(100vh - 10px);
+    overflow-y: auto;
+
+
+    .title {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 40px;
+      margin-top: 15px;
+      color: $blue1;
+
+      svg {
+        position: absolute;
+        top: 0;
+        right: 10px;
+        cursor: pointer;
+      }
+    }
+
+    .hr {
+      margin: 20px 0;
+      width: 100%;
+      height: 1px;
+      background: $bg-bg;
+    }
+
+    .save_btn {
+      width: 100%;
+      margin: 15px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .btn {
+        width: 220px;
+      }
+    }
+  }
+
+  &__files {
+    //width: 100%;
+    display: flex;
+    align-items: center;
+    border: 1px solid $gray5;
+    border-radius: 14px;
+    padding: 8px;
+    margin: 12px 5px 5px;
+
+    .btn {
+      margin-right: 8px;
+    }
+  }
+
+  &__items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
+    .col {
+      flex: 1 0 50%;
+      overflow: hidden;
+      padding: 0 5px;
+
+      &.item {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+
+        .modal__item {
+          margin-right: 5px;
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+
+  &__item {
+    padding: 16px 15px;
+    margin-bottom: 8px;
+    border: 1px solid $gray5;
+    border-radius: 14px;
+    flex: 1 0 370px;
+
+    h2 {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 16px;
+      color: $gray4;
+    }
+
+    .add {
+      width: 100%;
+      height: 24px;
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      color: $blue1;
+
+      span {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__select {
+    max-height: 240px;
+    overflow-y: auto;
+
+    &-radio {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px 10px;
+      margin-bottom: 10px;
+      color: $gray2;
+      border-bottom: 1px solid $gray6;
+
+      &.input {
+        padding-left: 0;
+        border-bottom: 0;
+        margin-bottom: 0;
+      }
+
+      input {
+        outline: none;
+        border-radius: 14px;
+        border: 1px solid $gray5;
+        padding: 8px 15px;
+        @include text($poppins, normal, 400, 16px, 24px);
+      }
+    }
+
+    [type="radio"] + .label {
+      position: absolute;
+      right: 0;
+    }
+
+    [type="radio"]:checked + .label:before,
+    [type="radio"]:not(:checked) + .label:before {
+      content: '';
+      position: absolute;
+      right: 15px;
+      bottom: 0;
+      transform: translateY(50%);
+      width: 24px;
+      height: 24px;
+      border-radius: 100%;
+      background: #fff;
+    }
+
+    [type="radio"]:checked + .label:after,
+    [type="radio"]:not(:checked) + .label:after {
+      content: '';
+      width: 14px;
+      height: 14px;
+      background: $gr-blue;
+      position: absolute;
+      bottom: -7px;
+      right: 20px;
+      border-radius: 100%;
+      -webkit-transition: all 0.2s ease;
+      transition: all 0.2s ease;
+    }
+
+    [type="radio"]:not(:checked) + .label:after {
+      opacity: 0;
+      -webkit-transform: scale(0);
+      transform: scale(0);
+    }
+
+    [type="radio"]:checked + .label:after {
+      opacity: 1;
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+
+    [type="radio"]:not(:checked) + .label:before {
+      border: 1px solid $gray4;
+    }
+
+    [type="radio"]:checked + .label:before {
+      border: 1px solid rgba(#2FA9ED, 1);
+    }
   }
 }

@@ -2,7 +2,7 @@
   <div class="section__page">
     <FilterBar>
       <v-btn type="outline" svg="filter">Filter</v-btn>
-      <v-btn svg="plus">Add driver</v-btn>
+      <v-btn svg="plus" @click="new_driver = true">Add driver</v-btn>
     </FilterBar>
     <vTable>
       <template v-slot:tool>
@@ -17,7 +17,7 @@
       </template>
       <template v-slot:body-row>
         <TableBRowDrivers @click="location(index)" v-for="(i,index) in data_body"
-                          icon="true"
+                          icon="true" cursor="pointer"
                           :id="index"
                           :col1="{name:i.col1,type:'def'}"
                           :col2="{name:i.col2,type:'def'}"
@@ -32,6 +32,18 @@
       </template>
     </vTable>
   </div>
+  <ModalAdded title="Add driver" v-if="new_driver" @close="new_driver = false">
+    <template v-slot:img>
+      <input type="file" accept="image/*">
+      <img src="@/assets/images/avatar.svg" alt="">
+    </template>
+    <template v-slot:content>
+      <v-input  label="Name" place="Enter name"/>
+      <v-input  label="Last name" place="Enter last name"/>
+      <v-input  label="Email" place="Enter email address"/>
+      <v-input  label="Phone" place="Enter phone number"/>
+    </template>
+  </ModalAdded>
 </template>
 
 <script>
@@ -41,9 +53,13 @@ import vTable from "@/components/app/table/vTable";
 import TableTool from "@/components/app/table/TableTool";
 import TableHRowDrivers from "@/components/app/table/TableHRowDrivers";
 import TableBRowDrivers from "@/components/app/table/TableBRowDrivers";
+import ModalAdded from "@/components/app/modals/ModalAdded";
+import {ref} from "vue";
+import router from "@/router";
+import VInput from "@/components/ui/vInput";
 
 export default {
-  components: {TableBRowDrivers, TableHRowDrivers, TableTool, vTable, VBtn, FilterBar},
+  components: {VInput, ModalAdded, TableBRowDrivers, TableHRowDrivers, TableTool, vTable, VBtn, FilterBar},
   data(){
     return {
       data_head:[
@@ -141,10 +157,12 @@ export default {
           col9: 'Active',}]
     }
   },
-  methods:{
-    location(id){
-      this.$router.push(`/drivers/${id}`)
+  setup() {
+    const new_driver = ref(false)
+    function location(id){
+      router.push(`/drivers/${id}`)
     }
+    return {location, new_driver}
   }
 }
 </script>

@@ -1,24 +1,29 @@
 <template>
   <div class="modal">
     <div class="modal__wrapper" @click="$emit('close')"></div>
-    <div class="modal__content modal__drivers">
+    <div class="modal__content modal__added">
       <div class="modal__body">
         <div class="title text-h1">
-          {{ modal_data.name }}<v-svg @click="$emit('close')" id="icon-close" width="30" height="30"/>
+          {{ title }}
         </div>
         <div class="hr"></div>
-        <div class="modal__items">
-          <div class="col" v-if="modal_data.select_name">
-            <ModalSelect :name="modal_data.select_name"/>
+        <div class="row">
+          <div class="col">
+            <div class="modal__added-image">
+              <label class="img">
+                <slot name="img"></slot>
+              </label>
+            </div>
           </div>
-          <div class="col item">
-            <ModalTextarea/>
-            <ModalInput/>
+          <div class="col">
+            <div class="modal__added-content">
+              <slot name="content"></slot>
+            </div>
+            <div class="buttons">
+              <v-btn type="outline">Cancel</v-btn>
+              <v-btn >Save</v-btn>
+            </div>
           </div>
-        </div>
-        <DownloadFiles/>
-        <div class="save_btn">
-          <v-btn type="100">Save</v-btn>
         </div>
       </div>
     </div>
@@ -31,8 +36,9 @@ import ModalTextarea from "@/components/views/drivers/modals/ModalTextarea";
 import DownloadFiles from "@/components/views/drivers/modals/DownloadFiles";
 import VBtn from "@/components/ui/vBtn";
 import ModalSelect from "@/components/views/drivers/modals/ModalSelect";
+import VInput from "@/components/ui/vInput";
 export default {
-  components: {ModalSelect, VBtn, DownloadFiles, ModalTextarea, ModalInput,  VSvg},
+  components: { VBtn, VSvg},
   props: ['title','modal_data']
 
 }

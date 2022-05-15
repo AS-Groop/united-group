@@ -2,7 +2,7 @@
   <div class="section__page">
     <FilterBar>
       <v-btn type="outline" svg="filter">Filter</v-btn>
-      <v-btn svg="plus">Add driver</v-btn>
+      <v-btn svg="plus" @click="new_truck = true">Add Truck</v-btn>
     </FilterBar>
     <vTable>
       <template v-slot:tool>
@@ -31,6 +31,21 @@
       </template>
     </vTable>
   </div>
+
+  <ModalAdded title="Add Truck" v-if="new_truck" @close="new_truck = false">
+    <template v-slot:img>
+      <input type="file" accept="image/*">
+      <img src="@/assets/images/truck.svg" alt="">
+    </template>
+    <template v-slot:content>
+      <v-input  label="Truck number" place="Enter number"/>
+      <v-input  label="Make" place="Enter make"/>
+      <v-input  label="Model" place="Enter model"/>
+      <v-input  label="Year made" place="Enter year"/>
+      <v-input  label="Milage" place="Enter milage"/>
+      <v-input  label="Plate number" place="Enter plate number"/>
+    </template>
+  </ModalAdded>
 </template>
 
 <script>
@@ -40,11 +55,14 @@ import vTable from "@/components/app/table/vTable";
 import TableTool from "@/components/app/table/TableTool";
 import TableHRowDrivers from "@/components/app/table/TableHRowDrivers";
 import TableBRowDrivers from "@/components/app/table/TableBRowDrivers";
+import ModalAdded from "@/components/app/modals/ModalAdded";
+import VInput from "@/components/ui/vInput";
 
 export default {
-  components: {TableBRowDrivers, TableHRowDrivers, TableTool, vTable, VBtn, FilterBar},
+  components: {VInput, ModalAdded, TableBRowDrivers, TableHRowDrivers, TableTool, vTable, VBtn, FilterBar},
   data() {
     return {
+      new_truck:false,
       data_head: [
         'Truck Number',
         'Make',
@@ -130,6 +148,7 @@ export default {
       }
       ]
     }
-  }
+  },
+
 }
 </script>
