@@ -37,6 +37,10 @@
           white-space: nowrap;
           margin-right: 60px;
           color: $gray2;
+          span {
+            color: $gray4;
+            margin-right: 8px;
+          }
         }
       }
       &-item{

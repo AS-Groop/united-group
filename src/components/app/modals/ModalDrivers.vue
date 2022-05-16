@@ -14,6 +14,7 @@
           <div class="col item">
             <ModalTextarea/>
             <ModalInput/>
+            <ModalCommit/>
           </div>
         </div>
         <DownloadFiles/>
@@ -31,8 +32,9 @@ import ModalTextarea from "@/components/views/drivers/modals/ModalTextarea";
 import DownloadFiles from "@/components/views/drivers/modals/DownloadFiles";
 import VBtn from "@/components/ui/vBtn";
 import ModalSelect from "@/components/views/drivers/modals/ModalSelect";
+import ModalCommit from "@/components/views/drivers/modals/ModalCommit";
 export default {
-  components: {ModalSelect, VBtn, DownloadFiles, ModalTextarea, ModalInput,  VSvg},
+  components: {ModalCommit, ModalSelect, VBtn, DownloadFiles, ModalTextarea, ModalInput,  VSvg},
   props: ['title','modal_data']
 
 }

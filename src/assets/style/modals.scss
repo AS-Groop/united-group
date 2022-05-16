@@ -219,6 +219,19 @@
     }
   }
 
+  &__commit {
+    padding: 16px 18px;
+    border-radius: 14px;
+    border: 1px solid $gray6;
+    &-text {
+      color: $gray2;
+      margin-bottom: 9px;
+    }
+    &-date{
+      color: $gray4;
+    }
+  }
+
   &__select {
     max-height: 240px;
     overflow-y: auto;

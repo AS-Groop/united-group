@@ -17,7 +17,7 @@
       </template>
       <template v-slot:body-row>
         <TableBRowDrivers v-for="(i,index) in data_body"
-                          icon="true"
+                          icon="true" @click="$router.push(`/trucks/${index}`)"
                           :id="index"
                           :col1="{name:i.col1,type:'def'}"
                           :col2="{name:i.col2,type:'def'}"

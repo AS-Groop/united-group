@@ -147,7 +147,7 @@
 
     input {
       width: 100%;
-      padding: 12px 20px 9px 46px;
+      padding: 12px 20px 9px 9px;
       outline: none;
       border: 1px solid transparent;
       border-bottom-color: $gray6;
@@ -179,6 +179,9 @@
       border: 1px solid $gray5;
       outline: none;
       @include text($poppins, normal, 400, 16px, 24px);
+      &::placeholder {
+        color: $gray4;
+      }
 
     }
   }

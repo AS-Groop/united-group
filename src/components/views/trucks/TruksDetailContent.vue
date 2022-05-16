@@ -1,42 +1,40 @@
 <template>
-  <div class="section__page drivers">
+  <div class="section__page trucks">
     <DetailNav>
-      <DeatilNavBack title="Ahmad Zakirov" path="/drivers"/>
-      <span class="detail__nav-item text-h6">
-        <v-svg id="icon-phone" width="18" height="18" />+1 773 217 77 77
-      </span>
-      <span class="detail__nav-item text-h6">
-        <v-svg id="icon-massage" width="18" height="18" />akhmad7721@gmail.com
-      </span>
+      <DeatilNavBack title="#120" span="Truck Number:" path="/trucks"/>
     </DetailNav>
-    <DriversTabMenu
-        :index="index"
-        @clicks="e=>index=e"
-    />
-    <TransitionGroup mode="none" name="slide">
-      <DriversTabItems @update="(val)=>modal_data=val" :items="items0" v-if="index === 0" />
-      <DriversTabItems @update="(val)=>modal_data=val" :items="items1" v-else-if="index === 1" />
-      <DriversTabItems @update="(val)=>modal_data=val" :items="items2" v-else-if="index === 2" />
-      <DriversTabItems @update="(val)=>modal_data=val" :items="items3" v-else-if="index === 3" />
-    </TransitionGroup>
+    <div class="trucks__content">
+      <TrucksInfo/>
+      <TrucksPick/>
+      <div class="hr"></div>
+      <div class="trucks__draw">
+        <TrucksDrawItem title="Driver Signature"/>
+        <TrucksDrawItem title="Company representative Signature"/>
+        <TrucksDrawItem area="true" title="Comments"/>
+      </div>
+      <div class="btns"></div>
+    </div>
   </div>
-  <ModalDrivers v-if="modal_data" :modal_data="modal_data" title="Recruited By" @close="modal_data = null"/>
 </template>
 
 <script>
 import DetailNav from "@/components/app/deatailNav/DetailNav";
 import DeatilNavBack from "@/components/app/deatailNav/DeatilNavBack";
-import ModalDrivers from "@/components/app/modals/ModalDrivers";
-import DriversTabMenu from "@/components/views/drivers/DriversTabMenu";
 import DriversTabItems from "@/components/views/drivers/DriversTabItem";
-import TableTool from "@/components/app/table/TableTool";
 import {ref} from "vue";
 import VSvg from "@/components/ui/vSvg";
+import TrucksInfo from "@/components/views/trucks/detail/TrucksInfo";
+import VInput from "@/components/ui/vInput";
+import TrucksPick from "@/components/views/trucks/detail/TrucksPick";
+import TrucksDrawItem from "@/components/views/trucks/detail/TrucksDrawItem";
 export default {
   components: {
+    TrucksDrawItem,
+    TrucksPick,
+    VInput,
+    TrucksInfo,
     VSvg,
-    DriversTabMenu,ModalDrivers,
-    DeatilNavBack,DriversTabItems, TableTool, DetailNav},
+    DeatilNavBack,  DetailNav},
   setup(){
     const index = ref(0)
     const modal_data = ref(null)

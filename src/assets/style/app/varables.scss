@@ -79,3 +79,8 @@ $poppins:  'Poppins', sans-serif;
 .text-h2-med {
   @include text($poppins, normal, 500, 12px, 18px);
 }
+
+/* Text/H3 Semi bold */
+.text-h3-SBold {
+  @include text($poppins, normal, 600, 16px, 24px);
+}

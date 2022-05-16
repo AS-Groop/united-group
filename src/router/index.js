@@ -26,6 +26,10 @@ const routes = [
                 path: '',
                 component: ()=>import('../views/trucks'),
             },
+            {
+                path: ':id',
+                component: ()=>import('../views/trucksDetailPage'),
+            },
 
         ]
     },
@@ -37,12 +41,12 @@ const routes = [
     },
     {
         path: '/',
-        name: 'Ui',
+        name: 'asd',
         component: ()=>import('../layaout/Main-Layaout'),
     },
     {
         path: '/*',
-        name: 'Ui',
+        name: 'sad',
         component: ()=>import('../layaout/Main-Layaout'),
     },
 ]
