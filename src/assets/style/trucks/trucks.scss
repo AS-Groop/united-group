@@ -13,6 +13,15 @@
       background: $gray6;
       margin: 30px 0;
     }
+    .btns{
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      .btn{
+        margin-right: 15px;
+        min-width: 140px;
+      }
+    }
   }
 
   &__title {
@@ -53,8 +62,24 @@
 
   &__pick {
     &-location {
-      width: 50%;
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
       margin-bottom: 30px;
+
+      .form__control {
+        flex: 1 0 50%;
+      }
+    }
+
+    &-radios {
+      flex: 1 0 50%;
+      padding-left: 50px;
+      padding-bottom: 8px;
+      display: flex;
+      label{
+        margin-right: 30px;
+      }
     }
 
     &-loads {
@@ -63,6 +88,17 @@
       p {
         color: $gray2;
         margin-bottom: 15px;
+      }
+
+      .info{
+        display: flex;
+        svg{
+          margin-right: 8px;
+        }
+        span {
+          color: $gray4;
+          @include text('Poppins',normal,400,14px,21px)
+        }
       }
     }
 
@@ -74,7 +110,7 @@
     }
     &-select {
       padding: 0 15px;
-      flex: 1 0 50%;
+      flex: 0 0 50%;
       .pick-select {
         width: 100%;
         display: flex;

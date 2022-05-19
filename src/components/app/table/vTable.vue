@@ -17,8 +17,8 @@
   </div>
 </template>
 <script>
-import TableBRowDrivers from "@/components/app/table/TableBRowDrivers";
-import TableHRowDrivers from "@/components/app/table/TableHRowDrivers";
+import TableBRowDrivers from "@/components/app/table/TableBRow";
+import TableHRowDrivers from "@/components/app/table/TableHRow";
 import TableFooter from "@/components/app/table/TableFooter";
 import TableTool from "@/components/app/table/TableTool";
 import VBtn from "@/components/ui/vBtn";

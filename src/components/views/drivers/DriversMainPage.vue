@@ -51,8 +51,8 @@ import FilterBar from "@/components/app/FilterBar";
 import VBtn from "@/components/ui/vBtn";
 import vTable from "@/components/app/table/vTable";
 import TableTool from "@/components/app/table/TableTool";
-import TableHRowDrivers from "@/components/app/table/TableHRowDrivers";
-import TableBRowDrivers from "@/components/app/table/TableBRowDrivers";
+import TableHRowDrivers from "@/components/app/table/TableHRow";
+import TableBRowDrivers from "@/components/app/table/TableBRow";
 import ModalAdded from "@/components/app/modals/ModalAdded";
 import {ref} from "vue";
 import router from "@/router";
@@ -73,7 +73,8 @@ export default {
         'Assigned Trailer',
         'Status',
       ],
-      data_body:[{
+      data_body:[
+          {
         col1: 'Ahmad Zakirov',
         col2: '12.02.2022',
         col3: '100%',
@@ -82,7 +83,9 @@ export default {
         col6: '0%',
         col7: '-',
         col8: '-',
-        col9: 'Active'}, {
+        col9: 'Active'
+      },
+        {
         col1: 'Ahmad Zakirov',
         col2: '12.02.2022',
         col3: '100%',
@@ -91,7 +94,9 @@ export default {
         col6: '0%',
         col7: '-',
         col8: '-',
-        col9: 'Active'}, {
+        col9: 'Active'
+      },
+        {
         col1: 'Ahmad Zakirov',
         col2: '12.02.2022',
         col3: '100%',
@@ -100,7 +105,9 @@ export default {
         col6: '0%',
         col7: '-',
         col8: '-',
-        col9: 'Active'}, {
+        col9: 'Active'
+      },
+        {
         col1: 'Ahmad Zakirov',
         col2: '12.02.2022',
         col3: '100%',
@@ -109,7 +116,9 @@ export default {
         col6: '0%',
         col7: '-',
         col8: '-',
-        col9: 'Active'}, {
+        col9: 'Active'
+      },
+        {
         col1: 'Ahmad Zakirov',
         col2: '12.02.2022',
         col3: '100%',
@@ -118,7 +127,9 @@ export default {
         col6: '0%',
         col7: '-',
         col8: '-',
-        col9: 'Active'}, {
+        col9: 'Active'
+      },
+        {
         col1: 'Ahmad Zakirov',
         col2: '12.02.2022',
         col3: '100%',
@@ -127,7 +138,9 @@ export default {
         col6: '0%',
         col7: '-',
         col8: '-',
-        col9: 'Active'}, {
+        col9: 'Active'
+      },
+        {
         col1: 'Ahmad Zakirov',
         col2: '12.02.2022',
         col3: '100%',
@@ -136,7 +149,9 @@ export default {
         col6: '0%',
         col7: '-',
         col8: '-',
-        col9: 'Active'}, {
+        col9: 'Active'
+      },
+        {
         col1: 'Ahmad Zakirov',
         col2: '12.02.2022',
         col3: '100%',
@@ -145,7 +160,8 @@ export default {
         col6: '0%',
         col7: '-',
         col8: '-',
-        col9: 'Active'},{
+        col9: 'Active'},
+        {
           col1: 'Ahmad Zakirov',
           col2: '12.02.2022',
           col3: '100%',
@@ -154,7 +170,8 @@ export default {
           col6: '0%',
           col7: '-',
           col8: '-',
-          col9: 'Active',}]
+          col9: 'Active',}
+      ]
     }
   },
   setup() {

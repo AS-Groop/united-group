@@ -1,16 +1,16 @@
 <template>
   <div class="section__page trucks">
     <DetailNav>
-      <DeatilNavBack title="#120" span="Truck Number:" path="/trucks"/>
+      <DeatilNavBack title="#120" span="Trailers Number:" path="/trailers"/>
     </DetailNav>
     <div class="trucks__content">
-      <TrucksInfo/>
-      <TrucksPick/>
+      <TrailersInfo/>
+      <TrailersPick />
       <div class="hr"></div>
       <div class="trucks__draw">
-        <TrucksDrawItem title="Driver Signature"/>
-        <TrucksDrawItem title="Company representative Signature"/>
-        <TrucksDrawItem area="true" title="Comments"/>
+        <TrailersDrawItem title="Driver Signature"/>
+        <TrailersDrawItem title="Company representative Signature"/>
+        <TrailersDrawItem area="true" title="Comments"/>
       </div>
       <div class="btns">
         <v-btn type="outline">Cancel</v-btn>
@@ -26,18 +26,18 @@ import DeatilNavBack from "@/components/app/deatailNav/DeatilNavBack";
 import DriversTabItems from "@/components/views/drivers/DriversTabItem";
 import {ref} from "vue";
 import VSvg from "@/components/ui/vSvg";
-import TrucksInfo from "@/components/views/trucks/detail/TrucksInfo";
 import VInput from "@/components/ui/vInput";
-import TrucksPick from "@/components/views/trucks/detail/TrucksPick";
-import TrucksDrawItem from "@/components/views/trucks/detail/TrucksDrawItem";
 import VBtn from "@/components/ui/vBtn";
+import TrailersInfo from "@/components/views/trailers/detail/TrailersInfo";
+import TrailersPick from "@/components/views/trailers/detail/TrailersPick";
+import TrailersDrawItem from "@/components/views/trailers/detail/TrailersDrawItem";
 export default {
   components: {
+    TrailersDrawItem,
+    TrailersPick,
+    TrailersInfo,
     VBtn,
-    TrucksDrawItem,
-    TrucksPick,
     VInput,
-    TrucksInfo,
     VSvg,
     DeatilNavBack,  DetailNav},
   setup(){

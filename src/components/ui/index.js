@@ -3,6 +3,7 @@ import HeaderDefault from "@/components/app/header/HeaderDefault";
 import vSearch from './vSearch';
 import vChecked from './vChecked';
 import vSvg from './vSvg'
+import vRadioInput from './vRadioInput'
 // import SvgIcon from "@/components/ui/SvgIcon";
 
 export default [
@@ -11,5 +12,6 @@ export default [
   vSearch,
   vChecked,
   vSvg,
+  vRadioInput
   // SvgIcon
 ]

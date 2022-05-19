@@ -34,6 +34,22 @@ const routes = [
         ]
     },
     {
+        path: '/trailers',
+        name: 'Trailers',
+        component: ()=>import('../layaout/Main-Layaout'),
+        children:[
+            {
+                path: '',
+                component: ()=>import('../views/trailers'),
+            },
+            {
+                path: ':id',
+                component: ()=>import('../views/trailersDetailPage'),
+            },
+
+        ]
+    },
+    {
         path: '/ui',
         name: 'Ui',
         component: ()=>import('../views/ui'),
@@ -42,12 +58,12 @@ const routes = [
     {
         path: '/',
         name: 'asd',
-        component: ()=>import('../layaout/Main-Layaout'),
+        component: ()=>import('../layaout/Layout404'),
     },
     {
         path: '/*',
-        name: 'sad',
-        component: ()=>import('../layaout/Main-Layaout'),
+        name: 'asds',
+        component: ()=>import('../layaout/Layout404'),
     },
 ]
 

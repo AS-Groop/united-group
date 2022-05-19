@@ -1,5 +1,5 @@
 <template>
-  <tr :class="'poiner' && cursor">
+  <tr :class="'pointer' && cursor">
     <td @click.stop v-if="icon">
       <v-checked :id="id"/>
     </td>

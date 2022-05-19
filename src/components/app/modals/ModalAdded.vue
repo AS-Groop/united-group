@@ -20,7 +20,7 @@
               <slot name="content"></slot>
             </div>
             <div class="buttons">
-              <v-btn type="outline">Cancel</v-btn>
+              <v-btn @click="$emit('close')" type="outline">Cancel</v-btn>
               <v-btn >Save</v-btn>
             </div>
           </div>
