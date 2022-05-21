@@ -4,7 +4,7 @@
       <div class="title text-h4">{{title}}</div>
       <div class="count text-h4">
         <span>{{count}} select</span>
-        <v-svg id="icon-arrow-select" width="20" height="20"/>
+        <v-svg id="arrow-select" width="20" height="20"/>
       </div>
     </div>
   </div>

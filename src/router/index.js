@@ -50,6 +50,18 @@ const routes = [
         ]
     },
     {
+        path: '/cars',
+        name: 'Cars',
+        component: ()=>import('../layaout/Main-Layaout'),
+        children:[
+            {
+                path: '',
+                component: ()=>import('../views/cars'),
+            }
+
+        ]
+    },
+    {
         path: '/ui',
         name: 'Ui',
         component: ()=>import('../views/ui'),

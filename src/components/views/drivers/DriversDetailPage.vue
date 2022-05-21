@@ -3,10 +3,10 @@
     <DetailNav>
       <DeatilNavBack title="Ahmad Zakirov" path="/drivers"/>
       <span class="detail__nav-item text-h6">
-        <v-svg id="icon-phone" width="18" height="18" />+1 773 217 77 77
+        <v-svg id="phone" width="18" height="18" />+1 773 217 77 77
       </span>
       <span class="detail__nav-item text-h6">
-        <v-svg id="icon-massage" width="18" height="18" />akhmad7721@gmail.com
+        <v-svg id="massage" width="18" height="18" />akhmad7721@gmail.com
       </span>
     </DetailNav>
     <DriversTabMenu

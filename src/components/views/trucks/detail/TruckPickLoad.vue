@@ -2,7 +2,6 @@
   <label class="trucks__pick-inputs">
     <img v-if="img" src="#" alt="">
     <v-svg v-else :id="svg" width="106" height="106"/>
-    <input class="d-none" type="file" />
   </label>
 </template>
 <script>
