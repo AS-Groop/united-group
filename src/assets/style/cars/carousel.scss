@@ -1,0 +1,53 @@
+.cars{
+  &__carousel{
+    .swiper-slide{
+      width: 354px;
+    }
+    &-item {
+      width: 354px;
+      position: relative;
+      height: 180px;
+      border-radius: 19px;
+      background: $bg-white;
+      border: 2px solid transparent;
+      margin-right: 2px;
+      padding: 10px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        border-color: $blue1;
+        cursor: pointer;
+      }
+
+      .title {
+        color: $gray2;
+        margin-bottom: 8px;
+      }
+
+      .text {
+        color: $gray2;
+        margin-bottom: 8px;
+        @include text('Poppins', normal, 600, 16px, 24px)
+      }
+
+      span {
+        padding: 4px 16px;
+        color: $bg-white;
+        border-radius: 16px;
+
+        &.booked {
+          background: $red;
+        }
+
+        &.available {
+          background: $green2;
+        }
+      }
+      img {
+        position: absolute;
+        left: 63px;
+        bottom: 29px;
+      }
+    }
+  }
+}

@@ -12,19 +12,19 @@
       <div class="trucks__pick-loads">
         <p class="text-h4">Please upload an image of the odometer and fuel level to help verify the mileage and fuel used during your trip!</p>
         <p class="info">
-          <v-svg id="icon-info-gray" width="21" height="21" />
+          <v-svg id="info-gray" width="21" height="21" />
           <span>Only for reefer trailers</span>
         </p>
-        <TruckPickLoad svg="icon_full-level" :img="img" />
+        <TruckPickLoad svg="full-level" :img="img" />
       </div>
       <div class="trucks__pick-loads">
         <p class="text-h4">Please upload a minimum of 5 images of the following!</p>
-        <TruckPickLoad svg="icon-track-side" :img="img" />
-        <TruckPickLoad svg="icon-truck-front" :img="img" />
-        <TruckPickLoad svg="icon-truck-side2" :img="img" />
-        <TruckPickLoad svg="icon-truck-back" :img="img" />
-        <TruckPickLoad svg="icon-truck-tires" :img="img" />
-        <TruckPickLoad svg="icon-truck-damages" :img="img" />
+        <TruckPickLoad svg="track-side" :img="img" />
+        <TruckPickLoad svg="truck-front" :img="img" />
+        <TruckPickLoad svg="truck-side2" :img="img" />
+        <TruckPickLoad svg="truck-back" :img="img" />
+        <TruckPickLoad svg="truck-tires" :img="img" />
+        <TruckPickLoad svg="truck-damages" :img="img" />
       </div>
       <div class="trucks__pick-selects">
         <TruckPickSelect title="Check items needing repair" count="7"/>

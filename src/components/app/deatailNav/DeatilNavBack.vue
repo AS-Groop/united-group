@@ -1,6 +1,6 @@
 <template>
   <div class="detail__nav-back">
-    <v-svg @click="$router.push(path)" id="icon-arrowLeft" width="24" height="24" />
+    <v-svg @click="$router.push(path)" id="arrowLeft" width="24" height="24" />
     <span class="text-h3"> <span>{{span}}</span> {{title}}</span>
   </div>
 </template>

@@ -4,8 +4,8 @@
       <DeatilNavBack title="#120" span="Truck Number:" path="/trucks"/>
     </DetailNav>
     <div class="trucks__content">
-      <TrucksInfo/>
-      <TrucksPick/>
+      <TrucksInfo />
+      <TrucksPick @loadPhoto="obj => modalPhoto=obj" @modal1="data1 = true" @modal2="data2 = true" />
       <div class="hr"></div>
       <div class="trucks__draw">
         <TrucksDrawItem title="Driver Signature"/>
@@ -18,12 +18,22 @@
       </div>
     </div>
   </div>
+  <ModalCheckList v-if="data1" @close="data1 = false" title="List of in cab devices">
+    <CheckListItem :name="item.name" v-for="item in data_modal" />
+  </ModalCheckList>
+  <ModalCheckList v-if="data2" @close="data2 = false" title="List of externally displayed signs & decals">
+    <CheckListItem :name="item.name" v-for="item in data_modal2" />
+  </ModalCheckList>
+  <ModalLoadPhotos @popupImg="img = true" v-if="modalPhoto" @close="modalPhoto = null" :title="modalPhoto.name">
+  </ModalLoadPhotos>
+  <PopupPhoto v-if="img" @close="img = false">
+    <img src="@/assets/images/tires1.png" alt="">
+  </PopupPhoto>
 </template>
 
 <script>
 import DetailNav from "@/components/app/deatailNav/DetailNav";
 import DeatilNavBack from "@/components/app/deatailNav/DeatilNavBack";
-import DriversTabItems from "@/components/views/drivers/DriversTabItem";
 import {ref} from "vue";
 import VSvg from "@/components/ui/vSvg";
 import TrucksInfo from "@/components/views/trucks/detail/TrucksInfo";
@@ -31,8 +41,16 @@ import VInput from "@/components/ui/vInput";
 import TrucksPick from "@/components/views/trucks/detail/TrucksPick";
 import TrucksDrawItem from "@/components/views/trucks/detail/TrucksDrawItem";
 import VBtn from "@/components/ui/vBtn";
+import ModalCheckList from "@/components/app/modals/modal-check-list/ModalCheckList";
+import CheckListItem from "@/components/app/modals/modal-check-list/CheckListItem";
+import ModalLoadPhotos from "@/components/app/modals/modal-load-photo/ModalLoadPhotos";
+import PopupPhoto from "@/components/app/modals/modal-load-photo/PopupPhoto";
 export default {
   components: {
+    PopupPhoto,
+    ModalLoadPhotos,
+    CheckListItem,
+    ModalCheckList,
     VBtn,
     TrucksDrawItem,
     TrucksPick,
@@ -41,46 +59,46 @@ export default {
     VSvg,
     DeatilNavBack,  DetailNav},
   setup(){
-    const index = ref(0)
-    const modal_data = ref(null)
-    const modal = ref(false)
-    const tabContents = ['DriversTabItems', 'TableTool', 'DriversTabIt', 'DriversTabI'];
+    const data1 = ref(false)
+    const data2 = ref(false)
+    const img = ref(false)
+    const modalPhoto = ref(null)
+    const data_modal = [
+      {name:'Select All'},
+      {name:'EZ Pass & Best Pass'},
+      {name:'Prepass'},
+      {name:'ELD device'},
+      {name:'Samsara System (Camera)'},
+      {name:'TabletGPS(truck tracking unit)'},
+      {name:'APU unit'},
+      {name:'Power inverter'},
+      {name:'Fridge'},
+      {name:'Microwave'},
+      {name:'Fire extinguisher'},
+      {name:'3 Emergency triangles'},
+      {name:'Set of spare fuses'},
+      {name:'Truck folder'},
+      {name:'Chain'},
+    ]
 
-    const items0=[
-      {select_name:'Select Recruiter',id: 'Recruited',name:'Recruited By'},
-      {select_name:'',id: 'Approved',name:'Approved MVR'},
-      {select_name:'Select Company',id: 'Company',name:'Company Name'},
-      {select_name:'',id: 'Accepted',name:'Accepted Clearing House Consent'},
-      {select_name:'',id: 'PSP',name:'PSP'},
-      {select_name:'',id: 'Driver',name:'Driver Scheduled For Drug Test'},
-      {select_name:'Experience',id: 'Experience',name:'Experience'},
-      {select_name:'',id: 'Truck',name:'Truck Number'},
-      {select_name:'',id: 'Driver',name:'Driver Type'},
-      {select_name:'',id: 'Pay',name:'Pay:'},
+    const data_modal2 = [
+      {name:'Select All'},
+      {name:'DOT/MC/KYU signs'},
+      {name:'Unit Number (displayed on both sides of the truck)'},
+      {name:'IFTA (displayed on both sides of the truck)'},
+      {name:'HUT (New York state weight & distance permit sticker displayed on the front)'},
+      {name:'ELD Sticker'},
+      {name:'Licence Plate'},
     ]
-    const items1=[
-      {select_name:'',id: 'Accepted',name:'Accepted Clearing House Consent'},
-      {select_name:'',id: 'PSP',name:'PSP'},
-      {select_name:'',id: 'Driver',name:'Driver Scheduled For Drug Test'},
-      {select_name:'',id: 'Experience',name:'Experience'},
-      {select_name:'',id: 'Truck',name:'Truck Number'},
-      {select_name:'',id: 'Driver',name:'Driver Type'},
-      {select_name:'',id: 'Pay',name:'Pay:'},
-    ]
-    const items2=[
-      {select_name:'',id: 'Driver',name:'Driver Scheduled For Drug Test'},
-      {select_name:'',id: 'Experience',name:'Experience'},
-      {select_name:'',id: 'Truck',name:'Truck Number'},
-      {select_name:'',id: 'Driver',name:'Driver Type'},
-      {select_name:'',id: 'Pay',name:'Pay:'},
-    ]
-    const items3=[
-      {select_name:'',id: 'Company',name:'Company Name'},
-      {select_name:'',id: 'Truck',name:'Truck Number'},
-      {select_name:'',id: 'Driver',name:'Driver Type'},
-      {select_name:'',id: 'Pay',name:'Pay:'},
-    ]
-    return{tabContents,index,items1,items0,items2,items3,modal,modal_data}
+
+    return{
+      data_modal,
+      data_modal2,
+      modalPhoto,
+      data1,
+      data2,
+      img,
+    }
   }
 }
 </script>
