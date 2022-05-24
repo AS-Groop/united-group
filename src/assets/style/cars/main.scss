@@ -1,0 +1,112 @@
+.cars {
+  &__content {
+    &-page {
+      border-radius: 20px;
+      padding: 30px 15px 15px 15px;
+      background: $bg-white;
+    }
+
+    &-info {
+      display: flex;
+      flex-wrap: wrap;
+
+      .form__control {
+        flex: 1 0 50%;
+      }
+    }
+
+    &-dates {
+      display: flex;
+      flex-wrap: wrap;
+
+      .date {
+        &__item {
+          flex: 1 0 50%;
+        }
+
+        &__cart {
+          padding: 15px 14px;
+          background: #ededed;
+          border-radius: 20px;
+
+          &-title {
+            color: $gray2;
+            text-align: center;
+          }
+
+          &-time {
+            flex: 1 0 50%;
+            position: relative;
+
+            input {
+              width: 100%;
+              border: 1px solid $gray5;
+              border-radius: 14px;
+              padding: 11px 48px 15px 15px;
+              background: white;
+              color: $gray2;
+              outline: none;
+              @include text($poppins, normal, 400, 16px, 24px);
+
+              &::placeholder {
+                color: $gray4;
+              }
+            }
+
+            .svg-date {
+              pointer-events: none;
+              position: absolute;
+              right: 28px;
+              top: 14px;
+            }
+          }
+        }
+      }
+    }
+
+    &-hitory{
+    }
+  }
+}
+.history {
+  &__btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $blue1;
+    cursor: pointer;
+    svg {
+      margin: 0 8px;
+      transition: all 0.3s ease;
+    }
+    .arr{
+      transform: rotate(180deg);
+    }
+    &.active{
+      .arr{
+        transform: rotate(0);
+      }
+    }
+  }
+  &__items {
+    max-width: 470px;
+    margin: auto;
+  }
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid $gray6;
+    padding-bottom: 16px;
+    margin: 15px 0;
+    &-text{
+      color: $gray2;
+      span{
+        color: $gray4;
+      }
+    }
+    &-date {
+      color: $gray4;
+    }
+  }
+}

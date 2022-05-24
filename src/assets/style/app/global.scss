@@ -21,6 +21,9 @@ a{
   text-decoration: none;
   color: black;
 }
+body{
+  background: $bg-bg;
+}
 .container {
   max-width: 1440px;
   width: 100%;
@@ -42,6 +45,20 @@ a{
 .align-center{
   align-items: center;
 }
+
+.justify-center{
+  justify-content: center;
+}
+.justify-between{
+  justify-content: space-between;
+}
+.justify-start{
+  justify-content: flex-start;
+}
+.justify-end{
+  justify-content: flex-end;
+}
+
 .mx-1 {
   margin-right: 4px;
   margin-left: 4px;
@@ -58,6 +75,15 @@ a{
     filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.1));
   }
 }
+
+.content-title{
+  width: 100%;
+  color: $gray2;
+  padding-bottom: 3px;
+  border-bottom: 1px solid $gray6;
+  margin-bottom: 15px;
+}
+
 .ui-layout{
   background: $bg-color;
   padding: 15px 0;
@@ -84,4 +110,47 @@ a{
       margin: 8px;
     }
   }
+}
+
+
+.px-15{
+  padding: 0 15px;
+}
+.py-15{
+  padding: 15px 0;
+}
+.pt-15{
+  padding-top: 15px;
+}
+.pb-15{
+  padding-bottom: 15px;
+}
+.ps-15{
+  padding-left: 15px;
+}
+.pe-15{
+  padding-right: 15px;
+}
+
+.mx--15{
+  margin: 0 -15px;
+}
+
+.my-15{
+  margin: 15px 0;
+}
+.mx-15{
+  margin: 0 15px;
+}
+.mt-15{
+  margin-top: 15px;
+}
+.mb-15{
+  margin-bottom: 15px;
+}
+.ms-15{
+  margin-left: 15px;
+}
+.me-15{
+  margin-right: 15px;
 }
