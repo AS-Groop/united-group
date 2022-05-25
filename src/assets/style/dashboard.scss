@@ -1,0 +1,18 @@
+.dashboard{
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -7px;
+  }
+  &__item {
+    padding: 0 7px;
+    flex: 0 0 50%;
+    &-inner {
+      width: 100%;
+      padding: 30px;
+      border-radius: 20px;
+      background: #FFFFFF;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+}

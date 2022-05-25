@@ -62,6 +62,18 @@ const routes = [
         ]
     },
     {
+        path: '/dashboard',
+        name: 'Dashboard',
+        component: ()=>import('../layaout/Main-Layaout'),
+        children:[
+            {
+                path: '',
+                component: ()=>import('../views/dashboard'),
+            }
+
+        ]
+    },
+    {
         path: '/ui',
         name: 'Ui',
         component: ()=>import('../views/ui'),
@@ -70,10 +82,10 @@ const routes = [
     {
         path: '/',
         name: 'asd',
-        component: ()=>import('../layaout/Layout404'),
+        component: ()=>import('../views/login'),
     },
     {
-        path: '/*',
+        path: '/:pathMatch(.*)*',
         name: 'asds',
         component: ()=>import('../layaout/Layout404'),
     },

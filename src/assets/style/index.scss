@@ -1,4 +1,4 @@
-@import "app";
+@import "app/index";
 @import "sidebar";
 @import "header";
 @import "filterBar";
@@ -6,3 +6,5 @@
 @import "drivers/detail";
 @import "trucks/trucks";
 @import "cars/index";
+@import "login";
+@import "dashboard";
