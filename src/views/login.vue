@@ -26,7 +26,7 @@ export default {
     justify-content: center;
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    background-image: url("../assets/images/login_bg.png");
+    background-image: url("../assets/images/bgbg.jpg");
   }
 }
 </style>

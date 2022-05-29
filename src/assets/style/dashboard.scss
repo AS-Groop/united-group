@@ -10,9 +10,77 @@
     &-inner {
       width: 100%;
       padding: 30px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 14px;
       border-radius: 20px;
       background: #FFFFFF;
       box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    }
+    &-left {
+      width: 250px;
+      margin-right: 60px;
+      .title {
+        margin-bottom: 11px;
+      }
+
+      .count {
+        @include text($poppins, normal, 600, 36px, 54px);
+        color: $blue1;
+        &.yellow{
+          color: $yellow;
+        }
+        &.green{
+          color: $green2;
+        }
+        &.purple{
+          color: $purple1;
+        }
+      }
+
+      .info {
+        margin-top: 8px;
+        color: $blue1;
+        &.yellow{
+          color: $yellow;
+        }
+        &.green{
+          color: $green2;
+        }
+        &.purple{
+          color: $purple1;
+        }
+        svg{
+          fill: currentColor;
+        }
+        span {
+          margin: 0 8px;
+          color: $blue1;
+          &.yellow{
+            color: $yellow;
+          }
+          &.green{
+            color: $green2;
+          }
+          &.purple{
+            color: $purple1;
+          }
+        }
+        p {
+          color: $gray2;
+        }
+      }
+    }
+    &-right{
+      p{
+        margin-bottom: 4px;
+
+      }
+      span {
+        width: 35px;
+        display: inline-block;
+        margin-right: 10px;
+      }
     }
   }
 }
