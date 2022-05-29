@@ -8,11 +8,11 @@ const routes = [
         children:[
             {
                 path: '',
-                component: ()=>import('../views/drivers'),
+                component: ()=>import('../views/driver/drivers'),
             },
             {
                 path: ':id',
-                component: ()=>import('../views/driversDetail'),
+                component: ()=>import('../views/driver/driversDetail'),
             },
 
         ]
@@ -24,11 +24,11 @@ const routes = [
         children:[
             {
                 path: '',
-                component: ()=>import('../views/trucks'),
+                component: ()=>import('../views/truck/trucks'),
             },
             {
                 path: ':id',
-                component: ()=>import('../views/trucksDetailPage'),
+                component: ()=>import('../views/truck/trucksDetailPage'),
             },
 
         ]
@@ -40,11 +40,11 @@ const routes = [
         children:[
             {
                 path: '',
-                component: ()=>import('../views/trailers'),
+                component: ()=>import('../views/trailer/trailers'),
             },
             {
                 path: ':id',
-                component: ()=>import('../views/trailersDetailPage'),
+                component: ()=>import('../views/trailer/trailersDetailPage'),
             },
 
         ]
@@ -56,7 +56,19 @@ const routes = [
         children:[
             {
                 path: '',
-                component: ()=>import('../views/cars'),
+                component: ()=>import('../views/car/cars'),
+            }
+
+        ]
+    },
+    {
+        path: '/reports',
+        name: 'Reports',
+        component: ()=>import('../layaout/Main-Layaout'),
+        children:[
+            {
+                path: '',
+                component: ()=>import('../views/reports/reports'),
             }
 
         ]
