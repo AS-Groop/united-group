@@ -1,7 +1,7 @@
 <template>
   <tr>
     <th v-if="icon" class="icon"> <v-checked id="all"/> </th>
-    <th v-if="data.length" v-for="name in data"><div>{{name}}</div></th>
+    <th v-if="data.length" :class="item.class" v-for="item in data"><div>{{item.name}}</div></th>
   </tr>
 </template>
 <script>

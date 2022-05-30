@@ -1,0 +1,56 @@
+<template>
+  <div class="section__page">
+    <FilterBar>
+      <v-btn type="outline" svg="filter">Filter</v-btn>
+      <v-btn svg="plus" @click="new_truck = true">Add Truck</v-btn>
+    </FilterBar>
+    <DriversTabMenu
+        :index="index"
+        @clicks="e=>index=e"
+        :tabs_content="['Drivers','Trucks','Trailers']"
+        class="bb-0"
+    />
+
+    <TableReportsDrivers v-if="index === 0" />
+    <TableReportsTrucks v-if="index === 1" />
+    <TableTrailer v-if="index === 2" />
+  </div>
+</template>
+
+<script>
+import FilterBar from "@/components/app/FilterBar";
+import VBtn from "@/components/ui/vBtn";
+import vTable from "@/components/app/table/vTable";
+import TableTool from "@/components/app/table/TableTool";
+import TableHRow from "@/components/app/table/TableHRow";
+import TableBRow from "@/components/app/table/TableBRow";
+import ModalAdded from "@/components/app/modals/ModalAdded";
+import VInput from "@/components/ui/vInput";
+import DriversTabMenu from "@/components/views/drivers/DriversTabMenu";
+import {ref} from "vue";
+import TableTrailer from "@/components/views/reports/tables/TableReportsTrailer";
+import TableReportsDrivers from "@/components/views/reports/tables/TableReportsDrivers";
+import TableReportsTrucks from "@/components/views/reports/tables/TableReportsTrucks";
+
+export default {
+  components: {
+    TableReportsTrucks,
+    TableReportsDrivers,
+    TableTrailer,
+    DriversTabMenu, VInput, ModalAdded, TableBRow, TableHRow, TableTool, vTable, VBtn, FilterBar},
+  data() {
+    return {
+      new_truck:false,
+    }
+  },
+  setup(){
+    const index = ref(0);
+
+
+    return{
+      index
+    }
+  }
+
+}
+</script>

@@ -63,15 +63,15 @@ export default {
   data(){
     return {
       data_head:[
-        'Driver Name',
-        'Date On Board',
-        'Human Resources',
-        'Safety',
-        'Dispatch Orientation',
-        'Fleet',
-        'Assigned Truck',
-        'Assigned Trailer',
-        'Status',
+        {name:'Driver Name'},
+        {name:'Date On Board'},
+        {name:'Human Resources'},
+        {name:'Safety'},
+        {name:'Dispatch Orientation'},
+        {name:'Fleet'},
+        {name:'Assigned Truck'},
+        {name:'Assigned Trailer'},
+        {name:'Status'},
       ],
       data_body:[
           {

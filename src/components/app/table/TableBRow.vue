@@ -93,6 +93,7 @@
         </template>
       </div>
     </td>
+    <slot></slot>
   </tr>
 </template>
 <script>

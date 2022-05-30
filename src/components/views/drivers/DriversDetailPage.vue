@@ -11,6 +11,7 @@
     </DetailNav>
     <DriversTabMenu
         :index="index"
+        :tabs_content="tabs_content"
         @clicks="e=>index=e"
     />
     <TransitionGroup mode="none" name="slide">
@@ -41,7 +42,7 @@ export default {
     const index = ref(0)
     const modal_data = ref(null)
     const modal = ref(false)
-    const tabContents = ['DriversTabItems', 'TableTool', 'DriversTabIt', 'DriversTabI'];
+    const tabs_content = ['HR (15%)', 'Sefety(35%)', 'Dispach Orentation (65%)', 'Fleet (92%)'];
 
     const items0=[
       {select_name:'Select Recruiter',id: 'Recruited',name:'Recruited By'},
@@ -77,7 +78,7 @@ export default {
       {select_name:'',id: 'Driver',name:'Driver Type'},
       {select_name:'',id: 'Pay',name:'Pay:'},
     ]
-    return{tabContents,index,items1,items0,items2,items3,modal,modal_data}
+    return{tabs_content,index,items1,items0,items2,items3,modal,modal_data}
   }
 }
 </script>

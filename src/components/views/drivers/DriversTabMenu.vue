@@ -5,10 +5,9 @@
 </template>
 <script>
 export default {
-  props:['index'],
+  props:['index','tabs_content'],
 setup(props){
-  const tabs_content = ['HR (15%)', 'Sefety(35%)', 'Dispach Orentation (65%)', 'Fleet (92%)'];
-  return {tabs_content}
+
 }
 
 }

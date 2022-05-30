@@ -64,14 +64,14 @@ export default {
     return {
       new_truck:false,
       data_head: [
-        'Truck Number',
-        'Make',
-        'Model',
-        'Year Made',
-        'Milage',
-        'Assigned Driver',
-        'With Driver Since',
-        'Status',
+        {name:'Truck Number'},
+        {name:'Make'},
+        {name:'Model'},
+        {name:'Year Made'},
+        {name:'Milage'},
+        {name:'Assigned Driver'},
+        {name:'With Driver Since'},
+        {name:'Status'},
       ],
       data_body: [{
         col1: '#120',

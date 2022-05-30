@@ -62,13 +62,13 @@ export default {
     return {
       new_truck:false,
       data_head: [
-        'Trailer Number',
-        'Make & Model',
-        'Type',
-        'Year Made',
-        'Assigned Driver',
-        'With Driver Since',
-        'Status',
+        {name:'Trailer Number'},
+        {name:'Make & Model'},
+        {name:'Type'},
+        {name:'Year Made'},
+        {name:'Assigned Driver'},
+        {name:'With Driver Since'},
+        {name:'Status'},
       ],
       data_body: [{
         col1: '#120',

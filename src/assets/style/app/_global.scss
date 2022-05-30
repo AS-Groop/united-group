@@ -20,6 +20,7 @@
     border-radius: 5px;
   }
 }
+
 a{
   text-decoration: none;
   color: black;
@@ -36,6 +37,13 @@ body{
 #app{
   background: $bg-color;
 }
+
+.w-150{
+  width: 150px;
+}
+
+
+
 .d-flex{
   display: flex;
 }
@@ -45,6 +53,8 @@ body{
 .d-inline-block{
   display: inline-block;
 }
+
+
 .align-center{
   align-items: center;
 }
@@ -54,6 +64,8 @@ body{
 .align-end{
   align-items: flex-end;
 }
+
+
 
 .justify-center{
   justify-content: center;
@@ -67,6 +79,25 @@ body{
 .justify-end{
   justify-content: flex-end;
 }
+
+.text-right{
+  text-align: right;
+}
+.text-left{
+  text-align: left;
+}
+.text-center{
+  text-align: center;
+}
+.text-end{
+  text-align: end;
+}
+.text-start{
+  text-align: start;
+}
+
+
+
 
 .mx-1 {
   margin-right: 4px;
@@ -162,4 +193,15 @@ body{
 }
 .me-15{
   margin-right: 15px;
+}
+.ms-auto{
+  margin-left: auto;
+}
+
+
+.bt-0{
+  border-top: 0 !important;
+}
+.bb-0{
+  border-bottom: 0 !important;
 }
