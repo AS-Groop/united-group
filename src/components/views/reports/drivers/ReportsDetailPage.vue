@@ -1,7 +1,8 @@
 <template>
-  <div class="section__page drivers">
+  <div class="section__page reports">
+    <FilterBar></FilterBar>
     <DetailNav>
-      <DeatilNavBack title="Ahmad Zakirov" path="/drivers"/>
+      <DeatilNavBack title="Ahmad Zakirov" path="/reports"/>
       <span class="detail__nav-item text-h6">
         <v-svg id="phone" width="18" height="18" />+1 773 217 77 77
       </span>
@@ -15,8 +16,8 @@
         @clicks="e=>index=e"
     />
     <DriversTabItems @update="(val)=>modal_data=val"
-                       :items="index === 0 ? items0 : index === 1 ? items1 : index === 2 ? items2 : index === 3 ? items3 : ''"
-                       v-if="index >= 0" />
+                     :items="index === 0 ? items0 : index === 1 ? items1 : index === 2 ? items2 : index === 3 ? items3 : ''"
+                     v-if="index >= 0" />
   </div>
   <ModalDrivers v-if="modal_data" :modal_data="modal_data" title="Recruited By" @close="modal_data = null"/>
 </template>
@@ -30,8 +31,12 @@ import DriversTabItems from "@/components/views/drivers/DriversTabItem";
 import TableTool from "@/components/app/table/TableTool";
 import {ref} from "vue";
 import VSvg from "@/components/ui/vSvg";
+import FilterBar from "@/components/app/FilterBar";
+import VBtn from "@/components/ui/vBtn";
 export default {
   components: {
+    VBtn,
+    FilterBar,
     VSvg,
     DriversTabMenu,ModalDrivers,
     DeatilNavBack,DriversTabItems, TableTool, DetailNav},

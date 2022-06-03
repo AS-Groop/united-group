@@ -2,6 +2,9 @@
   height: 100%;
   max-height: calc(100vh - 181px);
   overflow: hidden;
+  &.tabs{
+    max-height: calc(100vh - 221px);
+  }
   &__responsive {
     width: 100%;
     height: calc(100% - 64px);

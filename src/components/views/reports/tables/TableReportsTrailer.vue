@@ -13,7 +13,7 @@
     </template>
     <template v-slot:body-row>
       <TableBRow v-for="(i,index) in data_body"
-                 icon="true" @click="$router.push(`/trailers/${index}`)"
+                 icon="true"
                  :id="index" cursor="pointer"
                  :col1="{name:i.col1,type:'def'}"
                  :col2="{name:i.col2,type:'def'}"
@@ -25,7 +25,7 @@
       >
         <td>
           <v-svg class="mx-1" id="download-table" width="32" height="26"/>
-          <v-svg class="mx-1" id="edit-table" width="32" height="26"/>
+          <v-svg class="mx-1" @click="$router.push(`/reports/${i.id}/trailers`)" id="edit-table" width="32" height="26"/>
           <v-svg class="mx-1" id="remove-table" width="32" height="26"/>
         </td>
       </TableBRow>
@@ -58,6 +58,7 @@ export default {
     ];
     data_body = [
       {
+        id:1,
         col1: '#120',
         col2: 'Wabash',
         col3: 'Dry',
@@ -66,6 +67,7 @@ export default {
         col6: 'Pick Up',
         col7: '05/25/2022 11:24'
       },{
+        id:2,
         col1: '#120',
         col2: 'Wabash',
         col3: 'Dry',
@@ -74,6 +76,7 @@ export default {
         col6: 'Pick Up',
         col7: '05/25/2022 11:24'
       },{
+        id:3,
         col1: '#120',
         col2: 'Wabash',
         col3: 'Dry',
@@ -82,6 +85,7 @@ export default {
         col6: 'Pick Up',
         col7: '05/25/2022 11:24'
       },{
+        id:4,
         col1: '#120',
         col2: 'Wabash',
         col3: 'Dry',
@@ -90,6 +94,7 @@ export default {
         col6: 'Pick Up',
         col7: '05/25/2022 11:24'
       },{
+        id:5,
         col1: '#120',
         col2: 'Wabash',
         col3: 'Dry',
@@ -98,6 +103,7 @@ export default {
         col6: 'Pick Up',
         col7: '05/25/2022 11:24'
       },{
+        id:6,
         col1: '#120',
         col2: 'Wabash',
         col3: 'Dry',
@@ -106,6 +112,7 @@ export default {
         col6: 'Pick Up',
         col7: '05/25/2022 11:24'
       },{
+        id:7,
         col1: '#120',
         col2: 'Wabash',
         col3: 'Dry',

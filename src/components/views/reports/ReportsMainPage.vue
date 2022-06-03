@@ -1,8 +1,6 @@
 <template>
   <div class="section__page">
     <FilterBar>
-      <v-btn type="outline" svg="filter">Filter</v-btn>
-      <v-btn svg="plus" @click="new_truck = true">Add Truck</v-btn>
     </FilterBar>
     <DriversTabMenu
         :index="index"
@@ -11,9 +9,9 @@
         class="bb-0"
     />
 
-    <TableReportsDrivers v-if="index === 0" />
-    <TableReportsTrucks v-if="index === 1" />
-    <TableTrailer v-if="index === 2" />
+    <TableReportsDrivers tabs="tabs" v-if="index === 0" />
+    <TableReportsTrucks tabs="tabs" v-if="index === 1" />
+    <TableTrailer tabs="tabs" v-if="index === 2" />
   </div>
 </template>
 

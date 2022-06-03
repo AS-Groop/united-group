@@ -13,19 +13,18 @@
     </template>
     <template v-slot:body-row>
       <TableBRow v-for="(i,index) in data_body"
-                 icon="true" @click="$router.push(`/trailers/${index}`)"
+                 icon="true"
                  :id="index" cursor="pointer"
                  :col1="{name:i.col1,type:'def'}"
                  :col2="{name:i.col2,type:'def'}"
                  :col3="{name:i.col3,type:'def'}"
                  :col4="{name:i.col4,type:'def'}"
                  :col5="{name:i.col5,type:'def'}"
-                 :col6="{name:i.col6,type:'def'}"
                  :col7="{name:i.col7,type:'def',}"
       >
         <td>
           <v-svg class="mx-1" id="download-table" width="32" height="26"/>
-          <v-svg class="mx-1" id="edit-table" width="32" height="26"/>
+          <v-svg class="mx-1" @click="$router.push(`/reports/${i.id}/drivers`)" id="edit-table" width="32" height="26"/>
           <v-svg class="mx-1" id="remove-table" width="32" height="26"/>
         </td>
       </TableBRow>
@@ -47,71 +46,70 @@ export default {
     let data_head = null;
     let data_body = null;
     data_head = [
-      {name:'Trailer Number'},
-      {name:'Make'},
-      {name:'Model'},
-      {name:'Year Made'},
-      {name:'Assigned Driver'},
-      {name:'Status'},
+      {name:'Driver Name'},
+      {name:'Email'},
+      {name:'Phone number'},
+      {name:'Assigned Truck'},
+      {name:'Assigned Trailer'},
       {name:'Date Created'},
       {class:'w-150',name:'Actions'}
     ];
     data_body = [
       {
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: 'Azodov Asror',
-        col6: 'Pick Up',
+        id:1,
+        col1: 'Ahmad Zokir',
+        col2: 'ahmadz@gmail.com',
+        col3: '+ 1 717 777 0707',
+        col4: '120',
+        col5: '596',
         col7: '05/25/2022 11:24'
       },{
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: 'Azodov Asror',
-        col6: 'Pick Up',
+        id:2,
+        col1: 'Ahmad Zokir',
+        col2: 'ahmadz@gmail.com',
+        col3: '+ 1 717 777 0707',
+        col4: '120',
+        col5: '596',
         col7: '05/25/2022 11:24'
       },{
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: 'Azodov Asror',
-        col6: 'Pick Up',
+        id:3,
+        col1: 'Ahmad Zokir',
+        col2: 'ahmadz@gmail.com',
+        col3: '+ 1 717 777 0707',
+        col4: '120',
+        col5: '596',
         col7: '05/25/2022 11:24'
       },{
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: 'Azodov Asror',
-        col6: 'Pick Up',
+        id:4,
+        col1: 'Ahmad Zokir',
+        col2: 'ahmadz@gmail.com',
+        col3: '+ 1 717 777 0707',
+        col4: '120',
+        col5: '596',
         col7: '05/25/2022 11:24'
       },{
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: 'Azodov Asror',
-        col6: 'Pick Up',
+        id:5,
+        col1: 'Ahmad Zokir',
+        col2: 'ahmadz@gmail.com',
+        col3: '+ 1 717 777 0707',
+        col4: '120',
+        col5: '596',
         col7: '05/25/2022 11:24'
       },{
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: 'Azodov Asror',
-        col6: 'Pick Up',
+        id:6,
+        col1: 'Ahmad Zokir',
+        col2: 'ahmadz@gmail.com',
+        col3: '+ 1 717 777 0707',
+        col4: '120',
+        col5: '596',
         col7: '05/25/2022 11:24'
       },{
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: 'Azodov Asror',
-        col6: 'Pick Up',
+        id:7,
+        col1: 'Ahmad Zokir',
+        col2: 'ahmadz@gmail.com',
+        col3: '+ 1 717 777 0707',
+        col4: '120',
+        col5: '596',
         col7: '05/25/2022 11:24'
       }
     ];

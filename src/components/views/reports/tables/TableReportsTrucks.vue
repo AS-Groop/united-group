@@ -13,7 +13,7 @@
     </template>
     <template v-slot:body-row>
       <TableBRow v-for="(i,index) in data_body"
-                 icon="true" @click="$router.push(`/trailers/${index}`)"
+                 icon="true"
                  :id="index" cursor="pointer"
                  :col1="{name:i.col1,type:'def'}"
                  :col2="{name:i.col2,type:'def'}"
@@ -22,10 +22,11 @@
                  :col5="{name:i.col5,type:'def'}"
                  :col6="{name:i.col6,type:'def'}"
                  :col7="{name:i.col7,type:'def',}"
+                 :col8="{name:i.col8,type:'def',}"
       >
         <td class="w-150">
           <v-svg class="mx-1" id="download-table" width="32" height="26"/>
-          <v-svg class="mx-1" id="edit-table" width="32" height="26"/>
+          <v-svg class="mx-1" @click="$router.push(`/reports/${i.id}/trucks`)" id="edit-table" width="32" height="26"/>
           <v-svg class="mx-1 me-15" id="remove-table" width="32" height="26"/>
         </td>
       </TableBRow>
@@ -51,6 +52,7 @@ export default {
       {name:'Make'},
       {name:'Model'},
       {name:'Year Made'},
+      {name:'Milage'},
       {name:'Assigned Driver'},
       {name:'Status'},
       {name:'Date Created'},
@@ -58,61 +60,75 @@ export default {
     ];
     data_body = [
       {
+        id:1,
         col1: '#120',
         col2: 'Wabash',
         col3: 'Dry',
         col4: '2020',
-        col5: 'Azodov Asror',
-        col6: 'Pick Up',
-        col7: '05/25/2022 11:24'
+        col5: '350,000',
+        col6: 'Azodov Asror',
+        col7: 'Pick Up',
+        col8: '05/25/2022 11:24'
       },{
+        id:2,
         col1: '#120',
         col2: 'Wabash',
         col3: 'Dry',
         col4: '2020',
-        col5: 'Azodov Asror',
-        col6: 'Pick Up',
-        col7: '05/25/2022 11:24'
+        col5: '350,000',
+        col6: 'Azodov Asror',
+        col7: 'Pick Up',
+        col8: '05/25/2022 11:24'
       },{
+        id:3,
         col1: '#120',
         col2: 'Wabash',
         col3: 'Dry',
         col4: '2020',
-        col5: 'Azodov Asror',
-        col6: 'Pick Up',
-        col7: '05/25/2022 11:24'
+        col5: '350,000',
+        col6: 'Azodov Asror',
+        col7: 'Pick Up',
+        col8: '05/25/2022 11:24'
       },{
+        id:4,
         col1: '#120',
         col2: 'Wabash',
         col3: 'Dry',
         col4: '2020',
-        col5: 'Azodov Asror',
-        col6: 'Pick Up',
-        col7: '05/25/2022 11:24'
+        col5: '350,000',
+        col6: 'Azodov Asror',
+        col7: 'Pick Up',
+        col8: '05/25/2022 11:24'
       },{
+        id:5,
         col1: '#120',
         col2: 'Wabash',
         col3: 'Dry',
         col4: '2020',
-        col5: 'Azodov Asror',
-        col6: 'Pick Up',
-        col7: '05/25/2022 11:24'
+        col5: '350,000',
+        col6: 'Azodov Asror',
+        col7: 'Pick Up',
+        col8: '05/25/2022 11:24'
       },{
+        id:6,
         col1: '#120',
         col2: 'Wabash',
         col3: 'Dry',
         col4: '2020',
-        col5: 'Azodov Asror',
-        col6: 'Pick Up',
-        col7: '05/25/2022 11:24'
+        col5: '350,000',
+        col6: 'Azodov Asror',
+        col7: 'Pick Up',
+        col8: '05/25/2022 11:24'
       },{
+        id:7,
         col1: '#120',
         col2: 'Wabash',
         col3: 'Dry',
         col4: '2020',
-        col5: 'Azodov Asror',
-        col6: 'Pick Up',
-        col7: '05/25/2022 11:24'
+        col5: '350,000',
+        col6: 'Azodov Asror',
+        col7: 'Pick Up',
+        col8: '05/25/2022 11:24'
       }
     ];
     return {data_head, data_body}

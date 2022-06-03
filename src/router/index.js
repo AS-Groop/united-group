@@ -68,7 +68,27 @@ const routes = [
         children:[
             {
                 path: '',
+                name: 'ReportsDetail',
                 component: ()=>import('../views/reports/reports'),
+                children:[
+                    {
+                        path: '',
+                        component: () => import('../components/views/reports/ReportsMainPage'),
+                    },
+                    {
+                        path: ':id/drivers',
+                        component: () => import('../components/views/reports/drivers/ReportsDetailPage'),
+                    },
+                    {
+                        path: ':id/trucks',
+                        component: () => import('../components/views/reports/trukc/ReportsDetailPage'),
+                    },
+                    {
+                        path: ':id/trailers',
+                        component: () => import('../components/views/reports/trailer/ReportsDetailPage'),
+                    }
+
+                ]
             }
 
         ]

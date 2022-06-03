@@ -1,45 +1,50 @@
 <template>
-  <div class="section__page drivers">
+  <div class="section__page trucks">
     <DetailNav>
-      <DeatilNavBack title="Ahmad Zakirov" path="/drivers"/>
-      <span class="detail__nav-item text-h6">
-        <v-svg id="phone" width="18" height="18" />+1 773 217 77 77
-      </span>
-      <span class="detail__nav-item text-h6">
-        <v-svg id="massage" width="18" height="18" />akhmad7721@gmail.com
-      </span>
+      <DeatilNavBack title="#120" span="Trailers Number:" path="/reports"/>
     </DetailNav>
-    <DriversTabMenu
-        :index="index"
-        :tabs_content="tabs_content"
-        @clicks="e=>index=e"
-    />
-    <DriversTabItems @update="(val)=>modal_data=val"
-                       :items="index === 0 ? items0 : index === 1 ? items1 : index === 2 ? items2 : index === 3 ? items3 : ''"
-                       v-if="index >= 0" />
+    <div class="trucks__content">
+      <TrailersInfo/>
+      <TrailersPick />
+      <div class="hr"></div>
+      <div class="trucks__draw">
+        <TrailersDrawItem title="Driver Signature"/>
+        <TrailersDrawItem title="Company representative Signature"/>
+        <TrailersDrawItem area="true" title="Comments"/>
+      </div>
+      <div class="btns">
+        <v-btn type="outline">Cancel</v-btn>
+        <v-btn >Submit</v-btn>
+      </div>
+    </div>
   </div>
-  <ModalDrivers v-if="modal_data" :modal_data="modal_data" title="Recruited By" @close="modal_data = null"/>
 </template>
 
 <script>
 import DetailNav from "@/components/app/deatailNav/DetailNav";
 import DeatilNavBack from "@/components/app/deatailNav/DeatilNavBack";
-import ModalDrivers from "@/components/app/modals/ModalDrivers";
-import DriversTabMenu from "@/components/views/drivers/DriversTabMenu";
 import DriversTabItems from "@/components/views/drivers/DriversTabItem";
-import TableTool from "@/components/app/table/TableTool";
 import {ref} from "vue";
 import VSvg from "@/components/ui/vSvg";
+import VInput from "@/components/ui/vInput";
+import VBtn from "@/components/ui/vBtn";
+import TrailersInfo from "@/components/views/trailers/detail/TrailersInfo";
+import TrailersPick from "@/components/views/trailers/detail/TrailersPick";
+import TrailersDrawItem from "@/components/views/trailers/detail/TrailersDrawItem";
 export default {
   components: {
+    TrailersDrawItem,
+    TrailersPick,
+    TrailersInfo,
+    VBtn,
+    VInput,
     VSvg,
-    DriversTabMenu,ModalDrivers,
-    DeatilNavBack,DriversTabItems, TableTool, DetailNav},
+    DeatilNavBack,  DetailNav},
   setup(){
     const index = ref(0)
     const modal_data = ref(null)
     const modal = ref(false)
-    const tabs_content = ['HR (15%)', 'Sefety(35%)', 'Dispach Orentation (65%)', 'Fleet (92%)'];
+    const tabContents = ['DriversTabItems', 'TableTool', 'DriversTabIt', 'DriversTabI'];
 
     const items0=[
       {select_name:'Select Recruiter',id: 'Recruited',name:'Recruited By'},
@@ -75,7 +80,7 @@ export default {
       {select_name:'',id: 'Driver',name:'Driver Type'},
       {select_name:'',id: 'Pay',name:'Pay:'},
     ]
-    return{tabs_content,index,items1,items0,items2,items3,modal,modal_data}
+    return{tabContents,index,items1,items0,items2,items3,modal,modal_data}
   }
 }
 </script>
