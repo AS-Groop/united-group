@@ -1,0 +1,138 @@
+<template>
+
+  <v-table>
+    <template v-slot:tool>
+      <TableTool v-if="false" class="bt-0">
+        <v-btn type="edit" size="md">Edit</v-btn>
+        <v-btn type="edit" size="md">Print All Info</v-btn>
+        <v-btn type="edit" size="md">Print Docs</v-btn>
+      </TableTool>
+    </template>
+    <template v-slot:head-row>
+      <TableHRow icon="true" :data="data_head"/>
+    </template>
+    <template v-slot:body-row>
+      <TableBRow v-for="(i,index) in data_body"
+                 icon="true"
+                 :id="index" cursor="pointer"
+                 :col1="{name:i.col1,type:'def'}"
+                 :col2="{name:i.col2,type:'def'}"
+                 :col3="{name:i.col3,type:'def'}"
+                 :col4="{name:i.col4,type:'def'}"
+                 :col5="{name:i.col5,type:'def'}"
+                 :col6="{name:i.col6,type:'def'}"
+                 :col7="{name:i.col7,type:'def',}"
+                 :col8="{name:i.col8,type:'def',}"
+      >
+        <td class="w-150 text-end">
+          <v-svg class="mx-1" @click="$router.push(`/reports/${i.id}/trucks`)" id="edit-table" width="32" height="26"/>
+          <v-svg class="mx-1 me-15" id="remove-table" width="32" height="26"/>
+        </td>
+      </TableBRow>
+    </template>
+  </v-table>
+</template>
+<script>
+import VTable from "@/components/app/table/vTable";
+import TableTool from "@/components/app/table/TableTool";
+import VBtn from "@/components/ui/vBtn";
+import TableHRow from "@/components/app/table/TableHRow";
+import TableBRow from "@/components/app/table/TableBRow";
+// import {ref} from "vue";
+import VSvg from "@/components/ui/vSvg";
+
+export default {
+  components: {VSvg, TableBRow, TableHRow, VBtn, TableTool, VTable},
+  setup() {
+    let data_head = null;
+    let data_body = null;
+    data_head = [
+      {name:'Trailer Number'},
+      {name:'Make'},
+      {name:'Model'},
+      {name:'Year Made'},
+      {name:'Milage'},
+      {name:'Assigned Driver'},
+      {name:'Status'},
+      {name:'Date Created'},
+      {class:'w-150 text-end pe-15',name:'Actions'}
+    ];
+    data_body = [
+      {
+        id:1,
+        col1: '#120',
+        col2: 'Wabash',
+        col3: 'Dry',
+        col4: '2020',
+        col5: '350,000',
+        col6: 'Azodov Asror',
+        col7: 'Pick Up',
+        col8: '05/25/2022 11:24'
+      },{
+        id:2,
+        col1: '#120',
+        col2: 'Wabash',
+        col3: 'Dry',
+        col4: '2020',
+        col5: '350,000',
+        col6: 'Azodov Asror',
+        col7: 'Pick Up',
+        col8: '05/25/2022 11:24'
+      },{
+        id:3,
+        col1: '#120',
+        col2: 'Wabash',
+        col3: 'Dry',
+        col4: '2020',
+        col5: '350,000',
+        col6: 'Azodov Asror',
+        col7: 'Pick Up',
+        col8: '05/25/2022 11:24'
+      },{
+        id:4,
+        col1: '#120',
+        col2: 'Wabash',
+        col3: 'Dry',
+        col4: '2020',
+        col5: '350,000',
+        col6: 'Azodov Asror',
+        col7: 'Pick Up',
+        col8: '05/25/2022 11:24'
+      },{
+        id:5,
+        col1: '#120',
+        col2: 'Wabash',
+        col3: 'Dry',
+        col4: '2020',
+        col5: '350,000',
+        col6: 'Azodov Asror',
+        col7: 'Pick Up',
+        col8: '05/25/2022 11:24'
+      },{
+        id:6,
+        col1: '#120',
+        col2: 'Wabash',
+        col3: 'Dry',
+        col4: '2020',
+        col5: '350,000',
+        col6: 'Azodov Asror',
+        col7: 'Pick Up',
+        col8: '05/25/2022 11:24'
+      },{
+        id:7,
+        col1: '#120',
+        col2: 'Wabash',
+        col3: 'Dry',
+        col4: '2020',
+        col5: '350,000',
+        col6: 'Azodov Asror',
+        col7: 'Pick Up',
+        col8: '05/25/2022 11:24'
+      }
+    ];
+    return {data_head, data_body}
+
+  }
+
+}
+</script>

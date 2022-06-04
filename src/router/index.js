@@ -106,6 +106,18 @@ const routes = [
         ]
     },
     {
+        path: '/settings',
+        name: 'Settings',
+        component: ()=>import('../layaout/Main-Layaout'),
+        children:[
+            {
+                path: '',
+                component: ()=>import('../views/settings/settings'),
+            }
+
+        ]
+    },
+    {
         path: '/ui',
         name: 'Ui',
         component: ()=>import('../views/ui'),

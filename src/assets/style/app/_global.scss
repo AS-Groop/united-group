@@ -40,6 +40,10 @@ body{
 
 .w-150{
   width: 150px;
+  &.icon {
+    text-align: end;
+    //padding-right: 15px;
+  }
 }
 
 
