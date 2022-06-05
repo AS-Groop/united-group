@@ -4,7 +4,7 @@
     <div class="form__select" @click="drop = !drop"
          :class="{ 'place': !select, 'disabled': disabled }">
       {{select ? select[name || 'name'] : place }}
-      <v-svg  id="select-arrow"  width="24" height="24"/>
+      <v-svg :class-name="{'active': options && drop}"  id="select-arrow"  width="24" height="24"/>
       <div v-if="options && drop" class="wrapper"></div>
       <div v-if="options && drop" class="form__select-options">
         <div class="form__select-item text-h3"

@@ -33,10 +33,18 @@
     </div>
   </div>
 </template>
-<script setup>
+<script>
 
 import Datepicker from 'vue3-datepicker'
 import VSvg from "@/components/ui/vSvg";
+import {ref} from "vue";
 
-const picked = new Date();
+export default {
+  components:{Datepicker,VSvg},
+  setup() {
+    const picked = ref(new Date());
+
+    return{picked}
+  }
+};
 </script>

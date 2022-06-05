@@ -45,8 +45,10 @@ import ModalCheckList from "@/components/app/modals/modal-check-list/ModalCheckL
 import CheckListItem from "@/components/app/modals/modal-check-list/CheckListItem";
 import ModalLoadPhotos from "@/components/app/modals/modal-load-photo/ModalLoadPhotos";
 import PopupPhoto from "@/components/app/modals/modal-load-photo/PopupPhoto";
+import ModalDraw from "@/components/app/modals/ModalDraw";
 export default {
   components: {
+    ModalDraw,
     PopupPhoto,
     ModalLoadPhotos,
     CheckListItem,
@@ -61,6 +63,7 @@ export default {
   setup(){
     const data1 = ref(false)
     const data2 = ref(false)
+    const image_draw = ref(false)
     const img = ref(false)
     const modalPhoto = ref(null)
     const data_modal = [
@@ -95,6 +98,7 @@ export default {
       data_modal,
       data_modal2,
       modalPhoto,
+      image_draw,
       data1,
       data2,
       img,

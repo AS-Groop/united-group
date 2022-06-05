@@ -3,6 +3,7 @@
     <td @click.stop v-if="icon">
       <v-checked :id="id"/>
     </td>
+    <slot name="start"></slot>
     <td v-if="col1">
       <div :class="col1.type==='progress' && 'center'">
         <span v-if="col1.type==='progress'" class="progress-span text-h8" :class="col1.size" >{{col1.name}}</span>
@@ -93,7 +94,8 @@
         </template>
       </div>
     </td>
-    <slot></slot>
+
+    <slot name="end"></slot>
   </tr>
 </template>
 <script>

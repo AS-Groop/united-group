@@ -24,11 +24,13 @@
                  :col7="{name:i.col7,type:'def',}"
                  :col8="{name:i.col8,type:'def',}"
       >
-        <td class="w-150">
-          <v-svg class="mx-1" id="download-table" width="32" height="26"/>
-          <v-svg class="mx-1" @click="$router.push(`/reports/${i.id}/trucks`)" id="edit-table" width="32" height="26"/>
-          <v-svg class="mx-1 me-15" id="remove-table" width="32" height="26"/>
-        </td>
+        <template v-slot:end>
+          <td class="w-150">
+            <v-svg class="mx-1" id="download-table" width="32" height="26"/>
+            <v-svg class="mx-1" @click="$router.push(`/reports/${i.id}/trucks`)" id="edit-table" width="32" height="26"/>
+            <v-svg class="mx-1 me-15" id="remove-table" width="32" height="26"/>
+          </td>
+        </template>
       </TableBRow>
     </template>
   </v-table>

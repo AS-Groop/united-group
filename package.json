@@ -28,6 +28,7 @@
     "sass-loader": "^12.0.0",
     "svg-sprite-loader": "^6.0.11",
     "vue-cli-plugin-i18n": "~2.3.1",
+    "vue-drawing-canvas": "^1.0.14",
     "vue3-lazyload": "^0.3.0"
   },
   "browserslist": [

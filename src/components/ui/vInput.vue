@@ -1,11 +1,11 @@
 <template>
 <div class="form__control" :class="className">
   <h4 class="text-h4">{{ label }}</h4>
-  <input class="control__input" type="text" :placeholder="place" :disabled="disabled">
+  <input class="control__input" type="text" v-model="modelValue" :placeholder="place" :disabled="disabled">
 </div>
 </template>
 <script>
 export default {
-  props:['className', 'label','place', 'disabled']
+  props:['className', 'label','place', 'disabled','modelValue']
 }
 </script>

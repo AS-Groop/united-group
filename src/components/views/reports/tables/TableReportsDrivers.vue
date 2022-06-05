@@ -22,11 +22,13 @@
                  :col5="{name:i.col5,type:'def'}"
                  :col7="{name:i.col7,type:'def',}"
       >
-        <td>
-          <v-svg class="mx-1" id="download-table" width="32" height="26"/>
-          <v-svg class="mx-1" @click="$router.push(`/reports/${i.id}/drivers`)" id="edit-table" width="32" height="26"/>
-          <v-svg class="mx-1" id="remove-table" width="32" height="26"/>
-        </td>
+        <template v-slot:end>
+          <td>
+            <v-svg class="mx-1" id="download-table" width="32" height="26"/>
+            <v-svg class="mx-1" @click="$router.push(`/reports/${i.id}/drivers`)" id="edit-table" width="32" height="26"/>
+            <v-svg class="mx-1" id="remove-table" width="32" height="26"/>
+          </td>
+        </template>
       </TableBRow>
     </template>
   </v-table>
