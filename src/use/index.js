@@ -28,6 +28,14 @@ app.use(i18n)
 app.use(router)
 
 
+/// Axios
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+axios.defaults.baseURL = 'https://internal.lhbrokerage.com';
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
+console.log(process.env.VUE_API_URL)
+app.use(VueAxios, axios);
+
 
 
 export {app}

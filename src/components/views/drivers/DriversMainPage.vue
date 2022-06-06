@@ -54,7 +54,8 @@ import TableTool from "@/components/app/table/TableTool";
 import TableHRowDrivers from "@/components/app/table/TableHRow";
 import TableBRowDrivers from "@/components/app/table/TableBRow";
 import ModalAdded from "@/components/app/modals/ModalAdded";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
+import {getDriverList, driver_list} from "@/hooks/driver/useDriver"
 import router from "@/router";
 import VInput from "@/components/ui/vInput";
 
@@ -179,7 +180,12 @@ export default {
     function location(id){
       router.push(`/drivers/${id}`)
     }
-    return {location, new_driver}
+
+    console.log(driver_list)
+    onMounted(getDriverList())
+
+
+    return {location, new_driver};
   }
 }
 </script>
