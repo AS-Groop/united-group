@@ -8,7 +8,7 @@
         To sign in, use your preassigned login credentials.
       </div>
     </div>
-    <div class="login__card-item right">
+    <form @submit.prevent="mode" class="login__card-item right">
       <template v-if="enter && !forgot">
         <v-input class-name="mb-15" v-model="user_name" label="Username" place="Enter username"/>
         <v-input class-name="mb-15" v-model="pass_word" label="Password" place="Enter password"/>
@@ -34,7 +34,7 @@
       <v-btn type="100" @click="mode">
         {{ enter && !forgot ? 'Log in' : !enter && forgot ? 'Recover' : !enter && !forgot ? 'Recover' : 'Update Password' }}
       </v-btn>
-    </div>
+    </form>
   </div>
 </template>
 <script>
@@ -49,8 +49,8 @@ export default {
   setup() {
     const enter = ref(true);
     const forgot = ref(false);
-    const user_name = ref('asas');
-    const pass_word = ref('as');
+    const user_name = ref('');
+    const pass_word = ref('');
 
     function mode() {
       if (enter.value && !forgot.value) {

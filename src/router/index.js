@@ -94,7 +94,7 @@ const routes = [
         ]
     },
     {
-        path: '/dashboard',
+        path: '/',
         name: 'Dashboard',
         component: ()=>import('../layaout/Main-Layaout'),
         children:[
@@ -124,13 +124,13 @@ const routes = [
         meta: {auth:true, layout: 'Ui'},
     },
     {
-        path: '/',
-        name: 'asd',
+        path: '/login',
+        name: 'Login',
         component: ()=>import('../views/login'),
     },
     {
         path: '/:pathMatch(.*)*',
-        name: 'asds',
+        name: 'NoPage',
         component: ()=>import('../layaout/Layout404'),
     },
 ]
