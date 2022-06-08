@@ -11,5 +11,13 @@ module.exports = defineConfig({
       compositionOnly: false,
       fullInstall: true
     }
+  },
+  devServer:{
+    proxy: {
+      "^/v1": {
+        target: 'https://internal.lhbrokerage.com',
+        changeOrigin: true,
+      }
+    }
   }
 })
