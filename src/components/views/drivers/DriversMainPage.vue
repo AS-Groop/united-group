@@ -32,16 +32,16 @@
       </template>
     </vTable>
   </div>
-  <ModalAdded title="Add driver" v-if="new_driver" @close="new_driver = false">
+  <ModalAdded title="Add driver" v-if="new_driver" @close="new_driver = false" @save="addNewDriver">
     <template v-slot:img>
       <input type="file" accept="image/*">
       <img src="@/assets/images/avatar.svg" alt="">
     </template>
     <template v-slot:content>
-      <v-input  label="Name" place="Enter name"/>
-      <v-input  label="Last name" place="Enter last name"/>
-      <v-input  label="Email" place="Enter email address"/>
-      <v-input  label="Phone" place="Enter phone number"/>
+      <v-input v-model="driver.first_name"  label="Name" place="Enter name"/>
+      <v-input v-model="driver.last_name"  label="Last name" place="Enter last name"/>
+      <v-input v-model="driver.email"  label="Email" place="Enter email address"/>
+      <v-input v-model="driver.phone"  label="Phone" place="Enter phone number"/>
     </template>
   </ModalAdded>
 </template>
@@ -55,7 +55,7 @@ import TableHRowDrivers from "@/components/app/table/TableHRow";
 import TableBRowDrivers from "@/components/app/table/TableBRow";
 import ModalAdded from "@/components/app/modals/ModalAdded";
 import {computed, onMounted, ref} from "vue";
-import {getDriverList, driver_list} from "@/hooks/driver/useDriver"
+import {getDriverList, driver_list, createDriver} from "@/hooks/driver/useDriver"
 import router from "@/router";
 import VInput from "@/components/ui/vInput";
 
@@ -77,9 +77,23 @@ export default {
     }
   },
   setup() {
-    const new_driver = ref(false)
+    const new_driver = ref(false);
+    const driver = ref({
+      // email: "",
+      // first_name: "",
+      // image_id: "",
+      // last_name: "",
+      // phone: ""
+    })
     function location(id){
       router.push(`/drivers/${id}`)
+    }
+
+    async function addNewDriver() {
+      await createDriver(driver.value);
+      driver.value = {};
+      new_driver.value = false
+      await getDriverList();
     }
 
     onMounted(()=>{getDriverList()})
@@ -87,7 +101,7 @@ export default {
     // const list = computed(()=>driver_list.value.value)
 
 
-    return {location, new_driver,driver_list};
+    return {location, new_driver,driver_list, driver, addNewDriver};
   }
 }
 </script>

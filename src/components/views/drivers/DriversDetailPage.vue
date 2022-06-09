@@ -16,8 +16,16 @@
         @clicks="e=>tab=e"
     />
     <DriversTabItems @update="(val)=>modal_data=val"
-                       :items="tab === 'dipatch_orientation' ? items0 : tab === 'hr' ? items1 : tab === 'safety' ? items2 : tab === 'fleet' ? items3 : ''"
-                       v-if="tab" />
+                       :items="tab === 'dipatch_orientation'
+                       ? steps['dipatch_orientation'].steps[0].steps
+                       : tab === 'hr'
+                       ? steps['hr'].steps[0].steps
+                       : tab === 'safety'
+                       ? steps['safety'].steps[0].steps
+                       : tab === 'fleet'
+                       ? steps['fleet'].steps[0].steps
+                       : ''"
+                       v-if="tab && !!steps " />
   </div>
   <ModalDrivers v-if="modal_data" :modal_data="modal_data" title="Recruited By" @close="modal_data = null"/>
 </template>
@@ -32,7 +40,7 @@ import TableTool from "@/components/app/table/TableTool";
 import {computed, ref} from "vue";
 import VSvg from "@/components/ui/vSvg";
 import {driver_by_id, tabs_content} from "@/hooks/driver/useDriver";
-import {departments} from "@/hooks/driver/useDepartment";
+import {steps} from "@/hooks/driver/useStep";
 export default {
   components: {
     VSvg,
@@ -42,42 +50,7 @@ export default {
     const tab = ref('hr')
     const modal_data = ref(null)
     const modal = ref(false)
-
-    const items0=[
-      {select_name:'Select Recruiter',id: 'Recruited',name:'Recruited By'},
-      {select_name:'',id: 'Approved',name:'Approved MVR'},
-      {select_name:'Select Company',id: 'Company',name:'Company Name'},
-      {select_name:'',id: 'Accepted',name:'Accepted Clearing House Consent'},
-      {select_name:'',id: 'PSP',name:'PSP'},
-      {select_name:'',id: 'Driver',name:'Driver Scheduled For Drug Test'},
-      {select_name:'Experience',id: 'Experience',name:'Experience'},
-      {select_name:'',id: 'Truck',name:'Truck Number'},
-      {select_name:'',id: 'Driver',name:'Driver Type'},
-      {select_name:'',id: 'Pay',name:'Pay:'},
-    ]
-    const items1=[
-      {select_name:'',id: 'Accepted',name:'Accepted Clearing House Consent'},
-      {select_name:'',id: 'PSP',name:'PSP'},
-      {select_name:'',id: 'Driver',name:'Driver Scheduled For Drug Test'},
-      {select_name:'',id: 'Experience',name:'Experience'},
-      {select_name:'',id: 'Truck',name:'Truck Number'},
-      {select_name:'',id: 'Driver',name:'Driver Type'},
-      {select_name:'',id: 'Pay',name:'Pay:'},
-    ]
-    const items2=[
-      {select_name:'',id: 'Driver',name:'Driver Scheduled For Drug Test'},
-      {select_name:'',id: 'Experience',name:'Experience'},
-      {select_name:'',id: 'Truck',name:'Truck Number'},
-      {select_name:'',id: 'Driver',name:'Driver Type'},
-      {select_name:'',id: 'Pay',name:'Pay:'},
-    ]
-    const items3=[
-      {select_name:'',id: 'Company',name:'Company Name'},
-      {select_name:'',id: 'Truck',name:'Truck Number'},
-      {select_name:'',id: 'Driver',name:'Driver Type'},
-      {select_name:'',id: 'Pay',name:'Pay:'},
-    ]
-    return{tabs_content,tab,items1,items0,items2,items3,modal,modal_data, driver_by_id, departments}
+    return{tabs_content,tab,modal,modal_data, driver_by_id, steps}
   }
 }
 </script>
