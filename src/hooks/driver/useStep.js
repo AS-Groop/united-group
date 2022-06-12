@@ -1,7 +1,7 @@
 import {ref} from "vue";
 import axios from "axios";
 
-export const steps = ref({});
+export const steps = ref(null);
 export async function getSteps(id,items){
   steps.value = {};
   items.forEach(e => {

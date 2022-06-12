@@ -15,17 +15,18 @@
         :tabs_content="tabs_content"
         @clicks="e=>tab=e"
     />
-    <DriversTabItems @update="(val)=>modal_data=val"
+    <template v-if="tab && !!steps">
+      <DriversTabItems @update="(val)=>modal_data=val"
                        :items="tab === 'dipatch_orientation'
-                       ? steps['dipatch_orientation'].steps[0].steps
-                       : tab === 'hr'
-                       ? steps['hr'].steps[0].steps
-                       : tab === 'safety'
-                       ? steps['safety'].steps[0].steps
-                       : tab === 'fleet'
-                       ? steps['fleet'].steps[0].steps
-                       : ''"
-                       v-if="tab && !!steps " />
+                      ? steps['dipatch_orientation'].steps[0].steps
+                      : tab === 'hr'
+                      ? steps['hr'].steps[0].steps
+                      : tab === 'safety'
+                      ? steps['safety'].steps[0].steps
+                      : tab === 'fleet'
+                      ? steps['fleet'].steps[0].steps
+                      : ''" />
+    </template>
   </div>
   <ModalDrivers v-if="modal_data" :modal_data="modal_data" title="Recruited By" @close="modal_data = null"/>
 </template>
@@ -47,10 +48,13 @@ export default {
     DriversTabMenu,ModalDrivers,
     DeatilNavBack,DriversTabItems, TableTool, DetailNav},
   setup(){
-    const tab = ref('hr')
-    const modal_data = ref(null)
-    const modal = ref(false)
-    return{tabs_content,tab,modal,modal_data, driver_by_id, steps}
+    const tab = ref(null);
+    const modal_data = ref(null);
+    const modal = ref(false);
+    !!steps.value || steps.value.length > 0 ? console.log(Object.entries(steps.value)[0][0]) :''
+    // steps ? tab.value = Object.entries(steps.value) : ''
+
+    return {tabs_content, tab, modal, modal_data, driver_by_id, steps};
   }
 }
 </script>

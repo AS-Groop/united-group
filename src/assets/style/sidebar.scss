@@ -48,8 +48,43 @@
       fill: $gray4;
       margin-right: 15px;
       transition: all 0.3s ease;
+      &.drop {
+        margin-left: auto;
+        margin-right: -10px;
+        transform: rotate(-180deg);
+      }
+      &.active{
+        transform: rotate(0deg);
+      }
     }
 
+  }
+
+  &__drop{
+  }
+
+  &__dropdown {
+    padding: 0 20px 0 57px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    &.active {
+      visibility: visible;
+      opacity: 1;
+      height: auto;
+    }
+
+    &-item {
+      display: block;
+      margin-bottom: 16px;
+      cursor: pointer;
+
+      &.active {
+        color: $blue1;
+      }
+    }
   }
 
   .hr{
