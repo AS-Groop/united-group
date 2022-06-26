@@ -51,7 +51,7 @@ export default {
     const tab = ref(null);
     const modal_data = ref(null);
     const modal = ref(false);
-    !!steps.value || steps.value.length > 0 ? console.log(Object.entries(steps.value)[0][0]) :''
+    // !!steps.value || steps.value.length > 0 ? console.log(Object.entries(steps.value)[0][0]) :''
     // steps ? tab.value = Object.entries(steps.value) : ''
 
     return {tabs_content, tab, modal, modal_data, driver_by_id, steps};

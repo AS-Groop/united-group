@@ -58,6 +58,8 @@ import {computed, onMounted, ref} from "vue";
 import {getDriverList, driver_list, createDriver} from "@/hooks/driver/useDriver"
 import router from "@/router";
 import VInput from "@/components/ui/vInput";
+import useVuelidate from '@vuelidate/core'
+import { required, email } from '@vuelidate/validators'
 
 export default {
   components: {VInput, ModalAdded, TableBRowDrivers, TableHRowDrivers, TableTool, vTable, VBtn, FilterBar},
@@ -79,29 +81,43 @@ export default {
   setup() {
     const new_driver = ref(false);
     const driver = ref({
-      // email: "",
-      // first_name: "",
-      // image_id: "",
-      // last_name: "",
-      // phone: ""
+      email: "",
+      first_name: "",
+      image_id: "",
+      last_name: "",
+      phone: ""
     })
     function location(id){
       router.push(`/drivers/${id}`)
     }
 
     async function addNewDriver() {
-      await createDriver(driver.value);
-      driver.value = {};
-      new_driver.value = false
-      await getDriverList();
+      v$.value.$touch();
+      if(!v$.value.$invalid){
+        await createDriver(driver.value);
+        driver.value = {};
+        new_driver.value = false
+        await getDriverList();
+      }
+
     }
 
-    onMounted(()=>{getDriverList()})
+    onMounted(() => {
+      getDriverList()
+    });
 
-    // const list = computed(()=>driver_list.value.value)
+
+    const rules = {
+      first_name: { required },
+      last_name: { required },
+      email: { required, email },
+      phone: { required }
+    }
+
+    const v$ = useVuelidate(rules, driver);
 
 
-    return {location, new_driver,driver_list, driver, addNewDriver};
+    return {location, new_driver,driver_list, v$, driver, addNewDriver};
   }
 }
 </script>

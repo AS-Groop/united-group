@@ -32,18 +32,18 @@
     </vTable>
   </div>
 
-  <ModalAdded title="Add Truck" v-if="new_truck" @close="new_truck = false">
+  <ModalAdded title="Add Truck" v-if="new_truck" @close="new_truck = false" @save="addNewTruck">
     <template v-slot:img>
       <input type="file" accept="image/*">
       <img src="@/assets/images/truck.svg" alt="">
     </template>
     <template v-slot:content>
-      <v-input  label="Truck number" place="Enter number"/>
-      <v-input  label="Make" place="Enter make"/>
-      <v-input  label="Model" place="Enter model"/>
-      <v-input  label="Year made" place="Enter year"/>
-      <v-input  label="Milage" place="Enter milage"/>
-      <v-input  label="Plate number" place="Enter plate number"/>
+      <v-input v-model="truck.number" label="Truck number" place="Enter number"/>
+      <v-input v-model="truck.make" label="Make" place="Enter make"/>
+      <v-input v-model="truck.model" label="Model" place="Enter model"/>
+      <v-input v-model="truck.year_made" label="Year made" place="Enter year"/>
+      <v-input v-model="truck.milage" label="Milage" place="Enter milage"/>
+      <v-input v-model="truck.plate_number" label="Plate number" place="Enter plate number"/>
     </template>
   </ModalAdded>
 </template>
@@ -57,12 +57,14 @@ import TableHRowDrivers from "@/components/app/table/TableHRow";
 import TableBRowDrivers from "@/components/app/table/TableBRow";
 import ModalAdded from "@/components/app/modals/ModalAdded";
 import VInput from "@/components/ui/vInput";
+import {onMounted, ref} from "vue";
+import {createTruck, getAllTrucksList} from "@/hooks/truck/useTruck";
+import {createDriver, getDriverList} from "@/hooks/driver/useDriver";
 
 export default {
   components: {VInput, ModalAdded, TableBRowDrivers, TableHRowDrivers, TableTool, vTable, VBtn, FilterBar},
   data() {
     return {
-      new_truck:false,
       data_head: [
         {name:'Truck Number'},
         {name:'Make'},
@@ -149,6 +151,29 @@ export default {
       ]
     }
   },
+  setup(){
+    const new_truck = ref(false);
+    const truck = ref({
+
+    });
+
+
+
+    onMounted(() => {
+      getAllTrucksList();
+    });
+
+
+    async function addNewTruck() {
+      await createTruck(truck.value);
+      truck.value = {};
+      new_truck.value = false
+      await getAllTrucksList();
+    }
+
+
+    return {truck, new_truck, addNewTruck}
+  }
 
 }
 </script>
