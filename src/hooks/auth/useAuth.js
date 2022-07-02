@@ -1,6 +1,7 @@
 import axios from "axios";
 import {computed, ref} from "vue";
 import router from "@/router";
+import toast from "@/use/toast";
 
 const access_token = ref();
 const refresh_token = ref();
@@ -16,6 +17,7 @@ export async function useAuth (obj){
     console.log(router)
     router.push('/')
   } catch (e) {
+    toast('400','error')
     console.log(e)
   }
 }
