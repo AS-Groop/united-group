@@ -1,22 +1,32 @@
 <template>
   <div class="section__page drivers">
     <DetailNav>
-      <DeatilNavBack title="Ahmad Zakirov" path="/drivers"/>
+      <DeatilNavBack v-if="driver_by_id" :title="driver_by_id.first_name + ' ' +driver_by_id.last_name" path="/drivers"/>
       <span class="detail__nav-item text-h6">
-        <v-svg id="phone" width="18" height="18" />+1 773 217 77 77
+        <v-svg id="phone" width="18" height="18" />{{ driver_by_id ? driver_by_id.phone : '' }}
       </span>
       <span class="detail__nav-item text-h6">
-        <v-svg id="massage" width="18" height="18" />akhmad7721@gmail.com
+        <v-svg id="massage" width="18" height="18" />{{ driver_by_id ? driver_by_id.email : '' }}
       </span>
     </DetailNav>
     <DriversTabMenu
-        :index="index"
+        v-if="tabs_content"
+        :index="tab"
         :tabs_content="tabs_content"
-        @clicks="e=>index=e"
+        @clicks="e=>tab=e"
     />
-    <DriversTabItems @update="(val)=>modal_data=val"
-                       :items="index === 0 ? items0 : index === 1 ? items1 : index === 2 ? items2 : index === 3 ? items3 : ''"
-                       v-if="index >= 0" />
+    <template v-if="tab && !!steps">
+      <DriversTabItems @update="(val)=>modal_data=val"
+                       :items="tab === 'dipatch_orientation'
+                      ? steps['dipatch_orientation'].steps[0].steps
+                      : tab === 'hr'
+                      ? steps['hr'].steps[0].steps
+                      : tab === 'safety'
+                      ? steps['safety'].steps[0].steps
+                      : tab === 'fleet'
+                      ? steps['fleet'].steps[0].steps
+                      : ''" />
+    </template>
   </div>
   <ModalDrivers v-if="modal_data" :modal_data="modal_data" title="Recruited By" @close="modal_data = null"/>
 </template>
@@ -28,54 +38,23 @@ import ModalDrivers from "@/components/app/modals/ModalDrivers";
 import DriversTabMenu from "@/components/views/drivers/DriversTabMenu";
 import DriversTabItems from "@/components/views/drivers/DriversTabItem";
 import TableTool from "@/components/app/table/TableTool";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import VSvg from "@/components/ui/vSvg";
+import {driver_by_id, tabs_content} from "@/hooks/driver/useDriver";
+import {steps} from "@/hooks/driver/useStep";
 export default {
   components: {
     VSvg,
     DriversTabMenu,ModalDrivers,
     DeatilNavBack,DriversTabItems, TableTool, DetailNav},
   setup(){
-    const index = ref(0)
-    const modal_data = ref(null)
-    const modal = ref(false)
-    const tabs_content = ['HR (15%)', 'Sefety(35%)', 'Dispach Orentation (65%)', 'Fleet (92%)'];
+    const tab = ref(null);
+    const modal_data = ref(null);
+    const modal = ref(false);
+    // !!steps.value || steps.value.length > 0 ? console.log(Object.entries(steps.value)[0][0]) :''
+    // steps ? tab.value = Object.entries(steps.value) : ''
 
-    const items0=[
-      {select_name:'Select Recruiter',id: 'Recruited',name:'Recruited By'},
-      {select_name:'',id: 'Approved',name:'Approved MVR'},
-      {select_name:'Select Company',id: 'Company',name:'Company Name'},
-      {select_name:'',id: 'Accepted',name:'Accepted Clearing House Consent'},
-      {select_name:'',id: 'PSP',name:'PSP'},
-      {select_name:'',id: 'Driver',name:'Driver Scheduled For Drug Test'},
-      {select_name:'Experience',id: 'Experience',name:'Experience'},
-      {select_name:'',id: 'Truck',name:'Truck Number'},
-      {select_name:'',id: 'Driver',name:'Driver Type'},
-      {select_name:'',id: 'Pay',name:'Pay:'},
-    ]
-    const items1=[
-      {select_name:'',id: 'Accepted',name:'Accepted Clearing House Consent'},
-      {select_name:'',id: 'PSP',name:'PSP'},
-      {select_name:'',id: 'Driver',name:'Driver Scheduled For Drug Test'},
-      {select_name:'',id: 'Experience',name:'Experience'},
-      {select_name:'',id: 'Truck',name:'Truck Number'},
-      {select_name:'',id: 'Driver',name:'Driver Type'},
-      {select_name:'',id: 'Pay',name:'Pay:'},
-    ]
-    const items2=[
-      {select_name:'',id: 'Driver',name:'Driver Scheduled For Drug Test'},
-      {select_name:'',id: 'Experience',name:'Experience'},
-      {select_name:'',id: 'Truck',name:'Truck Number'},
-      {select_name:'',id: 'Driver',name:'Driver Type'},
-      {select_name:'',id: 'Pay',name:'Pay:'},
-    ]
-    const items3=[
-      {select_name:'',id: 'Company',name:'Company Name'},
-      {select_name:'',id: 'Truck',name:'Truck Number'},
-      {select_name:'',id: 'Driver',name:'Driver Type'},
-      {select_name:'',id: 'Pay',name:'Pay:'},
-    ]
-    return{tabs_content,index,items1,items0,items2,items3,modal,modal_data}
+    return {tabs_content, tab, modal, modal_data, driver_by_id, steps};
   }
 }
 </script>

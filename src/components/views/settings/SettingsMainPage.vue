@@ -7,7 +7,7 @@
     <DriversTabMenu
         :index="index"
         @clicks="e=>index=e"
-        :tabs_content="['All Users','Roles']"
+        :tabs_content="[{alias:0,name:'All Users'},{alias:1,name:'Roles'}]"
         class="bb-0"
     />
 

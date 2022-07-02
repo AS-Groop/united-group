@@ -1,5 +1,5 @@
 <template>
-  <svg @click="$emit('click')" :width="width" :height="height" :class="className" >
+  <svg  :width="width" :height="height" :class="className" >
     <use :xlink:href="require('@/icons/sprite.svg')+'#icon-'+id">
     </use>
   </svg>

@@ -5,7 +5,7 @@
     <DriversTabMenu
         :index="index"
         @clicks="e=>index=e"
-        :tabs_content="['Drivers','Trucks','Trailers']"
+        :tabs_content="[{name:'Drivers',alias:0},{name:'Trucks',alias:1},{name:'Trailers',alias:2}]"
         class="bb-0"
     />
 

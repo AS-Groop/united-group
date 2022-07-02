@@ -21,7 +21,7 @@
             </div>
             <div class="buttons">
               <v-btn @click="$emit('close')" type="outline">Cancel</v-btn>
-              <v-btn >Save</v-btn>
+              <v-btn @click="$emit('save')" >Save</v-btn>
             </div>
           </div>
         </div>

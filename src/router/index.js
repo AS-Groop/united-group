@@ -5,6 +5,7 @@ const routes = [
         path: '/drivers',
         name: 'Drivers',
         component: ()=>import('../layaout/Main-Layaout'),
+        meta:{auth:true},
         children:[
             {
                 path: '',
@@ -21,6 +22,7 @@ const routes = [
         path: '/trucks',
         name: 'Trucks',
         component: ()=>import('../layaout/Main-Layaout'),
+        meta:{auth:true},
         children:[
             {
                 path: '',
@@ -37,6 +39,7 @@ const routes = [
         path: '/trailers',
         name: 'Trailers',
         component: ()=>import('../layaout/Main-Layaout'),
+        meta:{auth:true},
         children:[
             {
                 path: '',
@@ -53,6 +56,7 @@ const routes = [
         path: '/cars',
         name: 'Cars',
         component: ()=>import('../layaout/Main-Layaout'),
+        meta:{auth:true},
         children:[
             {
                 path: '',
@@ -65,6 +69,7 @@ const routes = [
         path: '/reports',
         name: 'Reports',
         component: ()=>import('../layaout/Main-Layaout'),
+        meta:{auth:true},
         children:[
             {
                 path: '',
@@ -94,9 +99,10 @@ const routes = [
         ]
     },
     {
-        path: '/dashboard',
+        path: '/',
         name: 'Dashboard',
         component: ()=>import('../layaout/Main-Layaout'),
+        meta:{auth:true},
         children:[
             {
                 path: '',
@@ -109,10 +115,23 @@ const routes = [
         path: '/settings',
         name: 'Settings',
         component: ()=>import('../layaout/Main-Layaout'),
+        meta:{auth:true},
         children:[
             {
                 path: '',
-                component: ()=>import('../views/settings/settings'),
+                component: ()=>import('../views/settings/users'),
+            },
+            {
+                path: '/users',
+                component: ()=>import('../views/settings/users'),
+            },
+            {
+                path: '/tasks',
+                component: ()=>import('../views/settings/tasks'),
+            },
+            {
+                path: '/company',
+                component: ()=>import('../views/settings/company'),
             }
 
         ]
@@ -121,23 +140,35 @@ const routes = [
         path: '/ui',
         name: 'Ui',
         component: ()=>import('../views/ui'),
-        meta: {auth:true, layout: 'Ui'},
+        // meta:{auth:true}
+        meta: {auth:false, layout: 'Ui'},
     },
     {
-        path: '/',
-        name: 'asd',
+        path: '/login',
+        name: 'Login',
         component: ()=>import('../views/login'),
+        meta:{auth:false}
     },
     {
         path: '/:pathMatch(.*)*',
-        name: 'asds',
+        name: 'NoPage',
         component: ()=>import('../layaout/Layout404'),
+        meta:{auth:false}
     },
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next)=>{
+    const token = !!localStorage.getItem('access_token') ;
+    const auth = !!to.matched.some(record => record.meta.auth);
+    if (!token && auth && (to.path !== '/login') ) {
+        return next('/login')
+    }
+    return  next()
 })
 
 export default router
