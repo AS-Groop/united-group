@@ -192,6 +192,12 @@
         color: $gray2;
         background: #f2f2f2;
       }
+      &~.icon-input {
+        position: absolute;
+        right: 15px;
+        bottom: 11px;
+        cursor: pointer;
+      }
     }
 
     &-md{

@@ -14,7 +14,7 @@ export async function useAuth (obj){
     localStorage.setItem('access_token',response.access_token);
     localStorage.setItem('refresh_token',response.refresh_token);
     console.log(router)
-    router.push('/dashboard')
+    router.push('/')
   } catch (e) {
     console.log(e)
   }
