@@ -32,7 +32,7 @@ app.use(router)
 /// Axios
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-// axios.defaults.baseURL = 'https://internal.lhbrokerage.com';
+axios.defaults.baseURL = 'https://internal.lhbrokerage.com';
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
 
 axios.interceptors.request.use(config => {
