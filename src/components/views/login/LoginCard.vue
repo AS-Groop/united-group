@@ -54,7 +54,7 @@ export default {
   setup() {
     const enter = ref(true);
     const forgot = ref(false);
-    let pass__type = ref(false);
+    let pass__type = ref(true);
     const user_name = ref('');
     const pass_word = ref('');
 

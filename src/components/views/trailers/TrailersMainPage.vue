@@ -2,7 +2,7 @@
   <div class="section__page">
     <FilterBar>
       <v-btn type="outline" svg="filter">Filter</v-btn>
-      <v-btn svg="plus" @click="new_truck = true">Add Truck</v-btn>
+      <v-btn svg="plus" @click="trailer_modal = true">Add Trailer</v-btn>
     </FilterBar>
     <vTable>
       <template v-slot:tool>
@@ -31,7 +31,7 @@
     </vTable>
   </div>
 
-  <ModalAdded title="Add Truck" v-if="new_truck" @close="new_truck = false">
+  <ModalAdded title="Add Trailer" v-if="trailer_modal" @close="trailer_modal = false">
     <template v-slot:img>
       <input type="file" accept="image/*">
       <img src="@/assets/images/trailer.svg" alt="">
@@ -55,12 +55,13 @@ import TableHRow from "@/components/app/table/TableHRow";
 import TableBRow from "@/components/app/table/TableBRow";
 import ModalAdded from "@/components/app/modals/ModalAdded";
 import VInput from "@/components/ui/vInput";
+import {computed, onMounted, ref} from "vue";
+import {createTrailer, getAllTrailersList} from "@/hooks/trailer/useTrailer";
 
 export default {
   components: {VInput, ModalAdded, TableBRow, TableHRow, TableTool, vTable, VBtn, FilterBar},
   data() {
     return {
-      new_truck:false,
       data_head: [
         {name:'Trailer Number'},
         {name:'Make & Model'},
@@ -138,6 +139,36 @@ export default {
       ]
     }
   },
+  setup(){
+
+    let trailer_modal = ref(false)
+    const new_trailer = ref({
+
+    });
+
+    const trailer_list = computed(()=>trailer_list.value)
+
+
+    onMounted(()=>{
+      getAllTrailersList()
+    })
+
+
+    async function addNewTrailer() {
+      await createTrailer(new_trailer.value);
+      new_trailer.value = {};
+      trailer_modal.value = false
+      await getAllTrailersList();
+    }
+
+
+    return{
+      trailer_modal,
+      trailer_list,
+      addNewTrailer,
+      new_trailer
+    }
+  }
 
 }
 </script>

@@ -4,7 +4,7 @@
       <v-btn type="outline" svg="filter">Filter</v-btn>
       <v-btn svg="plus" @click="new_truck = true">Add Truck</v-btn>
     </FilterBar>
-    <vTable>
+    <vTable v-if="trucks_list && trucks_list.trucks">
       <template v-slot:tool>
         <TableTool v-if="false">
           <v-btn type="edit" size="md">Edit</v-btn>
@@ -16,17 +16,17 @@
         <TableHRowDrivers icon="true" :data="data_head"/>
       </template>
       <template v-slot:body-row>
-        <TableBRowDrivers v-for="(i,index) in data_body"
-                          icon="true" @click="$router.push(`/trucks/${index}`)"
+        <TableBRowDrivers v-for="(i,index) in trucks_list.trucks"
+                          icon="true" @click="$router.push(`/trucks/${i.id}`)"
                           :id="index" cursor="pointer"
-                          :col1="{name:i.col1,type:'def'}"
-                          :col2="{name:i.col2,type:'def'}"
+                          :col1="{name:i.number,type:'def'}"
+                          :col2="{name:i.make,type:'def'}"
                           :col3="{name:i.col3,type:'def'}"
-                          :col4="{name:i.col4,type:'def'}"
-                          :col5="{name:i.col5,type:'def'}"
+                          :col4="{name:i.year_made,type:'def'}"
+                          :col5="{name:i.milage,type:'def'}"
                           :col6="{name:i.col7,type:'def'}"
                           :col7="{name:i.col7,type:'def'}"
-                          :col8="{name:i.col8,type:'status',size:'full'}"
+                          :col8="{name:i.status.name,type:'status',size:'full'}"
         />
       </template>
     </vTable>
@@ -57,8 +57,8 @@ import TableHRowDrivers from "@/components/app/table/TableHRow";
 import TableBRowDrivers from "@/components/app/table/TableBRow";
 import ModalAdded from "@/components/app/modals/ModalAdded";
 import VInput from "@/components/ui/vInput";
-import {onMounted, ref} from "vue";
-import {createTruck, getAllTrucksList} from "@/hooks/truck/useTruck";
+import {computed, onMounted, ref} from "vue";
+import {all_trucks_list, createTruck, getAllTrucksList} from "@/hooks/truck/useTruck";
 import {createDriver, getDriverList} from "@/hooks/driver/useDriver";
 
 export default {
@@ -157,6 +157,8 @@ export default {
 
     });
 
+    const trucks_list = computed(()=>all_trucks_list.value)
+
 
 
     onMounted(() => {
@@ -172,7 +174,7 @@ export default {
     }
 
 
-    return {truck, new_truck, addNewTruck}
+    return {truck, new_truck, addNewTruck,trucks_list}
   }
 
 }
