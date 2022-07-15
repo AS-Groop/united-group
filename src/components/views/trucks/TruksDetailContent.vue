@@ -34,7 +34,7 @@
 <script>
 import DetailNav from "@/components/app/deatailNav/DetailNav";
 import DeatilNavBack from "@/components/app/deatailNav/DeatilNavBack";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import VSvg from "@/components/ui/vSvg";
 import TrucksInfo from "@/components/views/trucks/detail/TrucksInfo";
 import VInput from "@/components/ui/vInput";
@@ -46,6 +46,9 @@ import CheckListItem from "@/components/app/modals/modal-check-list/CheckListIte
 import ModalLoadPhotos from "@/components/app/modals/modal-load-photo/ModalLoadPhotos";
 import PopupPhoto from "@/components/app/modals/modal-load-photo/PopupPhoto";
 import ModalDraw from "@/components/app/modals/ModalDraw";
+import router from "@/router";
+import {useRoute, useRouter} from "vue-router";
+import {getInspectedTruck, getTruckById} from "@/hooks/truck/useTruck";
 export default {
   components: {
     ModalDraw,
@@ -65,7 +68,9 @@ export default {
     const data2 = ref(false)
     const image_draw = ref(false)
     const img = ref(false)
-    const modalPhoto = ref(null)
+    const inspected_truck = ref()
+    const modalPhoto = ref(null);
+    const truck = ref()
     const data_modal = [
       {name:'Select All'},
       {name:'EZ Pass & Best Pass'},
@@ -93,6 +98,13 @@ export default {
       {name:'ELD Sticker'},
       {name:'Licence Plate'},
     ]
+
+    onMounted(async () => {
+      truck.value = (await getTruckById(useRoute().params.id));
+      if(truck.value.assigned_driver.id){
+        inspected_truck.value = (await getInspectedTruck({truck_id:useRoute().params.id,driver_id:truck.value.assigned_driver.id}))
+      }
+    });
 
     return{
       data_modal,
