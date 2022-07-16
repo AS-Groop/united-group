@@ -13,7 +13,7 @@
         </tbody>
       </table>
     </div>
-    <TableFooter/>
+    <TableFooter v-model:pageNumber="pageNumber" @update:pageNumber="(val)=>{this.$emit('update:pageNumber',val)}"/>
   </div>
 </template>
 <script>
@@ -26,6 +26,6 @@ import VBtn from "@/components/ui/vBtn";
 export default {
   name: 'vTable',
   components: {VBtn, TableTool, TableFooter, TableHRowDrivers, TableBRowDrivers},
-  props:['tabs']
+  props:['tabs','pageNumber']
 };
 </script>

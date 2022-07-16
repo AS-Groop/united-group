@@ -4,7 +4,7 @@
       <v-btn type="outline" svg="filter">Filter</v-btn>
       <v-btn svg="plus" @click="new_driver = true">Add driver</v-btn>
     </FilterBar>
-    <vTable>
+    <vTable v-model:pageNumber="pageNumber" @update:pageNumber="test">
       <template v-slot:tool>
         <TableTool >
           <v-btn type="edit" size="md">Edit</v-btn>
@@ -16,8 +16,8 @@
         <TableHRowDrivers icon="true" :data="data_head"/>
       </template>
       <template v-slot:body-row>
-        <TableBRowDrivers @click="location(i.id)" v-for="(i,index) in driveres.drivers"
-                          v-if="driveres"
+        <TableBRowDrivers @click="location(i.id)" v-for="(i,index) in driver_list.drivers"
+                          v-if="driver_list"
                           icon="true" cursor="pointer" :key="i.id" :id="i.id"
                           :col1="{name:i.first_name + ' ' +i.last_name,type:'def'}"
                           :col2="{name:i.on_board_date ? i.on_board_date : '--',type:'def'}"
@@ -54,7 +54,7 @@ import TableTool from "@/components/app/table/TableTool";
 import TableHRowDrivers from "@/components/app/table/TableHRow";
 import TableBRowDrivers from "@/components/app/table/TableBRow";
 import ModalAdded from "@/components/app/modals/ModalAdded";
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import {getDriverList, driver_list, createDriver} from "@/hooks/driver/useDriver"
 import router from "@/router";
 import VInput from "@/components/ui/vInput";
@@ -78,6 +78,11 @@ export default {
       ],
     }
   },
+  methods:{
+    test(val){
+      console.log('update pageNumber in main page',val)
+    }
+  },
   setup() {
     const new_driver = ref(false);
     const driver = ref({
@@ -87,10 +92,9 @@ export default {
       last_name: "",
       phone: ""
     })
-    const driveres = ref(null)
+    let pageNumber = ref(3)
 
-    
-    
+
     function location(id){
       router.push(`/drivers/${id}`)
     }
@@ -105,8 +109,6 @@ export default {
       }
 
     }
-
-    driveres.value = computed(()=>driver_list.value)
 
     onMounted(() => {
       getDriverList()
@@ -123,7 +125,7 @@ export default {
     const v$ = useVuelidate(rules, driver);
 
 
-    return {location, new_driver,driveres, v$, driver, addNewDriver};
+    return {location, new_driver,driver_list, v$, driver, addNewDriver, pageNumber};
   }
 }
 </script>

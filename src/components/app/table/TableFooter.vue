@@ -9,7 +9,7 @@
       <p class="mx-1 table_select">
       </p>
       recorde</div>
-    <v-pagination/>
+    <v-pagination v-model:page='pageNumber' @update:page="(val)=>{this.$emit('update:pageNumber',val)}" />
     <div class="text-h6">160 recordes</div>
   </div>
 </template>
@@ -18,6 +18,7 @@ import VPagination from "@/components/ui/vPagination";
 import Multiselect from '@vueform/multiselect';
 export default {
   components: {VPagination,Multiselect},
+  props:['pageNumber'],
   data() {
     return {
       value: 6,
@@ -27,7 +28,7 @@ export default {
         '8',
       ]
     }
-  }
+  },
 }
 </script>
 <style src="@vueform/multiselect/themes/default.css"></style>

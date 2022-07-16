@@ -14,15 +14,17 @@ import VPagination from "@hennge/vue3-pagination";
 import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 export default {
   components:{VPagination},
+  props:{
+    page:[Number]
+  },
   data(){
-    return{
-      page:1
-    }
+    // return{
+    //   page:1
+    // }
   },
   methods:{
     updateHandler(e){
-      console.log(this.page);
-      console.log(e)
+      this.$emit('update:page',e)
     }
   }
 }
