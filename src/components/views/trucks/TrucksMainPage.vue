@@ -21,11 +21,9 @@
                           :id="index" cursor="pointer"
                           :col1="{name:i.number,type:'def'}"
                           :col2="{name:i.make,type:'def'}"
-                          :col3="{name:i.col3,type:'def'}"
                           :col4="{name:i.year_made,type:'def'}"
                           :col5="{name:i.milage,type:'def'}"
-                          :col6="{name:i.col7,type:'def'}"
-                          :col7="{name:i.col7,type:'def'}"
+                          :col6="{name:i.assigned_driver.name.trim() || '--',type:'def'}"
                           :col8="{name:i.status.name,type:'status',size:'full'}"
         />
       </template>
@@ -68,86 +66,12 @@ export default {
       data_head: [
         {name:'Truck Number'},
         {name:'Make'},
-        {name:'Model'},
+        // {name:'Model'},    /* No data received from API */
         {name:'Year Made'},
         {name:'Milage'},
         {name:'Assigned Driver'},
-        {name:'With Driver Since'},
+        // {name:'With Driver Since'},   /* No data received from API */
         {name:'Status'},
-      ],
-      data_body: [{
-        col1: '#120',
-        col2: 'Volvo',
-        col3: 'VNL',
-        col4: '2020',
-        col5: '350,000',
-        col6: '-',
-        col7: '-',
-        col8: 'Active',
-      }, {
-        col1: '#120',
-        col2: 'Volvo',
-        col3: 'VNL',
-        col4: '2020',
-        col5: '350,000',
-        col6: '-',
-        col7: '-',
-        col8: 'Active',
-      }, {
-        col1: '#120',
-        col2: 'Volvo',
-        col3: 'VNL',
-        col4: '2020',
-        col5: '350,000',
-        col6: '-',
-        col7: '-',
-        col8: 'Active',
-      }, {
-        col1: '#120',
-        col2: 'Volvo',
-        col3: 'VNL',
-        col4: '2020',
-        col5: '350,000',
-        col6: '-',
-        col7: '-',
-        col8: 'Active',
-      }, {
-        col1: '#120',
-        col2: 'Volvo',
-        col3: 'VNL',
-        col4: '2020',
-        col5: '350,000',
-        col6: '-',
-        col7: '-',
-        col8: 'Active',
-      }, {
-        col1: '#120',
-        col2: 'Volvo',
-        col3: 'VNL',
-        col4: '2020',
-        col5: '350,000',
-        col6: '-',
-        col7: '-',
-        col8: 'Active',
-      }, {
-        col1: '#120',
-        col2: 'Volvo',
-        col3: 'VNL',
-        col4: '2020',
-        col5: '350,000',
-        col6: '-',
-        col7: '-',
-        col8: 'Active',
-      }, {
-        col1: '#120',
-        col2: 'Volvo',
-        col3: 'VNL',
-        col4: '2020',
-        col5: '350,000',
-        col6: '-',
-        col7: '-',
-        col8: 'Active',
-      }
       ]
     }
   },

@@ -1,8 +1,10 @@
 import {computed, ref} from "vue";
 import axios from "axios";
+import toast from "@/use/toast";
 
 export const all_trucks_list = ref(null);
 export const truck_by_id = ref(null);
+export const truck_inspect = ref(null);
 
 
 
@@ -18,8 +20,10 @@ export async function getAllTrucksList(obj) {
 
 export async function createTruck(obj) {
   try {
-    truck_by_id.value  = (await axios.post(`/v1/truck/`,obj)).data;
+    truck_by_id.value  = (await axios.post(`/v1/truck`,obj)).data;
+    toast('100','success')
   } catch (e) {
+    toast('400','error')
     console.log(e)
   }
 }
@@ -34,3 +38,46 @@ export async function getTruckById(obj) {
   }
 }
 
+
+export async function updateTruckById(obj) {
+  try {
+    truck_by_id.value  = (await axios.put(`/v1/truck/${obj.id}`,obj.data)).data;
+    toast('100','success')
+  } catch (e) {
+    toast('100','error')
+    console.log(e)
+  }
+}
+
+export async function deleteTruckByid(id){
+  try {
+    axios.delete(`/v1/truck/${id}`)
+    toast('100','success')
+  } catch (e){
+    toast('400','error');
+    console.log(e)
+  }
+}
+
+
+
+export async function getTruckInspect(obj) {
+  console.log(obj)
+  try {
+    truck_inspect.value = (await axios.get(`/v1/truck/inspect/${obj.truck_id}/${obj.driver_id}`)).data;
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+
+
+export async function inspectTruck(obj) {
+  try {
+    truck_inspect.value  = (await axios.post(`/v1/truck/inspect`,obj)).data;
+    toast('100', 'success')
+  } catch (e) {
+    toast('400', 'error')
+    console.log(e)
+  }
+}

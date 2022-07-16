@@ -16,8 +16,8 @@
         <TableHRowDrivers icon="true" :data="data_head"/>
       </template>
       <template v-slot:body-row>
-        <TableBRowDrivers @click="location(i.id)" v-for="(i,index) in driver_list.drivers"
-                          v-if="driver_list"
+        <TableBRowDrivers @click="location(i.id)" v-for="(i,index) in driveres.drivers"
+                          v-if="driveres"
                           icon="true" cursor="pointer" :key="i.id" :id="i.id"
                           :col1="{name:i.first_name + ' ' +i.last_name,type:'def'}"
                           :col2="{name:i.on_board_date ? i.on_board_date : '--',type:'def'}"
@@ -87,6 +87,10 @@ export default {
       last_name: "",
       phone: ""
     })
+    const driveres = ref(null)
+
+    
+    
     function location(id){
       router.push(`/drivers/${id}`)
     }
@@ -101,6 +105,8 @@ export default {
       }
 
     }
+
+    driveres.value = computed(()=>driver_list.value)
 
     onMounted(() => {
       getDriverList()
@@ -117,7 +123,7 @@ export default {
     const v$ = useVuelidate(rules, driver);
 
 
-    return {location, new_driver,driver_list, v$, driver, addNewDriver};
+    return {location, new_driver,driveres, v$, driver, addNewDriver};
   }
 }
 </script>
