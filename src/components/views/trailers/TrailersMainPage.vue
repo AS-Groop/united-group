@@ -30,17 +30,17 @@
     </vTable>
   </div>
 
-  <ModalAdded title="Add Trailer" v-if="trailer_modal" @close="trailer_modal = false">
+  <ModalAdded title="Add Trailer" v-if="trailer_modal" @close="trailer_modal = false" @save="addNewTrailer">
     <template v-slot:img>
       <input type="file" accept="image/*">
       <img src="@/assets/images/trailer.svg" alt="">
     </template>
     <template v-slot:content>
-      <v-input  label="Trailer number" place="Enter number"/>
-      <v-input  label="Make & Model" place="Enter make"/>
-      <v-input  label="Type" place="Enter type"/>
-      <v-input  label="Year made" place="Enter year"/>
-      <v-input  label="Plate number" place="Enter plate number"/>
+      <v-input v-model="new_trailer.number" label="Trailer number" place="Enter number"/>
+      <v-input v-model="new_trailer.make" label="Make & Model" place="Enter make"/>
+      <v-input v-model="new_trailer.trailer_type" label="Type" place="Enter type"/>
+      <v-input v-model="new_trailer.year_made" label="Year made" place="Enter year"/>
+      <v-input v-model="new_trailer.plate_number" label="Plate number" place="Enter plate number"/>
     </template>
   </ModalAdded>
 </template>
