@@ -91,6 +91,8 @@ export default {
 
 
     async function addNewTruck() {
+      truck.value.year_made = +truck.value.year_made;
+      truck.value.milage = +truck.value.milage;
       await createTruck(truck.value);
       truck.value = {};
       new_truck.value = false

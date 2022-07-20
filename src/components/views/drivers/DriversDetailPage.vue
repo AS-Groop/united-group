@@ -16,15 +16,15 @@
         @clicks="e=>tab=e"
     />
     <template v-if="tab && !!steps">
-      <DriversTabItems @update="(val)=>modal_data=val"
+      <DriversTabItems @openModal="(val)=>modal_data=val"
                        :items="tab === 'dipatch_orientation'
-                      ? steps['dipatch_orientation'].steps[0].steps
+                      ? steps['dipatch_orientation'].steps
                       : tab === 'hr'
-                      ? steps['hr'].steps[0].steps
+                      ? steps['hr'].steps
                       : tab === 'safety'
-                      ? steps['safety'].steps[0].steps
+                      ? steps['safety'].steps
                       : tab === 'fleet'
-                      ? steps['fleet'].steps[0].steps
+                      ? steps['fleet'].steps
                       : ''" />
     </template>
   </div>

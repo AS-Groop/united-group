@@ -20,7 +20,7 @@ export async function getAllTrucksList(obj) {
 
 export async function createTruck(obj) {
   try {
-    truck_by_id.value  = (await axios.post(`/v1/truck`,obj)).data;
+    truck_by_id.value  = (await axios.post(`/v1/truck/`,obj)).data;
     toast('100','success')
   } catch (e) {
     toast('400','error')

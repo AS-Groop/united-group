@@ -1,20 +1,43 @@
 <template>
   <div>
-      <div v-for="(item,i) in items" class="drivers__detail-item" @click="$emit('update',item)">
-        <v-checked :id="item.name" class-name="check"/>
-        {{ item.name }}
-      </div>
+      <template v-for="(item) in items">
+        <div v-for="i in item.steps"
+              class="drivers__detail-item" @click="$emit('openModal',item)"
+             v-if="item.status.alias === 'initial'" >
+          <v-checked @clickCheck="check(item.status.id, i.id)" :id="i.name" class-name="check"/>
+          {{ i.name }}
+        </div>
+        <div v-for="i in item.steps"
+              class="drivers__detail-item" @click="$emit('openModal',item)"
+             v-if="item.status.alias === 'completed'" >
+          <v-checked @clickCheck="check(item.status.id, i.id)" :id="i.name" class-name="check" :check="true"/>
+          {{ i.name }}
+        </div>
+      </template>
 
   </div>
 </template>
 <script>
 import VChecked from "@/components/ui/vChecked";
+import router from "@/router";
+import {updateStepStatus} from "@/hooks/step/useStep";
+import {getDriverById} from "@/hooks/driver/useDriver";
 export default {
   components: {VChecked},
   props:['name','id','items'],
-  data(){
-    return{
+  setup(){
+    async function check(status_id, step_id){
+      let obj = {
+        driver_id: router.currentRoute.value.params.id,
+        status_id: status_id,
+        step_id: step_id
+      }
+      await updateStepStatus(obj)
+      await getDriverById(router.currentRoute.value.params.id)
+      console.log('test')
     }
+
+    return {check}
   }
 }
 </script>
