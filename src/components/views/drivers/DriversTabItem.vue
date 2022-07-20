@@ -2,13 +2,13 @@
   <div>
       <template v-for="(item) in items">
         <div v-for="i in item.steps"
-              class="drivers__detail-item" @click="$emit('openModal',item)"
+              class="drivers__detail-item" @click="$emit('openModal',i.id)"
              v-if="item.status.alias === 'initial'" >
           <v-checked @clickCheck="check(item.status.id, i.id)" :id="i.name" class-name="check"/>
           {{ i.name }}
         </div>
         <div v-for="i in item.steps"
-              class="drivers__detail-item" @click="$emit('openModal',item)"
+              class="drivers__detail-item" @click="$emit('openModal',i.id)"
              v-if="item.status.alias === 'completed'" >
           <v-checked @clickCheck="check(item.status.id, i.id)" :id="i.name" class-name="check" :check="true"/>
           {{ i.name }}

@@ -2,7 +2,7 @@
   <div class="modal__item">
     <h2 class="text-h2">{{ name }}</h2>
     <div class="modal__select">
-      <RadioSelect v-for="i in 4"/>
+      <RadioSelect v-for="i in 7"/>
     </div>
     <div class="modal__select">
       <div class="modal__select-radio input">

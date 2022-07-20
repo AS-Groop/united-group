@@ -4,15 +4,19 @@
     <div class="modal__content modal__drivers">
       <div class="modal__body">
         <div class="title text-h1">
-          {{ modal_data.name }}<v-svg @click="$emit('close')" id="close" width="30" height="30"/>
+          {{ data.title }}<v-svg @click="$emit('close')" id="close" width="30" height="30"/>
         </div>
         <div class="hr"></div>
         <div class="modal__items">
           <div class="col" v-if="modal_data.select_name">
-            <ModalSelect :name="modal_data.select_name"/>
           </div>
           <div class="col item">
-            <ModalTextarea/>
+            <div>
+              <ModalSelect :name="'modal_data.select_name'"/>
+            </div>
+            <div>
+              <ModalTextarea/>
+            </div>
             <ModalInput/>
             <ModalCommit/>
           </div>
@@ -33,9 +37,23 @@ import DownloadFiles from "@/components/views/drivers/modals/DownloadFiles";
 import VBtn from "@/components/ui/vBtn";
 import ModalSelect from "@/components/views/drivers/modals/ModalSelect";
 import ModalCommit from "@/components/views/drivers/modals/ModalCommit";
+import {computed, onMounted} from "vue";
+import router from "@/router";
+import {form_driver_step, getFormStepDriver} from "@/hooks/form/useDriver";
 export default {
   components: {ModalCommit, ModalSelect, VBtn, DownloadFiles, ModalTextarea, ModalInput,  VSvg},
-  props: ['title','modal_data']
+  props: ['title','modal_data'],
+  setup(props){
+    const data = computed(()=>form_driver_step.value)
+    onMounted(()=>{
+      let obj = {
+        driver_id: router.currentRoute.value.params.id,
+        step_id: props.modal_data
+      }
+      getFormStepDriver(obj)
+    })
+    return{data}
+  }
 
 }
 </script>
