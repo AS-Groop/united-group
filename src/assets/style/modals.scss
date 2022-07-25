@@ -199,6 +199,10 @@
       flex: 1 0 50%;
       padding: 0 5px;
     }
+    .col-12{
+      flex: 1 0 100%;
+      padding: 0 5px;
+    }
 
     .buttons {
       margin-top: 30px;
@@ -285,6 +289,10 @@
 
     .col {
       flex: 1 0 50%;
+      padding: 0 5px;
+    }
+    .col-12 {
+      flex: 1 0 100%;
       padding: 0 5px;
     }
 
@@ -392,8 +400,13 @@
 
     .col {
       flex: 1 0 50%;
-      overflow: hidden;
+      //overflow: hidden;
       padding: 0 5px;
+      order: 1;
+      &-12 {
+        flex: 1 0 100%;
+        order: 2;
+      }
 
       &.item {
         display: flex;
@@ -468,6 +481,11 @@
         padding-left: 0;
         border-bottom: 0;
         margin-bottom: 0;
+      }
+
+      p{
+        padding: 8px 15px;
+        @include text($poppins, normal, 400, 16px, 24px);
       }
 
       input {
