@@ -4,7 +4,7 @@
       <v-btn type="outline" svg="filter">Filter</v-btn>
       <v-btn svg="plus" @click="trailer_modal = true">Add Trailer</v-btn>
     </FilterBar>
-    <vTable>
+    <vTable v-if="trailer_list && trailer_list.trailers">
       <template v-slot:tool>
         <TableTool v-if="false">
           <v-btn type="edit" size="md">Edit</v-btn>
@@ -16,32 +16,32 @@
         <TableHRow icon="true" :data="data_head"/>
       </template>
       <template v-slot:body-row>
-        <TableBRow v-for="(i,index) in data_body"
-                          icon="true" @click="$router.push(`/trailers/${index}`)"
+        <TableBRow v-for="(i,index) in trailer_list.trailers"
+                          icon="true" @click="$router.push(`/trailers/${i.id}`)"
                           :id="index" cursor="pointer"
-                          :col1="{name:i.col1,type:'def'}"
-                          :col2="{name:i.col2,type:'def'}"
-                          :col3="{name:i.col3,type:'def'}"
-                          :col4="{name:i.col4,type:'def'}"
+                          :col1="{name:i.number,type:'def'}"
+                          :col2="{name:i.make,type:'def'}"
+                          :col3="{name:i.trailer_type,type:'def'}"
+                          :col4="{name:i.year_made,type:'def'}"
                           :col5="{name:i.col5,type:'def'}"
                           :col6="{name:i.col6,type:'def'}"
-                          :col7="{name:i.col7,type:'status',size:'full'}"
+                          :col7="{name:i.status.name,type:'status',size:'full'}"
         />
       </template>
     </vTable>
   </div>
 
-  <ModalAdded title="Add Trailer" v-if="trailer_modal" @close="trailer_modal = false">
+  <ModalAdded title="Add Trailer" v-if="trailer_modal" @close="trailer_modal = false" @save="addNewTrailer">
     <template v-slot:img>
       <input type="file" accept="image/*">
       <img src="@/assets/images/trailer.svg" alt="">
     </template>
     <template v-slot:content>
-      <v-input  label="Trailer number" place="Enter number"/>
-      <v-input  label="Make & Model" place="Enter make"/>
-      <v-input  label="Type" place="Enter type"/>
-      <v-input  label="Year made" place="Enter year"/>
-      <v-input  label="Plate number" place="Enter plate number"/>
+      <v-input v-model="new_trailer.number" label="Trailer number" place="Enter number"/>
+      <v-input v-model="new_trailer.make" label="Make & Model" place="Enter make"/>
+      <v-input v-model="new_trailer.trailer_type" label="Type" place="Enter type"/>
+      <v-input v-model="new_trailer.year_made" label="Year made" place="Enter year"/>
+      <v-input v-model="new_trailer.plate_number" label="Plate number" place="Enter plate number"/>
     </template>
   </ModalAdded>
 </template>
@@ -56,7 +56,7 @@ import TableBRow from "@/components/app/table/TableBRow";
 import ModalAdded from "@/components/app/modals/ModalAdded";
 import VInput from "@/components/ui/vInput";
 import {computed, onMounted, ref} from "vue";
-import {createTrailer, getAllTrailersList} from "@/hooks/trailer/useTrailer";
+import {all_trailers_list, createTrailer, getAllTrailersList} from "@/hooks/trailer/useTrailer";
 
 export default {
   components: {VInput, ModalAdded, TableBRow, TableHRow, TableTool, vTable, VBtn, FilterBar},
@@ -146,7 +146,7 @@ export default {
 
     });
 
-    const trailer_list = computed(()=>trailer_list.value)
+    const trailer_list = computed(()=>all_trailers_list.value)
 
 
     onMounted(()=>{
