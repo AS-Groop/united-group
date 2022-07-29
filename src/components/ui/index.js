@@ -6,6 +6,7 @@ import vSvg from './vSvg'
 import vRadioInput from './vRadioInput'
 import vSelect from './vSelect'
 import vToggle from './vToggle'
+import vLoading from './vLoading'
 // import SvgIcon from "@/components/ui/SvgIcon";
 
 export default [
@@ -16,6 +17,7 @@ export default [
   vSvg,
   vRadioInput,
   vSelect,
-  vToggle
+  vToggle,
+  vLoading
   // SvgIcon
 ];

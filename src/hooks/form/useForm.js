@@ -1,5 +1,6 @@
 import {ref} from "vue";
 import axios from "axios";
+import toast from "@/use/toast";
 
 
 export const form_driver_step = ref(null);
@@ -19,6 +20,21 @@ export async function getFormListEntities(obj){
   try{
     form_list_entities.value[obj.entities] = (await axios.get(`/v1/form/entities?entity_type=${obj.entities}${obj?.limit ? '&limit='+obj.limit:''}${obj?.page ? '&page='+obj.page:''}${obj?.search ? '&search='+obj.search:''}`)).data
   } catch (e){
+    console.log(e)
+  }
+}
+
+export async function setFormFiledValue(obj){
+  try {
+    console.log(obj)
+    let res = (await axios.put(`/v1/form/set`, obj)).data;
+    if (res.ok) {
+      toast('100', 'success');
+    } else {
+      toast('warning','warning')
+    }
+  } catch (e){
+    toast('400','success')
     console.log(e)
   }
 }

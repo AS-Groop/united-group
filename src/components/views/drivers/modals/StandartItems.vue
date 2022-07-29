@@ -3,10 +3,13 @@
     <h2 class="text-h2">{{ title }}</h2>
     <template v-for="field in fields">
       <template v-if="field.type === 'textarea'">
-        <v-input-modal/>
+        <v-input-modal @onChange="(v)=>{changeInput(v,field),valIn = v}" :inputValue="field.values ?field.values[0].value:''" />
         <div class="add text-h3">
-          <span v-if="field.label ==='Comments'">Add</span>
+          <span @click="changeCommit(field)" v-if="field.label ==='Comments'">Add</span>
         </div>
+      </template>
+      <template v-if="field.type === 'text'">
+            <v-input v-if="field.type === 'text'" class-name="mb-15" :place="field.hint"/>
       </template>
       <template v-if="field.type === 'radiogroup'">
         <div class="modal__select">
@@ -24,9 +27,7 @@
                     class-name=""
                     :options="form_list_entities[field.list_type].entities"/>
       </template>
-
     </template>
-
   </div>
 </template>
 <script>
@@ -35,15 +36,50 @@ import RadioSelect from "@/components/views/drivers/modals/RadioSelect";
 import VInput from "@/components/ui/vInput";
 import DownloadFiles from "@/components/views/drivers/modals/DownloadFiles";
 import VSelect from "@/components/ui/vSelect";
-import {form_list_entities} from "@/hooks/form/useForm";
+import {form_list_entities, getFormStepDriver, setFormFiledValue} from "@/hooks/form/useForm";
 import {ref} from "vue";
+import router from "@/router";
+import {useRoute, useRouter} from "vue-router";
 export default {
-  props:['title','fields'],
+  props:['title','fields','step_id','loading'],
   components: {RadioSelect, VInputModal,VInput, VSelect, DownloadFiles},
-  setup(){
+  setup(props,ctx){
     console.log(form_list_entities.value);
     let select =ref({})
-    return {form_list_entities,select}
+    let valIn =ref('')
+    function changeInput(val,filed){
+      let obj = {
+        field_id: filed.id,
+        step_id: props.step_id,
+        driver_id: router.currentRoute.value.params.id,
+        values:[
+            val
+        ]
+      }
+      if(filed.label !=='Comments') setFormFiledValue(obj)
+    }
+
+    async function changeCommit(filed){
+      ctx.emit('loading',true)
+      let obj = {
+        field_id: filed.id,
+        step_id: props.step_id,
+        driver_id: router.currentRoute.value.params.id,
+        values:[
+          valIn.value
+        ]
+      }
+      await setFormFiledValue(obj);
+      let obj2 = {
+        driver_id: router.currentRoute.value.params.id,
+        step_id: props.step_id
+      };
+      await getFormStepDriver(obj2).then(e=>{
+        console.log(e)
+        ctx.emit('loading',false)
+      })
+    }
+    return {form_list_entities,select,changeInput,changeCommit,valIn}
   }
 }
 </script>
