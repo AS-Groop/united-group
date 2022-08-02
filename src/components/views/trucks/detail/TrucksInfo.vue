@@ -9,21 +9,21 @@
 </template>
 <script>
 import TrucksInfoItem from "@/components/views/trucks/detail/TrucksInfoItem";
-import {ref} from "vue";
+import {computed, ref} from "vue";
+import {truck_by_id} from "@/hooks/truck/useTruck";
 export default {
   components: {TrucksInfoItem},
   setup(){
-    const data_info = ref([]);
-    data_info.value = [
-      {title:'Truck Number', value:'#120'},
-      {title:'Plate number', value:'077707'},
-      {title:'Make', value:'Volvo'},
-      {title:'Milage', value:'350,000'},
-      {title:'Model', value:'VNL'},
-      {title:'With Driver Since', value:'-'},
-      {title:'Year Made', value:'2020'},
-      {title:'Assigned Driver', value:'-'},
-    ]
+    const data_info =computed(()=> [
+      {title:'Truck Number', value: truck_by_id.value?.number || '--'},
+      {title:'Plate number', value:truck_by_id.value?.plate_number || '--'},
+      {title:'Make', value:truck_by_id.value?.make || '--'},
+      {title:'Milage', value:truck_by_id.value?.milage || '--'},
+      {title:'Model', value:truck_by_id.value?.modeld || '--'},
+      {title:'With Driver Since', value:truck_by_id.value?.driver_since || '--'},
+      {title:'Year Made', value:truck_by_id.value?.year_made || '--'},
+      {title:'Assigned Driver', value:truck_by_id.value?.assigned_driver?.name || '--'},
+    ])
 
     return{data_info}
   }

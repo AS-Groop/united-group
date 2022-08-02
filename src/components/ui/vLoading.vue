@@ -11,7 +11,9 @@
 </script>
 <style lang="scss" scoped>
 .loading{
-  background: #f5f5f5;
+  background: #ffffff;
+  border-radius: 12px;
+  max-height: calc(100vh - 116px);
   &>div {
     width: 100%;
     height: 100%;
