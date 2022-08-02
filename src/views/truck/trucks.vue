@@ -1,7 +1,7 @@
 <template>
   <div class="section">
     <HeaderDefault />
-    <TrucksMainPage/>ccccs
+    <TrucksMainPage/>
   </div>bbbb
 </template>
 <script>
