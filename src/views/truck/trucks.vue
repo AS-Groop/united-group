@@ -2,7 +2,7 @@
   <div class="section">
     <HeaderDefault />
     <TrucksMainPage/>
-  </div>
+  </div>bbbb
 </template>
 <script>
 import HeaderDefault from "@/components/app/header/HeaderDefault";
