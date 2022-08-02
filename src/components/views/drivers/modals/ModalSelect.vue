@@ -8,8 +8,8 @@
 <!--        <label for="text" class="label"></label>-->
       </div>
     </div>
-    <div class="modal__select" v-if="form_list_entities && form_list_entities[listType] && form_list_entities[listType].entities">
-      <RadioSelect @radioChange="()=>$emit('radioChange',i.id)" :name="listType" v-for="i in form_list_entities[listType].entities" :radio-checked="i.id === listValue[0]?.value" :title="i.name"/>
+    <div class="modal__select" v-if="form_list_entities && form_list_entities[listType] && form_list_entities[listType].entities?.length">
+      <RadioSelect @radioChange="()=>$emit('radioChange',i.id)" :name="listType" v-for="i in form_list_entities[listType].entities" :radio-checked="listValue && i.id === listValue[0]?.value" :title="i.name"/>
     </div>
     <div v-else class="modal_select">
       NOT LIST

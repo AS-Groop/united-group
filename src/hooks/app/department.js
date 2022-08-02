@@ -22,7 +22,7 @@ export async function changeInput(val,field,step_id,commit){
     if(field.label !== 'Comments' && commit && val.length) await setFormFiledValue(obj)
     if(field.label === 'Comments' && commit && val.length) {
         loading_modal.value = true;
-        field.values.forEach(e=>obj.fields[0].values.push(e.value))
+        if (field.values) field.values.forEach(e => obj.fields[0].values.push(e.value));
         await setFormFiledValue(obj)
         await getFormStepDriver(obj2)
         loading_modal.value = false
@@ -57,9 +57,6 @@ export function changeRadio (val,field,step_id,fields, child='simple'){
 
     // let data =
     setFormFiledValue(obj)
-    if(child === 'child' || 'dif') {
-        return
-    }
     if(child === 'simple') {
         return fields.map(i => {
             i.values[0].value = field.id

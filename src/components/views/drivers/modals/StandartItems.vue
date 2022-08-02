@@ -19,12 +19,12 @@
 <!--      For Radio Group-->
       <template v-if="field.type === 'radiogroup'">
         <div class="modal__select">
-          <RadioSelect @radioChange="(val)=>changeRadioLoc(val,field)" :title="field.name" :radio-checked="field.id === field.values[0].value" :name="field.type" />
+          <RadioSelect @radioChange="(val)=>changeRadioLoc(val,field)" :title="field.name" :radio-checked="field.values && field.id === field.values[0].value" :name="field.type" />
         </div>
-        <div v-if="field.child_fields && field.id === field.values[0].value" class="modal__select">
+        <div v-if="field.child_fields && field.values && field.id === field.values[0].value" class="modal__select">
           <template v-for="i in field.child_fields">
             <v-input v-if="i.type === 'text'" class-name="mb-15" :place="i.hint"/>
-            <ModalSelect @radioChange="(val)=>changeRadio(val,i,step_id,field.child_fields, child)"  v-if="i.type === 'select'" :listValue="i.values" :listType="i.list_type" />
+            <ModalSelect @radioChange="(val)=>changeRadio(val,i,step_id,field.child_fields, 'child')"  v-if="i.type === 'select'" :listValue="i.values" :listType="i.list_type" />
           </template>
         </div>
       </template>
@@ -61,12 +61,12 @@ export default {
     let valIn = ref('');
     let modelVal=ref({})
     props.fields?.forEach((e,i)=>{
-      if(e.type === 'text'){
+      if(e.type === 'text' && e.values){
         modelVal.value['text'+i] = e.values[0].value
       }
     })
     function changeRadioLoc(val, field) {
-      ctx.emit('update:fields',changeRadio(val,field,props.step_id,props.fields))
+      ctx.emit('update:fields',changeRadio(val,field,props.step_id, props.fields, 'simple'))
     }
     return {
       changeRadioLoc,
