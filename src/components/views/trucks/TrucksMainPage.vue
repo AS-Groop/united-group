@@ -1,5 +1,6 @@
 <template>
-  <div class="section__page">
+  <vLoading v-if="loading"/>
+  <div v-else class="section__page">
     <FilterBar>
       <v-btn type="outline" svg="filter">Filter</v-btn>
       <v-btn svg="plus" @click="new_truck = true">Add Truck</v-btn>
@@ -55,12 +56,13 @@ import TableHRowDrivers from "@/components/app/table/TableHRow";
 import TableBRowDrivers from "@/components/app/table/TableBRow";
 import ModalAdded from "@/components/app/modals/ModalAdded";
 import VInput from "@/components/ui/vInput";
+import vLoading from "@/components/ui/vLoading"
 import {computed, onMounted, ref} from "vue";
 import {all_trucks_list, createTruck, getAllTrucksList} from "@/hooks/truck/useTruck";
 import {createDriver, getDriverList} from "@/hooks/driver/useDriver";
 
 export default {
-  components: {VInput, ModalAdded, TableBRowDrivers, TableHRowDrivers, TableTool, vTable, VBtn, FilterBar},
+  components: {VInput, vLoading, ModalAdded, TableBRowDrivers, TableHRowDrivers, TableTool, vTable, VBtn, FilterBar},
   data() {
     return {
       data_head: [
@@ -76,6 +78,7 @@ export default {
     }
   },
   setup(){
+    let loading = ref(false)
     const new_truck = ref(false);
     const truck = ref({
 
@@ -86,7 +89,9 @@ export default {
 
 
     onMounted(() => {
+      loading.value = true;
       getAllTrucksList();
+      loading.value = false;
     });
 
 
@@ -100,7 +105,7 @@ export default {
     }
 
 
-    return {truck, new_truck, addNewTruck,trucks_list}
+    return {truck, new_truck, addNewTruck,trucks_list, loading}
   }
 
 }

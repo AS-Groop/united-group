@@ -1,5 +1,5 @@
 <template>
-  <div class="section">
+  <div class="section">aasas
     <HeaderDefault />
     <TrucksMainPage/>
   </div>bbbb

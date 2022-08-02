@@ -68,6 +68,10 @@ $poppins:  'Poppins', sans-serif;
 .text-h1 {
   @include text($poppins, normal, 400, 20px, 30px);
 }
+/* Text/H0 */
+.text-h0 {
+  @include text($poppins, normal, 500, 24px, 150%);
+}
 /* Text/H2 */
 .text-h2 {
   @include text($poppins, normal, 400, 18px, 27px);
