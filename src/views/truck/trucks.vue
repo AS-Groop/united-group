@@ -1,8 +1,8 @@
 <template>
-  <div class="section">aasas
+  <div class="section">
     <HeaderDefault />
     <TrucksMainPage/>
-  </div>bbbb
+  </div>
 </template>
 <script>
 import HeaderDefault from "@/components/app/header/HeaderDefault";

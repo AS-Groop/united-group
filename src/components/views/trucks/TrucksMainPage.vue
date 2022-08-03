@@ -80,9 +80,7 @@ export default {
   setup(){
     let loading = ref(false)
     const new_truck = ref(false);
-    const truck = ref({
-
-    });
+    const truck = ref({});
 
     const trucks_list = computed(()=>all_trucks_list.value)
 

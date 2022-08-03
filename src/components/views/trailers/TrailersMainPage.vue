@@ -1,5 +1,6 @@
 <template>
-  <div class="section__page">
+  <v-loading v-if="loading"/>
+  <div v-else class="section__page">
     <FilterBar>
       <v-btn type="outline" svg="filter">Filter</v-btn>
       <v-btn svg="plus" @click="trailer_modal = true">Add Trailer</v-btn>
@@ -56,9 +57,10 @@ import ModalAdded from "@/components/app/modals/ModalAdded";
 import VInput from "@/components/ui/vInput";
 import {computed, onMounted, ref} from "vue";
 import {all_trailers_list, createTrailer, getAllTrailersList} from "@/hooks/trailer/useTrailer";
+import VLoading from "@/components/ui/vLoading";
 
 export default {
-  components: {VInput, ModalAdded, TableBRow, TableHRow, TableTool, vTable, VBtn, FilterBar},
+  components: {VLoading, VInput, ModalAdded, TableBRow, TableHRow, TableTool, vTable, VBtn, FilterBar},
   data() {
     return {
       data_head: [
@@ -69,87 +71,22 @@ export default {
         {name:'Assigned Driver'},
         // {name:'With Driver Since'}, /* No data received from API */
         {name:'Status'},
-      ],
-      data_body: [{
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: 'Azodov Asror',
-        col6: '-',
-        col7: 'Active',
-      }, {
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: 'Azodov Asror',
-        col6: '-',
-        col7: 'Active',
-      }, {
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: 'Azodov Asror',
-        col6: '-',
-        col7: 'Active',
-      }, {
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: 'Azodov Asror',
-        col6: '-',
-        col7: 'Active',
-      }, {
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: 'Azodov Asror',
-        col6: '-',
-        col7: 'Active',
-      }, {
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: 'Azodov Asror',
-        col6: '-',
-        col7: 'Active',
-      }, {
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: 'Azodov Asror',
-        col6: '-',
-        col7: 'Active',
-      }, {
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: 'Azodov Asror',
-        col6: '-',
-        col7: 'Active',
-      }
       ]
     }
   },
   setup(){
 
     let trailer_modal = ref(false)
-    const new_trailer = ref({
-
-    });
+    let loading = ref(false)
+    const new_trailer = ref({});
 
     const trailer_list = computed(()=>all_trailers_list.value)
 
 
     onMounted(()=>{
-      getAllTrailersList()
+      loading.value = true;
+      getAllTrailersList();
+      loading.value = false;
     })
 
 
@@ -162,6 +99,7 @@ export default {
 
 
     return{
+      loading,
       trailer_modal,
       trailer_list,
       addNewTrailer,

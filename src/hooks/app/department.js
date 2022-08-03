@@ -57,10 +57,13 @@ export function changeRadio (val,field,step_id,fields, child='simple'){
 
     // let data =
     setFormFiledValue(obj)
-    if(child === 'simple') {
+    if (child === 'simple') {
+        console.log(fields)
         return fields.map(i => {
-            i.values[0].value = field.id
+            i.values
+                ? i.values[0].value = field.id
+                : i.values = [{value: field.id}]
             return i
-        })
+        });
     }
 }
