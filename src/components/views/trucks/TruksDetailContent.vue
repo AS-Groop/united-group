@@ -6,17 +6,18 @@
     </DetailNav>
     <div class="trucks__content">
       <TrucksInfo />
-      <template v-if="truck_inspect_id">
-        <TrucksPick @loadPhoto="obj => modalPhoto=obj" @modal1="data1 = true" @modal2="data2 = true" />
+      <template v-if="data_target">
+        <TrucksPick :data_target="data_target" @loadPhoto="obj => modalPhoto=obj" @modal1="data1 = true" @modal2="data2 = true" />
         <div class="hr"></div>
         <div class="trucks__draw">
           <TrucksDrawItem title="Driver Signature"/>
           <TrucksDrawItem title="Company representative Signature"/>
-          <TrucksDrawItem area="true" title="Comments"/>
+          <TrucksDrawItem area="true" v-model="comment" title="Comments"/>
+          <TrucksDrawItem disabled="true" v-for="item in data_target.comments" v-model="item.text" area="true" title="Comments"/>
         </div>
         <div class="btns">
           <v-btn type="outline">Cancel</v-btn>
-          <v-btn >Submit</v-btn>
+          <v-btn @click="save">Submit</v-btn>
         </div>
       </template>
     </div>
@@ -52,7 +53,7 @@ import PopupPhoto from "@/components/app/modals/modal-load-photo/PopupPhoto";
 import ModalDraw from "@/components/app/modals/ModalDraw";
 import router from "@/router";
 import {useRoute, useRouter} from "vue-router";
-import {getTruckInspect, getTruckById, truck_by_id, truck_inspect_id} from "@/hooks/truck/useTruck";
+import {getTruckInspect, getTruckById, truck_by_id, truck_inspect_id, postInspectTruck} from "@/hooks/truck/useTruck";
 import vLoading from "@/components/ui/vLoading";
 import {form_list_entities, getFormListEntities} from "@/hooks/form/useForm";
 export default {
@@ -76,59 +77,52 @@ export default {
     const data2 = ref(false)
     const image_draw = ref(false)
     const img = ref(false)
-    const inspected_truck = ref(null)
+    const comment = ref('')
     const modalPhoto = ref(null);
-    const data_modal = [
-      {name:'Select All'},
-      {name:'EZ Pass & Best Pass'},
-      {name:'Prepass'},
-      {name:'ELD device'},
-      {name:'Samsara System (Camera)'},
-      {name:'TabletGPS(truck tracking unit)'},
-      {name:'APU unit'},
-      {name:'Power inverter'},
-      {name:'Fridge'},
-      {name:'Microwave'},
-      {name:'Fire extinguisher'},
-      {name:'3 Emergency triangles'},
-      {name:'Set of spare fuses'},
-      {name:'Truck folder'},
-      {name:'Chain'},
-    ]
+    const data_target = ref({})
+    const router_id = useRoute().params.id;
 
-    const data_modal2 = [
-      {name:'Select All'},
-      {name:'DOT/MC/KYU signs'},
-      {name:'Unit Number (displayed on both sides of the truck)'},
-      {name:'IFTA (displayed on both sides of the truck)'},
-      {name:'HUT (New York state weight & distance permit sticker displayed on the front)'},
-      {name:'ELD Sticker'},
-      {name:'Licence Plate'},
-    ]
-
-    onMounted(async () => {
-      loading.value = true
-      const  router_id = useRoute().params.id;
-      await getTruckById(router_id);
+    async function fetchData(){
       if(truck_by_id.value?.assigned_driver?.id){
         await getTruckInspect({truck_id: router_id, driver_id: truck_by_id.value.assigned_driver.id});
         await getFormListEntities({entities: 'incab_devices', limit: 99});
         await getFormListEntities({entities: 'external_devices', limit: 99});
+        if(truck_inspect_id.value) {
+          data_target.value = Object.assign({}, truck_inspect_id.value);
+          data_target.value.truck_id = truck_inspect_id.value.truck.id;
+          data_target.value.driver_id = truck_inspect_id.value.truck.assigned_driver.id;
+          data_target.value.location = truck_inspect_id.value?.location || 'Tashkent';
+          delete data_target.value.truck;
+        }
       }
+    }
+
+    onMounted(async () => {
+      loading.value = true
+      await getTruckById(router_id);
+      await fetchData();
       loading.value = false
     });
 
+    function save(){
+      console.log(comment.value)
+      if(comment.value) data_target.value.comments.unshift({created_by: "", text: comment.value, created_at: ""});
+      postInspectTruck(data_target.value)
+      comment.value = ''
+    }
+
     return{
-      data_modal,
+      data_target,
       form_list_entities,
       truck_by_id,
-      data_modal2,
       modalPhoto,
       image_draw,
       data1,
       data2,
       loading,
       img,
+      save,
+      comment,
       truck_inspect_id
     }
   }

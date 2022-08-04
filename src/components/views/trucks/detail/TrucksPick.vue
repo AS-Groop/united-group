@@ -1,10 +1,9 @@
 <template>
   <div>
-
     <div class="trucks__title text-h3-SBold">Pick Up</div>
     <div class="trucks__pick-up">
       <div class="trucks__pick-location">
-        <v-input  label="Location" place="Enter Location"/>
+        <v-input v-model="data_target.location" label="Location" place="Enter Location"/>
       </div>
       <div class="trucks__pick-loads">
         <p class="text-h4">Please upload an image of the odometer and fuel level to help verify the mileage and fuel used during your trip!</p>
@@ -34,6 +33,7 @@ import VSvg from "@/components/ui/vSvg";
 import TruckPickLoad from "@/components/views/trucks/detail/TruckPickLoad";
 import TruckPickSelect from "@/components/views/trucks/detail/TruckPickSelect";
 export default {
+  props:['data_target'],
   components: {TruckPickSelect, TruckPickLoad, VSvg, VInput},
   data(){
     return{

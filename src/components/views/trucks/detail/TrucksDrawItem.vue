@@ -3,7 +3,7 @@
   <div class="trucks__draw-inner">
     <div class="trucks__draw-item">
       <p class="text-h4">{{title}}</p>
-      <textarea v-if="area" placeholder="Comment..." class="text-h6"></textarea>
+      <textarea v-if="area" :disabled="disabled" v-model="modelValue" @update:modelValue="$emit('update:modelValue',modelValue)" placeholder="Comment..." class="text-h6"></textarea>
       <div v-else class="trucks__draw-dr" @click="image_draw = true"></div>
     </div>
   </div>
@@ -14,10 +14,10 @@
 </template>
 <script>
 import ModalDraw from "@/components/app/modals/ModalDraw";
-import {ref} from "vue";
+import {ref, watch} from "vue";
 export default {
   components: {ModalDraw},
-  props:['title','area'],
+  props:['title','area','disabled','modelValue'],
   setup(){
     const image_draw = ref(false);
 
