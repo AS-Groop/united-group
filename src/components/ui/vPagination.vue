@@ -1,12 +1,12 @@
 <template>
     <v-pagination
         v-model="page"
-        :pages="10"
+        :pages="pages"
         :range-size="1"
         active-color="#2F80ED"
         hide-first-button
         hide-last-button
-        @update:modelValue="updateHandler"
+        @update:modelValue="val=>$emit('update:page',val)"
     />
 </template>
 <script>
@@ -15,16 +15,12 @@ import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 export default {
   components:{VPagination},
   props:{
-    page:[Number]
-  },
-  data(){
-    // return{
-    //   page:1
-    // }
+    page:[Number],
+    pages:[Number],
   },
   methods:{
     updateHandler(e){
-      this.$emit('update:page',e)
+      // this.
     }
   }
 }

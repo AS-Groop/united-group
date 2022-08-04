@@ -1,10 +1,16 @@
 <template>
-  <div class="section__page">
+  <v-loading v-if="loading"/>
+  <div v-else class="section__page">
     <FilterBar>
       <v-btn type="outline" svg="filter">Filter</v-btn>
       <v-btn svg="plus" @click="new_driver = true">Add driver</v-btn>
     </FilterBar>
-    <vTable v-model:pageNumber="pageNumber" @update:pageNumber="test">
+    <vTable :count="count"
+            :pages="pages"
+            v-model:limit="limit"
+            @update:limit="fetchList({type:'limit'})"
+            v-model:page="page"
+            @update:page="fetchList">
       <template v-slot:tool>
         <TableTool >
           <v-btn type="edit" size="md">Edit</v-btn>
@@ -60,24 +66,10 @@ import router from "@/router";
 import VInput from "@/components/ui/vInput";
 import useVuelidate from '@vuelidate/core'
 import { required, email } from '@vuelidate/validators'
+import VLoading from "@/components/ui/vLoading";
 
 export default {
-  components: {VInput, ModalAdded, TableBRowDrivers, TableHRowDrivers, TableTool, vTable, VBtn, FilterBar},
-  data(){
-    return {
-      data_head:[
-        {name:'Driver Name'},
-        {name:'Date On Board'},
-        {name:'Human Resources'},
-        {name:'Safety'},
-        {name:'Dispatch Orientation'},
-        {name:'Fleet'},
-        {name:'Assigned Truck'},
-        {name:'Assigned Trailer'},
-        {name:'Status'},
-      ],
-    }
-  },
+  components: {VInput, VLoading, ModalAdded, TableBRowDrivers, TableHRowDrivers, TableTool, vTable, VBtn, FilterBar},
   methods:{
     test(val){
       console.log('update pageNumber in main page',val)
@@ -85,20 +77,34 @@ export default {
   },
   setup() {
     const new_driver = ref(false);
+    let page = ref(1);
+    let limit = ref(10);
+    let loading = ref(false);
+    let count = computed(() => (driver_list?.value?.count) ? driver_list.value.count : 0);
+    let pages = computed(() => (driver_list?.value?.count) ? Math.ceil(driver_list.value.count/limit.value) : 0);
     const driver = ref({
       email: "",
       first_name: "",
       image_id: "",
       last_name: "",
       phone: ""
-    })
-    let pageNumber = ref(3)
+    });
+    const data_head=[
+      {name:'Driver Name'},
+      {name:'Date On Board'},
+      {name:'Human Resources'},
+      {name:'Safety'},
+      {name:'Dispatch Orientation'},
+      {name:'Fleet'},
+      {name:'Assigned Truck'},
+      {name:'Assigned Trailer'},
+      {name:'Status'},
+    ];
 
 
     function location(id){
       router.push(`/drivers/${id}`)
     }
-
     async function addNewDriver() {
       v$.value.$touch();
       if(!v$.value.$invalid){
@@ -110,8 +116,15 @@ export default {
 
     }
 
+    async function fetchList(obj){
+      loading.value = true;
+      if(obj?.type==='limit') page.value = 1
+      await getDriverList({limit:limit.value,page:page.value});
+      loading.value = false;
+    }
+
     onMounted(() => {
-      getDriverList()
+       fetchList()
     });
 
 
@@ -125,7 +138,7 @@ export default {
     const v$ = useVuelidate(rules, driver);
 
 
-    return {location, new_driver,driver_list, v$, driver, addNewDriver, pageNumber};
+    return {limit, count, location, fetchList, new_driver,driver_list, v$, driver, addNewDriver, page, pages, loading, data_head};
   }
 }
 </script>

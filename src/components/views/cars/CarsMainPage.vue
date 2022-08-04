@@ -26,14 +26,11 @@ import { getAllCarList } from "@/hooks/car/useCar";
 import { getAllUserList } from "@/hooks/user/useUser";
 import { getAllDepartmentList } from "@/hooks/department/useDepartment";
 export default {
+  name:"CarsMainPage",
   components: {CarsHistory, CarsDateCards, CarsDriverInfo,  VBtn, CarouselCars},
   setup(){
-
-
     onMounted(()=>{
       getAllCarList();
-      getAllUserList();
-      getAllDepartmentList();
     })
   }
 }

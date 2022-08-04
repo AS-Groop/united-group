@@ -5,7 +5,12 @@
       <v-btn type="outline" svg="filter">Filter</v-btn>
       <v-btn svg="plus" @click="new_truck = true">Add Truck</v-btn>
     </FilterBar>
-    <vTable v-if="trucks_list && trucks_list.trucks">
+    <vTable v-if="trucks_list && trucks_list.trucks"
+            :count="count" :pages="pages"
+            v-model:limit="limit"
+            @update:limit="fetchList({type:'limit'})"
+            v-model:page="page"
+            @update:page="fetchList">
       <template v-slot:tool>
         <TableTool v-if="false">
           <v-btn type="edit" size="md">Edit</v-btn>
@@ -59,7 +64,6 @@ import VInput from "@/components/ui/vInput";
 import vLoading from "@/components/ui/vLoading"
 import {computed, onMounted, ref} from "vue";
 import {all_trucks_list, createTruck, getAllTrucksList} from "@/hooks/truck/useTruck";
-import {createDriver, getDriverList} from "@/hooks/driver/useDriver";
 
 export default {
   components: {VInput, vLoading, ModalAdded, TableBRowDrivers, TableHRowDrivers, TableTool, vTable, VBtn, FilterBar},
@@ -81,15 +85,23 @@ export default {
     let loading = ref(false)
     const new_truck = ref(false);
     const truck = ref({});
+    let page = ref(1);
+    let limit = ref(10);
+    let count = computed(() => (trucks_list?.value?.count) ? trucks_list.value.count : 0);
+    let pages = computed(() => (trucks_list?.value?.count) ? Math.ceil(trucks_list.value.count/limit.value) : 0);
 
-    const trucks_list = computed(()=>all_trucks_list.value)
+    const trucks_list = computed(()=>all_trucks_list.value || null)
 
 
+    async function fetchList(obj){
+      loading.value = true;
+      if(obj?.type==='limit') page.value = 1;
+      await getAllTrucksList({limit:limit.value,page:page.value});
+      loading.value = false;
+    }
 
     onMounted(() => {
-      loading.value = true;
-      getAllTrucksList();
-      loading.value = false;
+      fetchList();
     });
 
 
@@ -103,7 +115,7 @@ export default {
     }
 
 
-    return {truck, new_truck, addNewTruck,trucks_list, loading}
+    return {truck, new_truck, fetchList, addNewTruck,trucks_list, loading, page, count, limit, pages}
   }
 
 }

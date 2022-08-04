@@ -21,14 +21,15 @@
       </template>
     </div>
   </div>
-  <ModalCheckList v-if="data1" @close="data1 = false" title="List of in cab devices">
-    <CheckListItem :name="item.name" v-for="item in data_modal" />
+  <ModalCheckList v-if="data1 && form_list_entities && form_list_entities['incab_devices']?.entities?.length"
+                  @close="data1 = false" title="List of in cab devices">
+    <CheckListItem :name="item.name" v-for="item in form_list_entities['incab_devices'].entities" />
   </ModalCheckList>
-  <ModalCheckList v-if="data2" @close="data2 = false" title="List of externally displayed signs & decals">
-    <CheckListItem :name="item.name" v-for="item in data_modal2" />
+  <ModalCheckList v-if="data2 && form_list_entities && form_list_entities['external_devices']?.entities?.length"
+                  @close="data2 = false" title="List of externally displayed signs & decals">
+    <CheckListItem :name="item.name" v-for="item in form_list_entities['external_devices'].entities" />
   </ModalCheckList>
-  <ModalLoadPhotos @popupImg="img = true" v-if="modalPhoto" @close="modalPhoto = null" :title="modalPhoto.name">
-  </ModalLoadPhotos>
+  <ModalLoadPhotos @popupImg="img = true" v-if="modalPhoto" @close="modalPhoto = null" :title="modalPhoto.name"/>
   <PopupPhoto v-if="img" @close="img = false">
     <img src="@/assets/images/tires1.png" alt="">
   </PopupPhoto>
@@ -53,6 +54,7 @@ import router from "@/router";
 import {useRoute, useRouter} from "vue-router";
 import {getTruckInspect, getTruckById, truck_by_id, truck_inspect_id} from "@/hooks/truck/useTruck";
 import vLoading from "@/components/ui/vLoading";
+import {form_list_entities, getFormListEntities} from "@/hooks/form/useForm";
 export default {
   components: {
     ModalDraw,
@@ -109,14 +111,16 @@ export default {
       const  router_id = useRoute().params.id;
       await getTruckById(router_id);
       if(truck_by_id.value?.assigned_driver?.id){
-        await getTruckInspect({truck_id:router_id,driver_id:truck_by_id.value.assigned_driver.id})
+        await getTruckInspect({truck_id: router_id, driver_id: truck_by_id.value.assigned_driver.id});
+        await getFormListEntities({entities: 'incab_devices', limit: 99});
+        await getFormListEntities({entities: 'external_devices', limit: 99});
       }
       loading.value = false
-      console.log(inspected_truck.value)
     });
 
     return{
       data_modal,
+      form_list_entities,
       truck_by_id,
       data_modal2,
       modalPhoto,

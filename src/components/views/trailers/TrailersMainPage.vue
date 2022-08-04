@@ -5,7 +5,12 @@
       <v-btn type="outline" svg="filter">Filter</v-btn>
       <v-btn svg="plus" @click="trailer_modal = true">Add Trailer</v-btn>
     </FilterBar>
-    <vTable v-if="trailer_list && trailer_list.trailers">
+    <vTable v-if="trailer_list && trailer_list.trailers"
+            :count="count" :pages="pages"
+            v-model:limit="limit"
+            @update:limit="fetchList({type:'limit'})"
+            v-model:page="page"
+            @update:page="fetchList">
       <template v-slot:tool>
         <TableTool v-if="false">
           <v-btn type="edit" size="md">Edit</v-btn>
@@ -79,15 +84,23 @@ export default {
     let trailer_modal = ref(false)
     let loading = ref(false)
     const new_trailer = ref({});
+    let page = ref(1);
+    let limit = ref(10);
+    let count = computed(() => (trailer_list?.value?.count) ? trailer_list.value.count : 0);
+    let pages = computed(() => (trailer_list?.value?.count) ? Math.ceil(trailer_list.value.count/limit.value) : 0);
 
     const trailer_list = computed(()=>all_trailers_list.value)
 
-
-    onMounted(()=>{
+    async function fetchList(obj){
       loading.value = true;
-      getAllTrailersList();
+      if(obj?.type==='limit') page.value = 1;
+      await getAllTrailersList({limit:limit.value,page:page.value});
       loading.value = false;
-    })
+    }
+
+    onMounted(() => {
+      fetchList();
+    });
 
 
     async function addNewTrailer() {
@@ -98,13 +111,7 @@ export default {
     }
 
 
-    return{
-      loading,
-      trailer_modal,
-      trailer_list,
-      addNewTrailer,
-      new_trailer
-    }
+    return{ page, limit, count, pages, fetchList, loading, trailer_modal, trailer_list, addNewTrailer, new_trailer }
   }
 
 }

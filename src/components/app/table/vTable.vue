@@ -13,7 +13,11 @@
         </tbody>
       </table>
     </div>
-    <TableFooter v-model:pageNumber="pageNumber" @update:pageNumber="(val)=>{this.$emit('update:pageNumber',val)}"/>
+    <TableFooter
+        :count="count"
+        :pages="pages"
+        v-model:limit="limit" @update:limit="(val)=>{$emit('update:limit',val)}"
+        v-model:page="page" @update:page="(val)=>{$emit('update:page',val)}"/>
   </div>
 </template>
 <script>
@@ -26,6 +30,6 @@ import VBtn from "@/components/ui/vBtn";
 export default {
   name: 'vTable',
   components: {VBtn, TableTool, TableFooter, TableHRowDrivers, TableBRowDrivers},
-  props:['tabs','pageNumber']
+  props:['tabs','page','pages', 'limit', 'count']
 };
 </script>

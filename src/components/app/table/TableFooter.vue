@@ -2,15 +2,18 @@
   <div class="table__footer">
     <div class="text-h6 d-flex align-center">Show
       <Multiselect
-          v-model="value"
+          v-model="limit"
+          @update:modelValue="$emit('update:limit',limit)"
           :options="options"
           :canClear="false"
       />
       <p class="mx-1 table_select">
       </p>
       recorde</div>
-    <v-pagination v-model:page='pageNumber' @update:page="(val)=>{this.$emit('update:pageNumber',val)}" />
-    <div class="text-h6">160 recordes</div>
+    <v-pagination
+        :pages='pages'
+        v-model:page='page' @update:page="(val)=>{$emit('update:page',val)}" />
+    <div class="text-h6">{{ count || 0 }} recordes</div>
   </div>
 </template>
 <script>
@@ -18,14 +21,14 @@ import VPagination from "@/components/ui/vPagination";
 import Multiselect from '@vueform/multiselect';
 export default {
   components: {VPagination,Multiselect},
-  props:['pageNumber'],
+  props:['page', 'pages', 'count', 'limit'],
   data() {
     return {
       value: 6,
       options: [
-        '5',
-        '6',
-        '8',
+        '10',
+        '15',
+        '20',
       ]
     }
   },

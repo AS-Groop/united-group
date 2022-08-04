@@ -15,6 +15,18 @@
 import Sidebar from "@/components/app/Sidebar";
 
 export default {
-  components: {Sidebar}
+  components: {Sidebar},
+  beforeUpdate() {
+    console.log('beforeUpdate')
+  },
+  beforeCreate() {
+    console.log('beforeCreate')
+  },
+  beforeMount() {
+    console.log('beforeMount')
+  },
+  mounted() {
+    console.log('mounted')
+  }
 }
 </script>
