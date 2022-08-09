@@ -1,7 +1,7 @@
 <template>
   <tr :class="'pointer' && cursor">
     <td @click.stop v-if="icon">
-      <v-checked :id="id"/>
+      <v-checked :id="id" v-model:check="check" @update:check="$emit('update:check',check)"/>
     </td>
     <slot name="start"></slot>
     <td v-if="col1">
@@ -101,6 +101,10 @@
 import VChecked from "@/components/ui/vChecked";
 export default {
   components: {VChecked},
-  props:['icon','id','as', 'cursor','col1','col2','col3','col4','col5','col6','col7','col8','col9','col10','col11','col12',]
+  props:['icon','check','id','as', 'cursor','col1','col2','col3','col4','col5','col6','col7','col8','col9','col10','col11','col12',],
+  setup(props,ctx){
+    return {
+    }
+  }
 }
 </script>

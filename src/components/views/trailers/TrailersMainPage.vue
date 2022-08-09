@@ -12,8 +12,8 @@
             v-model:page="page"
             @update:page="fetchList">
       <template v-slot:tool>
-        <TableTool v-if="false">
-          <v-btn type="edit" size="md">Edit</v-btn>
+        <TableTool v-if="checked && checked.length > 0">
+          <v-btn type="edit" size="md" v-if="checked.length === 1">Edit</v-btn>
           <v-btn type="edit" size="md">Print All Info</v-btn>
           <v-btn type="edit" size="md">Print Docs</v-btn>
         </TableTool>
@@ -22,9 +22,10 @@
         <TableHRow icon="true" :data="data_head"/>
       </template>
       <template v-slot:body-row>
-        <TableBRow v-for="(i) in trailer_list.trailers"
+        <TableBRow v-for="(i,index) in trailer_list.trailers"
                           icon="true" @click="$router.push(`/trailers/${id}`)"
-                          :id="i.id" cursor="pointer" :key="i.id"
+                          v-model:check="i.checked"
+                          :id="i.id + index" cursor="pointer" :key="index"
                           :col1="{name:i.number,type:'def'}"
                           :col2="{name:i.make,type:'def'}"
                           :col3="{name:i.trailer_type,type:'def'}"
@@ -63,6 +64,7 @@ import VInput from "@/components/ui/vInput";
 import {computed, onMounted, ref} from "vue";
 import {all_trailers_list, createTrailer, getAllTrailersList} from "@/hooks/trailer/useTrailer";
 import VLoading from "@/components/ui/vLoading";
+import {driver_list} from "@/hooks/driver/useDriver";
 
 export default {
   components: {VLoading, VInput, ModalAdded, TableBRow, TableHRow, TableTool, vTable, VBtn, FilterBar},
@@ -110,8 +112,12 @@ export default {
       await getAllTrailersList();
     }
 
+    const checked = computed(()=>{
+      return trailer_list.value?.trailers.filter(e=>e.checked===true)
+    })
 
-    return{ page, limit, count, pages, fetchList, loading, trailer_modal, trailer_list, addNewTrailer, new_trailer }
+
+    return{ page, limit, count, checked, pages, fetchList, loading, trailer_modal, trailer_list, addNewTrailer, new_trailer }
   }
 
 }

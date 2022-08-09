@@ -12,8 +12,8 @@
             v-model:page="page"
             @update:page="fetchList">
       <template v-slot:tool>
-        <TableTool >
-          <v-btn type="edit" size="md">Edit</v-btn>
+        <TableTool v-if="checked && checked.length > 0" >
+          <v-btn type="edit" size="md" v-if="checked.length===1">Edit</v-btn>
           <v-btn type="edit" size="md">Print All Info</v-btn>
           <v-btn type="edit" size="md">Print Docs</v-btn>
         </TableTool>
@@ -23,7 +23,7 @@
       </template>
       <template v-slot:body-row>
         <TableBRowDrivers @click="location(i.id)" v-for="(i,index) in driver_list.drivers"
-                          v-if="driver_list"
+                          v-if="driver_list" v-model:check="i.checked"
                           icon="true" cursor="pointer" :key="i.id" :id="i.id"
                           :col1="{name:i.first_name + ' ' +i.last_name,type:'def'}"
                           :col2="{name:i.on_board_date ? i.on_board_date : '--',type:'def'}"
@@ -72,7 +72,7 @@ export default {
   components: {VInput, VLoading, ModalAdded, TableBRowDrivers, TableHRowDrivers, TableTool, vTable, VBtn, FilterBar},
   methods:{
     test(val){
-      console.log('update pageNumber in main page',val)
+      console.log('update pageNumber in main page',driver_list.value.drivers[0].checked, val)
     }
   },
   setup() {
@@ -135,10 +135,15 @@ export default {
       phone: { required }
     }
 
+    const checked = computed(()=>{
+      return driver_list.value?.drivers.filter(e=>e.checked===true)
+    })
+
+
     const v$ = useVuelidate(rules, driver);
 
 
-    return {limit, count, location, fetchList, new_driver,driver_list, v$, driver, addNewDriver, page, pages, loading, data_head};
+    return {limit, count, location, checked, fetchList, new_driver,driver_list, v$, driver, addNewDriver, page, pages, loading, data_head};
   }
 }
 </script>

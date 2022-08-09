@@ -10,6 +10,7 @@ export default {
   methods:{
     eventd(e){
       this.$emit('clickCheck')
+      this.$emit('update:check',e.target.checked)
     }
   }
 }

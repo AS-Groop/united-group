@@ -13,8 +13,9 @@ export const truck_inspect_id = ref(null);
 
 export async function getAllTrucksList(obj) {
   try {
-     all_trucks_list.value  = (await axios
-         .get(`/v1/truck/${location.query ? location.query + '&' : '?'}limit=${obj?.limit ? obj.limit : 10}&page=${obj?.page ? obj.page : 1}${obj?.search ? '&search='+obj.search : ''}${obj?.status_id ? '&status_id='+obj.status_id : ''}`)).data;
+    all_trucks_list.value = (await axios
+        .get(`/v1/truck/${location.query ? location.query + '&' : '?'}limit=${obj?.limit ? obj.limit : 10}&page=${obj?.page ? obj.page : 1}${obj?.search ? '&search=' + obj.search : ''}${obj?.status_id ? '&status_id=' + obj.status_id : ''}`)).data;
+    all_trucks_list.value.trucks.map(e=>{e.checked = false; return e})
   } catch (e) {
     console.log(e)
   }

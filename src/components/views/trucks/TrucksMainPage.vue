@@ -12,8 +12,8 @@
             v-model:page="page"
             @update:page="fetchList">
       <template v-slot:tool>
-        <TableTool v-if="false">
-          <v-btn type="edit" size="md">Edit</v-btn>
+        <TableTool v-if="checked && checked.length > 0">
+          <v-btn type="edit" size="md" v-if="checked.length === 1">Edit</v-btn>
           <v-btn type="edit" size="md">Print All Info</v-btn>
           <v-btn type="edit" size="md">Print Docs</v-btn>
         </TableTool>
@@ -24,7 +24,7 @@
       <template v-slot:body-row>
         <TableBRowDrivers v-for="(i,index) in trucks_list.trucks"
                           icon="true" @click="$router.push(`/trucks/${i.id}`)"
-                          :id="index" cursor="pointer"
+                          :id="index" cursor="pointer" v-model:check="i.checked"
                           :col1="{name:i.number,type:'def'}"
                           :col2="{name:i.make,type:'def'}"
                           :col4="{name:i.year_made,type:'def'}"
@@ -64,6 +64,7 @@ import VInput from "@/components/ui/vInput";
 import vLoading from "@/components/ui/vLoading"
 import {computed, onMounted, ref} from "vue";
 import {all_trucks_list, createTruck, getAllTrucksList} from "@/hooks/truck/useTruck";
+import {driver_list} from "@/hooks/driver/useDriver";
 
 export default {
   components: {VInput, vLoading, ModalAdded, TableBRowDrivers, TableHRowDrivers, TableTool, vTable, VBtn, FilterBar},
@@ -114,8 +115,12 @@ export default {
       await getAllTrucksList();
     }
 
+    const checked = computed(()=>{
+      return trucks_list.value?.trucks.filter(e=>e.checked===true)
+    })
 
-    return {truck, new_truck, fetchList, addNewTruck,trucks_list, loading, page, count, limit, pages}
+
+    return {truck, new_truck, checked, fetchList, addNewTruck,trucks_list, loading, page, count, limit, pages}
   }
 
 }
