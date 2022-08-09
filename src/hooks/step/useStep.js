@@ -17,7 +17,7 @@ export async function getStepStatuses(){
 
 export async function updateStepStatus(obj){
   try{
-    await axios.patch(`/v1/step/statuses`,obj)
+    await axios.patch(`/v1/step/statuses`, obj);
     toast('100','success')
   } catch(e){
     toast('400', 'error')

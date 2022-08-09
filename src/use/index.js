@@ -42,7 +42,7 @@ axios.interceptors.response.use(config => {
     return config
 }, async error => {
     const originalRequest = error.config;
-    if (error.response.data.error_code === 400 && error.response.data.error_message === 'error occured while authorization' || error.response.data.error_code===500){
+    if (error.response.data.error_code === 400 && error.response.data.error_message === 'error occured while authorization'){
         originalRequest._isRetry = true;
         if(localStorage.getItem('refresh_token')){
             try{
@@ -68,6 +68,7 @@ axios.interceptors.response.use(config => {
     if (error.response.status === 502 && error.config && !originalRequest._isRetry){
         // document.body.innerHTML = (error.response.data)
     }
+    return error
 })
 app.use(VueAxios, axios);
 
