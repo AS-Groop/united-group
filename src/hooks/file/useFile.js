@@ -18,11 +18,10 @@ export async function uploadFile(file){
 
 
 
-export async function getFileById(id){
-	try{
-		getFile.value = (await axios.get(`/v1/file/${id}`)).data
-		toast('100','success')
-	} catch(e){
-		toast('400','error')
-	}
+export  function getFileById(id,data,conf){
+	return new Promise((resolve, reject)=>{
+		axios.get(`/v1/file/${id}`,data,conf)
+			.then(res=>resolve(res))
+			.catch((err)=>reject(err))
+	})
 }

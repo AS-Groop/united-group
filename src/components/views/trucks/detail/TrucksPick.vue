@@ -32,6 +32,7 @@ import VInput from "@/components/ui/vInput";
 import VSvg from "@/components/ui/vSvg";
 import TruckPickLoad from "@/components/views/trucks/detail/TruckPickLoad";
 import TruckPickSelect from "@/components/views/trucks/detail/TruckPickSelect";
+import {getFileById} from "@/hooks/file/useFile";
 export default {
   props:['data_target'],
   components: {TruckPickSelect, TruckPickLoad, VSvg, VInput},
@@ -39,6 +40,15 @@ export default {
     return{
       img:'https://priem.stankin.ru/upload/landing/09c/c86jma8jukreqbujathoanebut3eq8xd/banner_610x610_poday-dokymenti@1x.jpg'
     }
+  },
+  setup(){
+    // fetch('https://internal.lhbrokerage.com/v1/file/0727b29d-9595-48f7-aad4-0dde0eb94af1')
+    //     .then(resp => resp.blob())
+    //     .then(blob => {
+    //       const url = window.URL.createObjectURL(blob);
+    //       alert('your file has downloaded!'); // or you know, something with better UX...
+    //     })
+    //     .catch(() => alert('oh no!'));
   }
 }
 </script>
