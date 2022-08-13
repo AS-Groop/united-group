@@ -18,11 +18,20 @@ export async function uploadFile(file){
 
 
 
-export async function getFileById(id){
-	try{
-		getFile.value = (await axios.get(`/v1/file/${id}`)).data
-		toast('100','success')
-	} catch(e){
-		toast('400','error')
-	}
+export function getFileById(id){
+	return new Promise(((resolve, reject) => {
+		axios({
+			url: `/v1/file/${id}`, //your url
+			method: 'GET',
+			responseType: 'blob',} // important
+			).then(data=> {
+			resolve(data)
+			toast('100','success')
+		}).catch(err=>{
+			reject(err)
+			console.log(err)
+			toast('400','error')
+		})
+	}))
+
 }

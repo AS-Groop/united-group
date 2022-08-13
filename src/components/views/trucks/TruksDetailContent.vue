@@ -24,11 +24,11 @@
   </div>
   <ModalCheckList v-if="data1 && form_list_entities && form_list_entities['incab_devices']?.entities?.length"
                   @close="data1 = false" title="List of in cab devices">
-    <CheckListItem :name="item.name" v-for="item in form_list_entities['incab_devices'].entities" />
+    <CheckListItem :name="item.name" :checked="truck_inspect_id.incab_devices.some(e=>e===item.id)" v-for="item in form_list_entities['incab_devices'].entities" />
   </ModalCheckList>
   <ModalCheckList v-if="data2 && form_list_entities && form_list_entities['external_devices']?.entities?.length"
                   @close="data2 = false" title="List of externally displayed signs & decals">
-    <CheckListItem :name="item.name" v-for="item in form_list_entities['external_devices'].entities" />
+    <CheckListItem :name="item.name" :checked="truck_inspect_id.external_displayed.some(e=>e===item.id)" v-for="item in form_list_entities['external_devices'].entities" />
   </ModalCheckList>
   <ModalLoadPhotos @popupImg="img = true" v-if="modalPhoto" @close="modalPhoto = null" :title="modalPhoto.name"/>
   <PopupPhoto v-if="img" @close="img = false">
