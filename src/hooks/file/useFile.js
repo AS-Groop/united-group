@@ -9,8 +9,10 @@ const fetchFile = ref(null)
 
 export async function uploadFile(file){
 	try{
+		// console.log('file',file)
 		fetchFile.value = (await axios.post(`/v1/file/`, file)).data;
 		toast('100','success')
+		return fetchFile.value;
 	} catch(e){
 		toast('400','error')
 	}
@@ -26,7 +28,6 @@ export function getFileById(id){
 			responseType: 'blob',} // important
 			).then(data=> {
 			resolve(data)
-			toast('100','success')
 		}).catch(err=>{
 			reject(err)
 			console.log(err)

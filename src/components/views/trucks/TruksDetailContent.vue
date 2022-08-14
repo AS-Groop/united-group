@@ -10,8 +10,8 @@
         <TrucksPick :data_target="data_target" @loadPhoto="obj => modalPhoto=obj" @modal1="data1 = true" @modal2="data2 = true" />
         <div class="hr"></div>
         <div class="trucks__draw">
-          <TrucksDrawItem title="Driver Signature"/>
-          <TrucksDrawItem title="Company representative Signature"/>
+          <TrucksDrawItem v-model:data_target="data_target" id="driver_signature_id" title="Driver Signature"/>
+          <TrucksDrawItem v-model:data_target="data_target" id="company_representative_signature_id" title="Company representative Signature"/>
           <TrucksDrawItem area="true" v-model="comment" title="Comments"/>
           <TrucksDrawItem disabled="true" v-for="item in data_target.comments" v-model="item.text" area="true" title="Comments"/>
         </div>
@@ -24,13 +24,13 @@
   </div>
   <ModalCheckList v-if="data1 && form_list_entities && form_list_entities['incab_devices']?.entities?.length"
                   @close="data1 = false" title="List of in cab devices">
-    <CheckListItem :name="item.name" :checked="truck_inspect_id.incab_devices.some(e=>e===item.id)" v-for="item in form_list_entities['incab_devices'].entities" />
+    <CheckListItem @onChange="test" :name="item.name" :checked="truck_inspect_id && truck_inspect_id.incab_devices ? truck_inspect_id.incab_devices.some(e=>e===item.id) : false" v-for="item in form_list_entities['incab_devices'].entities" />
   </ModalCheckList>
   <ModalCheckList v-if="data2 && form_list_entities && form_list_entities['external_devices']?.entities?.length"
                   @close="data2 = false" title="List of externally displayed signs & decals">
-    <CheckListItem :name="item.name" :checked="truck_inspect_id.external_displayed.some(e=>e===item.id)" v-for="item in form_list_entities['external_devices'].entities" />
+    <CheckListItem :name="item.name" :checked="truck_inspect_id && truck_inspect_id.external_displayed ? truck_inspect_id.external_displayed.some(e=>e===item.id) : false" v-for="item in form_list_entities['external_devices'].entities" />
   </ModalCheckList>
-  <ModalLoadPhotos @popupImg="img = true" v-if="modalPhoto" @close="modalPhoto = null" :title="modalPhoto.name"/>
+  <ModalLoadPhotos @popupImg="img = true" v-if="modalPhoto" @close="modalPhoto = null" v-model:data_target="data_target" :data="modalPhoto"/>
   <PopupPhoto v-if="img" @close="img = false">
     <img src="@/assets/images/tires1.png" alt="">
   </PopupPhoto>
@@ -122,6 +122,8 @@ export default {
       loading,
       img,
       save,
+      test(a){
+        console.log(a)},
       comment,
       truck_inspect_id
     }

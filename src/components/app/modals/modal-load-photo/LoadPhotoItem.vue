@@ -1,15 +1,33 @@
 <template>
-  <div class="modal__load-item">
-    <img src="@/assets/images/tires1.png" alt="">
-    <div class="remove">
+  <div ref="imgContent" class="modal__load-item">
+    <div class="remove" @click.stop="$emit('remove')">
       <v-svg id="remove-image" width="30" height="30"/>
     </div>
+<!--      <img src="@/assets/images/tires1.png" alt="">-->
   </div>
 </template>
 <script>
 import VSvg from "@/components/ui/vSvg";
+import {ref} from "vue";
+import {getFileById} from "@/hooks/file/useFile";
 export default {
   components: {VSvg},
-  props:['image']
+  props:['image', 'img'],
+  setup(props){
+  const imgContent = ref(null)
+
+    if(props.img)getFileById(props.img).then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const Img = new Image();
+      Img.src = url;
+      imgContent.value.appendChild(Img)
+      // const link = document.createElement('a');
+      // link.href = url;
+      // link.setAttribute('download', 'file.jpeg'); //or any other extension
+      // document.body.appendChild(link);
+      // link.click();
+    });
+    return{imgContent}
+  }
 }
 </script>
