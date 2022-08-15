@@ -11,7 +11,7 @@ export const car_by_id = ref(null);
 export async function getAllCarList(obj) {
   try {
      all_cars_list.value  = (await axios
-         .get(`/v1/car${location.query ? location.query + '&' : '?'}limit=${obj?.limit ? obj.limit : 10}&page=${obj?.page ? obj.page : 1}${obj?.search ? '&search='+obj.search : ''}`)).data;
+         .get(`/v1/car/${location.query ? location.query + '&' : '?'}limit=${obj?.limit ? obj.limit : 10}&page=${obj?.page ? obj.page : 1}${obj?.search ? '&search='+obj.search : ''}`)).data;
   } catch (e) {
     console.log(e)
   }
