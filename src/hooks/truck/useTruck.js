@@ -80,7 +80,6 @@ export async function deleteTruckByid(id){
 
 
 export async function getTruckInspect(obj) {
-  console.log(obj)
   truck_inspect_id.value=null;
   try {
     truck_inspect_id.value = (await axios.get(`/v1/truck/inspect/${obj.truck_id}/${obj.driver_id}`)).data;
@@ -94,7 +93,7 @@ export async function getTruckInspect(obj) {
 export async function postInspectTruck(obj) {
   try {
     truck_inspect.value  = (await axios.post(`/v1/truck/inspect`,obj)).data;
-    toast('100', 'success')
+    truck_inspect.value ? toast('100', 'success') : toast('400', 'error');
   } catch (e) {
     toast('400', 'error')
     console.log(e)

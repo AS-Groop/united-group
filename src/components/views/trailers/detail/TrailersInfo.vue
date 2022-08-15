@@ -9,20 +9,21 @@
 </template>
 <script>
 import TrucksInfoItem from "@/components/views/trucks/detail/TrucksInfoItem";
-import {ref} from "vue";
+import {computed, ref} from "vue";
+import {trailer_by_id} from "@/hooks/trailer/useTrailer";
 export default {
   components: {TrucksInfoItem},
   setup(){
-    const data_info = ref([]);
-    data_info.value = [
-      {title:'Truck Number', value:'#120'},
-      {title:'Plate number', value:'077707'},
-      {title:'Make & Model', value:'Volvo'},
-      {title:'Assigned Driver', value:'Azodov Asror'},
-      {title:'Model', value:'VNL'},
-      {title:'With Driver Since', value:'-'},
-      {title:'Year Made', value:'2020'},
-    ]
+    // const data_info = ref([]);
+    const data_info = computed(()=>[
+      {title:'Trailer Number', value:trailer_by_id.value?.number || '---'},
+      {title:'Plate number', value:trailer_by_id.value?.plate_number || '---'},
+      {title:'Make & Model', value:trailer_by_id.value?.make || '---'},
+      {title:'Assigned Driver', value:trailer_by_id.value?.assigned_driver?.name || '---'},
+      {title:'Model',value:trailer_by_id.value?.model || '---'},
+      {title:'With Driver Since',value:trailer_by_id.value?.driver_since || '---'},
+      {title:'Year Made', value:trailer_by_id.value?.year_made || '---'},
+    ])
 
     return{data_info}
   }

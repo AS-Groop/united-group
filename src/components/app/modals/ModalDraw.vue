@@ -35,8 +35,8 @@
           />
         </div>
         <div class="save_btn">
-          <v-btn type="100">Save</v-btn>
-          <v-btn type="100">Save</v-btn>
+          <v-btn type="100" style="margin-right: 15px;" @click="save">Save</v-btn>
+          <v-btn type="100 btn-outline" @click="$emit('close')">Cancel</v-btn>
         </div>
       </div>
     </div>
@@ -48,60 +48,58 @@ import VBtn from "@/components/ui/vBtn";
 import CheckListItem from "@/components/app/modals/modal-check-list/CheckListItem";
 import LoadPhotoItem from "@/components/app/modals/modal-load-photo/LoadPhotoItem";
 import VueDrawingCanvas from "vue-drawing-canvas";
-import {ref} from "vue";
+import {computed, ref} from "vue";
+import {uploadFile} from "@/hooks/file/useFile";
 export default {
   components: {LoadPhotoItem, CheckListItem, VBtn, VSvg,VueDrawingCanvas},
-  props: ['title'],
-  setup(){
+  props: ['title','data_target','id'],
+  setup(props, ctx) {
 
     const initialImage = ref([
-                          {
-                            type: "dash",
-                            from: {
-                              x: 262,
-                              y: 154,
-                            },
-                            coordinates: [],
-                            color: "#000000",
-                            width: 5,
-                            fill: false,
-                          },
-                        ]);
+      {
+        type: "dash",
+        from: {
+          x: 262,
+          y: 154,
+        },
+        coordinates: [],
+        color: "#000000",
+        width: 5,
+        fill: false,
+      },
+    ]);
     let x = 0;
     let y = 0;
     let image = ref("");
 
     const VueCanvasDrawing = ref(null)
-     async function  setImage(event) {
-      let URL = window.URL;
-      this.backgroundImage = URL.createObjectURL(event.target.files[0]);
-      await VueCanvasDrawing.redraw();
-    }
-     async function  setWatermarkImage(event) {
-      let URL = window.URL;
-      this.watermark = {
-        type: "Image",
-        source: URL.createObjectURL(event.target.files[0]),
-        x: 0,
-        y: 0,
-        imageStyle: {
-          width: 600,
-          height: 400,
-        },
-      };
-      await VueCanvasDrawing.redraw();
-    }
-
     const getCoordinate = (event) => {
       // console.log(VueCanvasDrawing.value)
-      console.log(image.value)
       let coordinates = VueCanvasDrawing.value.getCoordinates(event);
       x = coordinates.x;
       y = coordinates.y;
     };
+
+    const textFile = computed(()=>image.value);
+    const save = ()=> {
+      fetch(textFile.value)
+          .then(res => res.blob())
+          .then(blob => {
+            const fd = new FormData();
+            const fil = new File([blob], "filename.jpeg");
+            fd.append('file', fil)
+            uploadFile(fd).then(data => {
+              props.data_target[props.id] = props.data_target[props.id] || '';
+              props.data_target[props.id] = data.file_id;
+              ctx.emit('update:data_target', props.data_target)
+              console.log(props.data_target);
+            });
+          }).then(e=>{ctx.emit('close')})
+    }
     return {
       initialImage,
       image,
+      save,
 
 
       VueCanvasDrawing,

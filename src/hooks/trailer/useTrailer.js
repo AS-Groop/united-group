@@ -6,6 +6,7 @@ export const all_trailers_list = ref(null);
 export const trailer_by_id = ref(null);
 export const trailer_inspect = ref(null);
 export const picks_trailer = ref(null);
+export const trailer_inspect_id = ref(null);
 
 
 
@@ -64,9 +65,9 @@ export async function deleteTrailerById(id) {
 
 
 export async function getTrailerInspect(obj) {
-  console.log(obj)
+  trailer_inspect_id.value = null;
   try {
-    trailer_inspect.value = (await axios.get(`/v1/trailer/inspect/${obj.trailer_id}/${obj.driver_id}`)).data;
+    trailer_inspect_id.value = (await axios.get(`/v1/trailer/inspect/${obj.trailer_id}/${obj.driver_id}`)).data;
   } catch (e) {
     console.log(e)
   }
@@ -74,7 +75,7 @@ export async function getTrailerInspect(obj) {
 
 
 
-export async function picksUpTrailer(obj) {
+export async function postInspectTrailer(obj) {
   try {
     picks_trailer.value  = (await axios.post(`/v1/trailer/inspect`,obj)).data;
     toast('100', 'success')

@@ -30,7 +30,7 @@
                           :col4="{name:i.year_made,type:'def'}"
                           :col5="{name:i.milage,type:'def'}"
                           :col6="{name:i.assigned_driver.name.trim() || '--',type:'def'}"
-                          :col8="{name:i.status.name,type:'status',size:'full'}"
+                          :col8="{name:i.status.name,type:'status',size:i.status.alias ==='full' ? 'null' : i.status.alias === 'assigned' ? 'half' : 'full'}"
         />
       </template>
     </vTable>
