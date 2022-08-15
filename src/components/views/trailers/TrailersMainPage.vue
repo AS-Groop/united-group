@@ -23,7 +23,7 @@
       </template>
       <template v-slot:body-row>
         <TableBRow v-for="(i,index) in trailer_list.trailers"
-                          icon="true" @click="$router.push(`/trailers/${id}`)"
+                          icon="true" @click="$router.push(`/trailers/${i.id}`)"
                           v-model:check="i.checked"
                           :id="i.id + index" cursor="pointer" :key="index"
                           :col1="{name:i.number,type:'def'}"
@@ -31,7 +31,7 @@
                           :col3="{name:i.trailer_type,type:'def'}"
                           :col4="{name:i.year_made,type:'def'}"
                           :col5="{name:i.assigned_driver.name.trim() || '--',type:'def'}"
-                          :col7="{name:i.status.name.trim() || '--',type:'status',size:'full'}"
+                          :col7="{name:i.status.name.trim() || '--',type:'status',size:i.status.alias ==='full' ? 'null' : i.status.alias === 'assigned' ? 'half' : 'full'}"
         />
       </template>
     </vTable>

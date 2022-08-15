@@ -36,7 +36,7 @@
         </div>
         <div class="save_btn">
           <v-btn type="100" style="margin-right: 15px;" @click="save">Save</v-btn>
-          <v-btn type="100" @click="$emit('close')">Cancel</v-btn>
+          <v-btn type="100 btn-outline" @click="$emit('close')">Cancel</v-btn>
         </div>
       </div>
     </div>

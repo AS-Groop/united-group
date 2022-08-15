@@ -80,7 +80,6 @@ export async function deleteTruckByid(id){
 
 
 export async function getTruckInspect(obj) {
-  console.log(obj)
   truck_inspect_id.value=null;
   try {
     truck_inspect_id.value = (await axios.get(`/v1/truck/inspect/${obj.truck_id}/${obj.driver_id}`)).data;
