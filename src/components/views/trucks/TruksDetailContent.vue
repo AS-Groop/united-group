@@ -7,32 +7,39 @@
     <div class="trucks__content">
       <TrucksInfo />
       <template v-if="data_target">
-        <TrucksPick :data_target="data_target" @loadPhoto="obj => modalPhoto=obj" @modal1="data1 = true" @modal2="data2 = true" />
+        <TrucksPick :data_target="data_target" :validate="validate" @loadPhoto="obj => modalPhoto=obj" @modal1="data1 = true" @modal2="data2 = true" />
         <div class="hr"></div>
         <div class="trucks__draw">
-          <TrucksDrawItem v-model:data_target="data_target" id="driver_signature_id" title="Driver Signature"/>
-          <TrucksDrawItem v-model:data_target="data_target" id="company_representative_signature_id" title="Company representative Signature"/>
-          <TrucksDrawItem area="true" v-model="comment" title="Comments"/>
+          <TrucksDrawItem :error="!validate && !data_target.driver_signature_id" v-model:data_target="data_target" id="driver_signature_id" title="Driver Signature"/>
+          <TrucksDrawItem :error="!validate && !data_target.company_representative_signature_id" v-model:data_target="data_target" id="company_representative_signature_id" title="Company representative Signature"/>
+          <TrucksDrawItem :error="!validate && !data_target.comments" area="true" v-model="comment" title="Comments"/>
           <TrucksDrawItem disabled="true" v-for="item in data_target.comments" v-model="item.text" area="true" title="Comments"/>
         </div>
         <div class="btns">
-          <v-btn type="outline">Cancel</v-btn>
-          <v-btn @click="save">Submit</v-btn>
+          <div style="margin-right: auto;">
+            <v-btn @click="data_target.inspection_type = 'pickup'" :type="data_target.inspection_type !== 'pickup'?'outline':''">Pick Up</v-btn>
+            <v-btn @click="data_target.inspection_type = 'drop-off'" :type="data_target.inspection_type !== 'drop-off'?'outline':''">Drop off</v-btn>
+          </div>
+          <div>
+            <v-btn type="outline" @click="$router.back()">Cancel</v-btn>
+            <v-btn @click="save">Save</v-btn>
+          </div>
+
         </div>
       </template>
     </div>
   </div>
   <ModalCheckList v-if="data1 && form_list_entities && form_list_entities['incab_devices']?.entities?.length"
                   @close="data1 = false" title="List of in cab devices">
-    <CheckListItem @onChange="test" :name="item.name" :checked="truck_inspect_id && truck_inspect_id.incab_devices ? truck_inspect_id.incab_devices.some(e=>e===item.id) : false" v-for="item in form_list_entities['incab_devices'].entities" />
+    <CheckListItem @onChange="val=>checkList(val,item.id,'incab_devices')" :name="item.name" :checked="data_target && data_target.incab_devices ? data_target.incab_devices.some(e=>e===item.id) : false" v-for="item in form_list_entities['incab_devices'].entities" />
   </ModalCheckList>
   <ModalCheckList v-if="data2 && form_list_entities && form_list_entities['external_devices']?.entities?.length"
                   @close="data2 = false" title="List of externally displayed signs & decals">
-    <CheckListItem :name="item.name" :checked="truck_inspect_id && truck_inspect_id.external_displayed ? truck_inspect_id.external_displayed.some(e=>e===item.id) : false" v-for="item in form_list_entities['external_devices'].entities" />
+    <CheckListItem @onChange="val=>checkList(val,item.id,'external_displayed')" :name="item.name" :checked="data_target && data_target.external_displayed ? data_target.external_displayed.some(e=>e===item.id) : false" v-for="item in form_list_entities['external_devices'].entities" />
   </ModalCheckList>
-  <ModalLoadPhotos @popupImg="img = true" v-if="modalPhoto" @close="modalPhoto = null" v-model:data_target="data_target" :data="modalPhoto"/>
-  <PopupPhoto v-if="img" @close="img = false">
-    <img src="@/assets/images/tires1.png" alt="">
+  <ModalLoadPhotos @popupImg="val=>img=val" v-if="modalPhoto" @close="modalPhoto = null" v-model:data_target="data_target" :data="modalPhoto"/>
+  <PopupPhoto v-if="img" @close="img = ''">
+    <img :src="img" alt="">
   </PopupPhoto>
 </template>
 
@@ -56,6 +63,7 @@ import {useRoute, useRouter} from "vue-router";
 import {getTruckInspect, getTruckById, truck_by_id, truck_inspect_id, postInspectTruck} from "@/hooks/truck/useTruck";
 import vLoading from "@/components/ui/vLoading";
 import {form_list_entities, getFormListEntities} from "@/hooks/form/useForm";
+import toast from "@/use/toast";
 export default {
   components: {
     ModalDraw,
@@ -76,10 +84,11 @@ export default {
     const loading = ref(false)
     const data2 = ref(false)
     const image_draw = ref(false)
-    const img = ref(false)
+    const validate = ref(true)
+    const img = ref('')
     const comment = ref('')
     const modalPhoto = ref(null);
-    const data_target = ref({})
+    const data_target = ref(null);
     const router_id = useRoute().params.id;
 
     async function fetchData(){
@@ -91,7 +100,7 @@ export default {
           data_target.value = Object.assign({}, truck_inspect_id.value);
           data_target.value.truck_id = truck_inspect_id.value.truck.id;
           data_target.value.driver_id = truck_inspect_id.value.truck.assigned_driver.id;
-          data_target.value.location = truck_inspect_id.value?.location || 'Tashkent';
+          data_target.value.location = truck_inspect_id.value?.location || '';
           delete data_target.value.truck;
         }
       }
@@ -103,18 +112,44 @@ export default {
       await fetchData();
       loading.value = false
     });
+    function fnValidate(){
+      if(!data_target.value) return  validate.value = false;
+      if(!data_target.value.back_side_images) return  validate.value = false;
+      if(!data_target.value.comments) return  validate.value = false;
+      if(!data_target.value.company_representative_signature_id) return  validate.value = false;
+      if(!data_target.value.damage_images) return  validate.value = false;
+      if(!data_target.value.location) return  validate.value = false;
+      if(!data_target.value.driver_side_images) return  validate.value = false;
+      if(!data_target.value.driver_signature_id) return  validate.value = false;
+      if(!data_target.value.external_displayed) return  validate.value = false;
+      if(!data_target.value.front_side_images) return  validate.value = false;
+      if(!data_target.value.fuel_level_images) return  validate.value = false;
+      if(!data_target.value.incab_devices) return  validate.value = false;
+      if(!data_target.value.inspection_type) return  validate.value = false;
+      if(!data_target.value.odometer_images) return  validate.value = false;
+      if(!data_target.value.passenger_side_images) return  validate.value = false;
+      if(!data_target.value.tire_images) return  validate.value = false;
+      return validate.value = true;
+
+    }
 
     function save(){
-      console.log(comment.value)
+      fnValidate();
+      data_target.value.comments = data_target.value.comments || []
       if(comment.value) data_target.value.comments.unshift({created_by: "", text: comment.value, created_at: ""});
-      postInspectTruck(data_target.value)
-      comment.value = ''
+      if(validate.value) {
+        postInspectTruck(data_target.value);
+        comment.value = '';
+      } else {
+        toast('400','error')
+      }
     }
 
     return{
       data_target,
       form_list_entities,
       truck_by_id,
+      validate,
       modalPhoto,
       image_draw,
       data1,
@@ -122,8 +157,12 @@ export default {
       loading,
       img,
       save,
-      test(a){
-        console.log(a)},
+      checkList(a,b,c){
+        data_target.value[c] = data_target.value[c] || [];
+        data_target.value[c] = data_target.value[c].filter(i=>i!==b)
+        if(a)data_target.value[c].push(b);
+        console.log(data_target.value[c])
+      },
       comment,
       truck_inspect_id
     }

@@ -1,7 +1,7 @@
 <template>
 
   <div class="trucks__draw-inner">
-    <div class="trucks__draw-item">
+    <div class="trucks__draw-item" :class="{'error':error}">
       <p class="text-h4">{{title}}</p>
       <textarea v-if="area" :disabled="disabled" v-model="modelValue" @update:modelValue="$emit('update:modelValue',modelValue)" placeholder="Comment..." class="text-h6"></textarea>
       <div v-else class="trucks__draw-dr" ref="img" @click="image_draw = true"></div>
@@ -18,7 +18,7 @@ import {onMounted, ref, watch} from "vue";
 import {getFileById} from "@/hooks/file/useFile";
 export default {
   components: {ModalDraw},
-  props:['title','area','id','data_target','disabled','modelValue'],
+  props:['title','area','id','error','data_target','disabled','modelValue'],
   setup(props){
     const image_draw = ref(false);
     const img = ref(null);

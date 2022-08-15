@@ -198,6 +198,12 @@
         bottom: 11px;
         cursor: pointer;
       }
+      &.error{
+        border-color: $red;
+        &::placeholder{
+          color: $red;
+        }
+      }
     }
 
     &-md{

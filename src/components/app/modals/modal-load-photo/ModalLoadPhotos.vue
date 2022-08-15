@@ -14,7 +14,7 @@
             </label>
           </div>
           <template v-if="images.length > 0">
-            <LoadPhotoItem @remove="remove(img)" @click="$emit('popupImg')" :img="img" v-for="(img,index) in images"/>
+            <LoadPhotoItem @remove="remove(img)" @click="$emit('popupImg',img_src)" @update:img_src="val=>img_src=val" v-model:img_src="img_src" :img="img" v-for="(img,index) in images"/>
           </template>
         </div>
         <div class="save_btn">
@@ -36,12 +36,14 @@ import CheckListItem from "@/components/app/modals/modal-check-list/CheckListIte
 import LoadPhotoItem from "@/components/app/modals/modal-load-photo/LoadPhotoItem";
 import {uploadFile} from "@/hooks/file/useFile";
 import {postInspectTruck} from "@/hooks/truck/useTruck";
-import {computed, ref} from "vue";
+import {computed, ref, watch} from "vue";
 export default {
   components: {LoadPhotoItem, CheckListItem, VBtn, VSvg},
   props: ['data','data_target'],
   setup(props, ctx){
     const images = computed(() => props.data_target[props.data.name] || []);
+    const img_src =  ref('')
+    watch(img_src,(a)=>console.log(a))
     const remove = (id) => {
       props.data_target[props.data.name] = props.data_target[props.data.name].filter(i => i !== id);
       ctx.emit('update:data_target', props.data_target);
@@ -57,7 +59,7 @@ export default {
         // ctx.data
       });
     }
-    return{uploadImage, images, remove}
+    return{uploadImage, images, remove, img_src}
   }
 
 }

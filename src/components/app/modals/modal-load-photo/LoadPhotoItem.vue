@@ -12,8 +12,8 @@ import {ref} from "vue";
 import {getFileById} from "@/hooks/file/useFile";
 export default {
   components: {VSvg},
-  props:['image', 'img'],
-  setup(props){
+  props:['image', 'img','img_src'],
+  setup(props,ctx){
   const imgContent = ref(null)
 
     if(props.img)getFileById(props.img).then((response) => {
@@ -21,6 +21,7 @@ export default {
       const Img = new Image();
       Img.src = url;
       imgContent.value.appendChild(Img)
+      ctx.emit('update:img_src',url)
       // const link = document.createElement('a');
       // link.href = url;
       // link.setAttribute('download', 'file.jpeg'); //or any other extension

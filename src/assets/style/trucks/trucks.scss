@@ -120,6 +120,9 @@
         border: 1px solid $gray5;
         border-radius: 14px;
         cursor: pointer;
+        &.error{
+          border-color: $red;
+        }
         .title {
           color: $gray2;
         }
@@ -188,6 +191,11 @@
         }
       }
 
+
+      &.error{
+        border-color: $red;
+      }
+
       &:active {
         &:before {
           content: '';
@@ -226,6 +234,9 @@
       background: #f7f7f7;
       border: 1px solid $gray6;
       border-radius: 14px;
+      &.error{
+        border-color: $red;
+      }
       p {
         text-align: center;
         margin-bottom: 8px;

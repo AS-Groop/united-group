@@ -1,6 +1,6 @@
 <template>
   <div class="trucks__pick-select">
-    <div class="pick-select">
+    <div class="pick-select" :class="{'error':error}">
       <div class="title text-h4">{{title}}</div>
       <div class="count text-h4">
         <span>{{count}} select</span>
@@ -13,6 +13,6 @@
 import VSvg from "@/components/ui/vSvg";
 export default {
   components: {VSvg},
-  props:['count','title']
+  props:['count','title','error']
 }
 </script>

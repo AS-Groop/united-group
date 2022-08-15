@@ -1,5 +1,5 @@
 <template>
-  <label class="trucks__pick-inputs">
+  <label class="trucks__pick-inputs" :class="{'error':error}">
     <span class="wrapper"><b class="text-h0">+{{ count || 0 }}</b> <span class="text-h2-med"> {{ title }} </span></span>
     <div v-if="img" class="img" ref="div">
     </div>
@@ -12,7 +12,7 @@ import {onMounted, ref} from "vue";
 import {getFileById} from "@/hooks/file/useFile";
 export default {
   components: {VSvg},
-  props:['img','svg','title','count'],
+  props:['img','svg','title','count','error'],
   setup(props){
     const setImages = ref(null);
     const div = ref(null);

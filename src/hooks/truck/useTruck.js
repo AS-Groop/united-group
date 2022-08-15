@@ -94,7 +94,7 @@ export async function getTruckInspect(obj) {
 export async function postInspectTruck(obj) {
   try {
     truck_inspect.value  = (await axios.post(`/v1/truck/inspect`,obj)).data;
-    toast('100', 'success')
+    truck_inspect.value ? toast('100', 'success') : toast('400', 'error');
   } catch (e) {
     toast('400', 'error')
     console.log(e)
