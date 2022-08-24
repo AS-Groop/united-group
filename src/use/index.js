@@ -42,7 +42,7 @@ axios.interceptors.response.use(config => {
     return config
 }, async error => {
     const originalRequest = error.config;
-    if (error.response.data.error_code === 400 && error.response.data.error_message === 'error occured while authorization' || error.response.data.error_code === 500 && error.response.data.error_message === 'expired jwt token'){
+    if (error.response.data.error_code === 400 && error.response.data.error_message === 'error occured while authorization' || error.response.data.error_message === 'expired jwt token' || error.response.data.error_code === 500 && error.response.data.error_message === 'expired jwt token'){
         originalRequest._isRetry = true;
         if(localStorage.getItem('refresh_token')){
             try{

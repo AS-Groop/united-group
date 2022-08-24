@@ -12,7 +12,7 @@
             v-model:page="page"
             @update:page="fetchList">
       <template v-slot:tool>
-        <TableTool v-if="checked && checked.length > 0" >
+        <TableTool v-if="checked && checked.length === 1" >
           <v-btn type="edit" size="md" v-if="checked.length===1">Edit</v-btn>
           <v-btn type="edit" size="md">Print All Info</v-btn>
           <v-btn type="edit" size="md">Print Docs</v-btn>
@@ -40,7 +40,7 @@
   </div>
   <ModalAdded title="Add driver" v-if="new_driver" @close="new_driver = false" @save="addNewDriver">
     <template v-slot:img>
-      <input type="file" accept="image/*">
+<!--      <input type="file" accept="image/*">-->
       <img src="@/assets/images/avatar.svg" alt="">
     </template>
     <template v-slot:content>

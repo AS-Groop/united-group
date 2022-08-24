@@ -46,6 +46,10 @@
     border-color: $gray5;
     color: $gray2;
   }
+  &-disabled {
+    opacity: 0.7;
+    cursor: no-drop;
+  }
   &-edit {
     background: transparent;
     border-color: $blue1;

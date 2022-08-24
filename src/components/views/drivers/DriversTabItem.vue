@@ -5,7 +5,7 @@
               class="drivers__detail-item" @click="$emit('openModal',i.id)"
              v-if="item.status.alias === 'initial'" >
           <v-checked
-              @clickCheck="check(item.status.id, i.id), item.status.id=== static_completed ? item.status.id=static_initial : item.status.id=static_completed"
+              @clickCheck="check(item.status.id, i.id)"
               :id="i.name" class-name="check"/>
           {{ i.name }}
         </div>

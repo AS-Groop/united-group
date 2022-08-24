@@ -1,7 +1,7 @@
 <template>
   <div class="modal__item">
-    <h2 class="text-h2">{{ title }}</h2>
     <template v-for="(field,index) in fields">
+      <h2 class="text-h2">{{ field.name || field.name || title }}</h2>
 
 <!--      For Textarea Group-->
       <template v-if="field.type === 'textarea'">
@@ -12,8 +12,15 @@
       </template>
 
 <!--      For Text Group-->
-      <template v-if="field.type === 'text'">
+      <template v-if="field.type === 'text' && field.alias !== '#truck-inspection-inspect' && field.alias !== '#trailer-inspection-inspect'">
             <v-input v-if="field.type === 'text'" v-model="modelVal['text'+index] " @onChange="changeInput(modelVal['text'+index],field,step_id,true)" class-name="mb-15" :place="field.hint"/>
+      </template>
+
+      <!--      For Inspect Button-->
+      <template v-if="field.type === 'text' && (field.alias === '#truck-inspection-inspect' || field.alias === '#trailer-inspection-inspect')">
+        <v-btn v-if="modelVal['text'+index]=== 'Inspected'" type="disabled">Inspected</v-btn>
+        <v-btn v-else @click="changeInput('Inspected',field,step_id,true)">Inspected</v-btn>
+<!--        <v-input v-if="field.type === 'text'" v-model="modelVal['text'+index] " @onChange="changeInput(modelVal['text'+index],field,step_id,true)" class-name="mb-15" :place="field.hint"/>-->
       </template>
 
 <!--      For Radio Group-->

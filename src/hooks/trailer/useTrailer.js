@@ -67,7 +67,7 @@ export async function deleteTrailerById(id) {
 export async function getTrailerInspect(obj) {
   trailer_inspect_id.value = null;
   try {
-    trailer_inspect_id.value = (await axios.get(`/v1/trailer/inspect/${obj.trailer_id}/${obj.driver_id}`)).data;
+    trailer_inspect_id.value = (await axios.get(`/v1/trailer/inspect/${obj.trailer_id}`)).data;
   } catch (e) {
     console.log(e)
   }
