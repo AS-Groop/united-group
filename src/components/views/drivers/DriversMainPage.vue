@@ -1,9 +1,9 @@
 <template>
   <v-loading v-if="loading"/>
   <div v-else class="section__page">
-    <FilterBar>
-      <v-btn type="outline" svg="filter">Filter</v-btn>
-      <v-btn svg="plus" @click="new_driver = true">Add driver</v-btn>
+    <FilterBar v-model="searchList">
+<!--      <v-btn type="outline" svg="filter" @click="new_driver = false, old_driver = true">Filter</v-btn>-->
+      <v-btn svg="plus" @click="new_driver = true, old_driver = false">Add driver</v-btn>
     </FilterBar>
     <vTable :count="count"
             :pages="pages"
@@ -13,9 +13,9 @@
             @update:page="fetchList">
       <template v-slot:tool>
         <TableTool v-if="checked && checked.length === 1" >
-          <v-btn type="edit" size="md" v-if="checked.length===1">Edit</v-btn>
-          <v-btn type="edit" size="md">Print All Info</v-btn>
-          <v-btn type="edit" size="md">Print Docs</v-btn>
+          <v-btn type="edit" size="md" @click="editDriver()" v-if="checked.length===1">Edit</v-btn>
+<!--          <v-btn type="edit" size="md">Print All Info</v-btn>-->
+<!--          <v-btn type="edit" size="md">Print Docs</v-btn>-->
         </TableTool>
       </template>
       <template v-slot:head-row>
@@ -38,16 +38,16 @@
       </template>
     </vTable>
   </div>
-  <ModalAdded title="Add driver" v-if="new_driver" @close="new_driver = false" @save="addNewDriver">
+  <ModalAdded :title="new_driver && !old_driver ?'Add driver' : 'Edit driver'" v-if="new_driver || old_driver" @close="new_driver = false, old_driver = false, driver = {}" @save="addNewDriver">
     <template v-slot:img>
 <!--      <input type="file" accept="image/*">-->
       <img src="@/assets/images/avatar.svg" alt="">
     </template>
     <template v-slot:content>
-      <v-input v-model="driver.first_name"  label="Name" place="Enter name"/>
-      <v-input v-model="driver.last_name"  label="Last name" place="Enter last name"/>
-      <v-input v-model="driver.email"  label="Email" place="Enter email address"/>
-      <v-input v-model="driver.phone"  label="Phone" place="Enter phone number"/>
+      <v-input v-model="driver.first_name" :error="v$.$dirty && v$.first_name.$invalid" label="Name" place="Enter name"/>
+      <v-input v-model="driver.last_name" :error="v$.$dirty && v$.last_name.$invalid" label="Last name" place="Enter last name"/>
+      <v-input v-model="driver.email" :error="v$.$dirty && v$.email.$invalid" label="Email" place="Enter email address"/>
+      <v-input v-model="driver.phone" :error="v$.$dirty && v$.phone.$invalid" label="Phone" place="Enter phone number"/>
     </template>
   </ModalAdded>
 </template>
@@ -61,7 +61,7 @@ import TableHRowDrivers from "@/components/app/table/TableHRow";
 import TableBRowDrivers from "@/components/app/table/TableBRow";
 import ModalAdded from "@/components/app/modals/ModalAdded";
 import {computed, onMounted, ref, watch} from "vue";
-import {getDriverList, driver_list, createDriver} from "@/hooks/driver/useDriver"
+import {getDriverList, driver_list, createDriver, updateDriverById} from "@/hooks/driver/useDriver"
 import router from "@/router";
 import VInput from "@/components/ui/vInput";
 import useVuelidate from '@vuelidate/core'
@@ -77,6 +77,7 @@ export default {
   },
   setup() {
     const new_driver = ref(false);
+    const old_driver = ref(false);
     let page = ref(1);
     let limit = ref(10);
     let loading = ref(false);
@@ -100,6 +101,11 @@ export default {
       {name:'Assigned Trailer'},
       {name:'Status'},
     ];
+    const searchList = ref("");
+    watch(searchList,(a)=>{
+      page.value = 1;
+      getDriverList({limit:limit.value,page:page.value,search:a});
+    });
 
 
     function location(id){
@@ -108,10 +114,12 @@ export default {
     async function addNewDriver() {
       v$.value.$touch();
       if(!v$.value.$invalid){
-        await createDriver(driver.value);
-        driver.value = {};
-        new_driver.value = false
+        if(new_driver && !old_driver)await createDriver(driver.value); else await updateDriverById({id:driver.value.id,data:driver.value});
+
         await getDriverList();
+        driver.value = {};
+        new_driver.value = old_driver.value = false;
+
       }
 
     }
@@ -121,6 +129,14 @@ export default {
       if(obj?.type==='limit') page.value = 1
       await getDriverList({limit:limit.value,page:page.value});
       loading.value = false;
+    }
+
+    function editDriver(){
+      new_driver.value = false;
+      old_driver.value = true;
+      driver_list.value.drivers.forEach(e=> {
+        if(e.checked)driver.value = e
+      })
     }
 
     onMounted(() => {
@@ -143,7 +159,7 @@ export default {
     const v$ = useVuelidate(rules, driver);
 
 
-    return {limit, count, location, checked, fetchList, new_driver,driver_list, v$, driver, addNewDriver, page, pages, loading, data_head};
+    return {limit, count, searchList, editDriver, location, checked, fetchList, new_driver, old_driver, driver_list, v$, driver, addNewDriver, page, pages, loading, data_head};
   }
 }
 </script>

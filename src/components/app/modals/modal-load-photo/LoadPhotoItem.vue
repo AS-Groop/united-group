@@ -11,7 +11,7 @@ import VSvg from "@/components/ui/vSvg";
 import {ref} from "vue";
 import {getFileById} from "@/hooks/file/useFile";
 export default {
-  components: {VSvg},
+    components: {VSvg},
   props:['image', 'img','img_src'],
   setup(props,ctx){
   const imgContent = ref(null)

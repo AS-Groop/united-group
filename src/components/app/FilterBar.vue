@@ -1,6 +1,6 @@
 <template>
   <div class="filter__bar">
-    <v-search/>
+    <v-search v-model="modelValue" @update:modelValue="(val)=>$emit('update:modelValue',val)"/>
     <div class="filter__btns">
       <slot></slot>
     </div>
@@ -9,6 +9,7 @@
 <script>
 import VSearch from "@/components/ui/vSearch";
 export default {
+  props:['modelValue'],
   components: {VSearch}
 }
 </script>

@@ -3,6 +3,7 @@ import axios from "axios";
 import toast from "@/use/toast";
 
 export const all_cars_list = ref(null);
+export const car_pick_drop = ref(null);
 export const car_by_id = ref(null);
 
 
@@ -14,6 +15,16 @@ export async function getAllCarList(obj) {
          .get(`/v1/car/${location.query ? location.query + '&' : '?'}limit=${obj?.limit ? obj.limit : 10}&page=${obj?.page ? obj.page : 1}${obj?.search ? '&search='+obj.search : ''}`)).data;
   } catch (e) {
     console.log(e)
+  }
+}
+export async function getPickDropCar(obj) {
+  try {
+     car_pick_drop.value  = (await axios
+         .get(`/v1/car/${obj.id}/pickup-dropoff`)).data;
+     return car_pick_drop.value
+  } catch (e) {
+    console.log(e)
+    return e
   }
 }
 
