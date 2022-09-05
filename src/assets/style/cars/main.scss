@@ -42,11 +42,18 @@
               width: 100%;
               border: 1px solid $gray5;
               border-radius: 14px;
-              padding: 11px 48px 15px 15px;
+              padding: 11px 15px 15px;
               background: white;
               color: $gray2;
               outline: none;
               @include text($poppins, normal, 400, 16px, 24px);
+
+              &.error {
+                border-color: red;
+                &::placeholder{
+                  color: red;
+                }
+              }
 
               &::placeholder {
                 color: $gray4;

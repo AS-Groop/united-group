@@ -58,7 +58,6 @@ import CheckListItem from "@/components/app/modals/modal-check-list/CheckListIte
 import ModalLoadPhotos from "@/components/app/modals/modal-load-photo/ModalLoadPhotos";
 import PopupPhoto from "@/components/app/modals/modal-load-photo/PopupPhoto";
 import ModalDraw from "@/components/app/modals/ModalDraw";
-import router from "@/router";
 import {useRoute, useRouter} from "vue-router";
 import {getTruckInspect, getTruckById, truck_by_id, truck_inspect_id, postInspectTruck} from "@/hooks/truck/useTruck";
 import vLoading from "@/components/ui/vLoading";

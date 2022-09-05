@@ -18,6 +18,7 @@ export async function getAllCarList(obj) {
   }
 }
 export async function getPickDropCar(obj) {
+  car_pick_drop.value = null;
   try {
      car_pick_drop.value  = (await axios
          .get(`/v1/car/${obj.id}/pickup-dropoff`)).data;
@@ -27,6 +28,21 @@ export async function getPickDropCar(obj) {
     return e
   }
 }
+
+export async function pickDropCar(obj) {
+  car_pick_drop.value = null;
+  try {
+     car_pick_drop.value  = (await axios
+         .post(`/v1/car/${obj.id}/pickup-dropoff`, obj.obj)).data;
+    toast('100', 'success')
+     return car_pick_drop.value
+  } catch (e) {
+    toast('400', 'error')
+    console.log(e)
+    return e
+  }
+}
+
 
 export async function createCar(obj) {
   try {
