@@ -139,7 +139,7 @@ export default {
       if (!v$.value.$invalid) {
         // truck.value.year_made = +truck.value.year_made;
         // truck.value.milage = +truck.value.milage;
-        if (trailer_modal && !old_trailer) await createTrailer(new_trailer.value); else await updateTrailerById({
+        if (trailer_modal.value && !old_trailer.value) await createTrailer(new_trailer.value); else await updateTrailerById({
           id: new_trailer.value.id,
           data: new_trailer.value
         });

@@ -145,7 +145,7 @@ export default {
       if (!v$.value.$invalid) {
         truck.value.year_made = +truck.value.year_made;
         truck.value.milage = +truck.value.milage;
-        if (new_truck && !old_truck) await createTruck(truck.value); else await updateTruckById({
+        if (new_truck.value && !old_truck.value) await createTruck(truck.value); else await updateTruckById({
           id: truck.value.id,
           data: truck.value
         });

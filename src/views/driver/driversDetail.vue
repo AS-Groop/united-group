@@ -13,9 +13,6 @@ import router from "@/router";
 export default {
   components: {DriversDetailPage, HeaderDefault},
   setup() {
-    onMounted(() => {
-      getDriverById(router.currentRoute.value.params.id)
-    });
 
     return{}
   }

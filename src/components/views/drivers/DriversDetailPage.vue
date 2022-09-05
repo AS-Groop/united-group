@@ -1,7 +1,7 @@
 <template>
   <div class="section__page drivers">
     <DetailNav>
-      <DeatilNavBack v-if="driver_by_id" :title="driver_by_id.first_name + ' ' +driver_by_id.last_name" path="/drivers"/>
+      <DeatilNavBack v-if="driver_by_id" :title="driver_by_id.first_name + ' ' +driver_by_id.last_name" path="/reports"/>
       <span class="detail__nav-item text-h6">
         <v-svg id="phone" width="18" height="18" />{{ driver_by_id ? driver_by_id.phone : '' }}
       </span>
@@ -38,10 +38,11 @@ import ModalDrivers from "@/components/app/modals/ModalDrivers";
 import DriversTabMenu from "@/components/views/drivers/DriversTabMenu";
 import DriversTabItems from "@/components/views/drivers/DriversTabItem";
 import TableTool from "@/components/app/table/TableTool";
-import {computed, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import VSvg from "@/components/ui/vSvg";
-import {driver_by_id, tabs_content} from "@/hooks/driver/useDriver";
+import {driver_by_id, getDriverById, tabs_content} from "@/hooks/driver/useDriver";
 import {steps} from "@/hooks/driver/useStep";
+import router from "@/router";
 export default {
   components: {
     VSvg,
@@ -54,6 +55,9 @@ export default {
     // !!steps.value || steps.value.length > 0 ? console.log(Object.entries(steps.value)[0][0]) :''
     // steps ? tab.value = Object.entries(steps.value) : ''
 
+    onMounted(() => {
+      getDriverById(router.currentRoute.value.params.id)
+    });
     return {tabs_content, tab, modal, modal_data, driver_by_id, steps};
   }
 }

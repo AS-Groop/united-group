@@ -114,7 +114,7 @@ export default {
     async function addNewDriver() {
       v$.value.$touch();
       if(!v$.value.$invalid){
-        if(new_driver && !old_driver)await createDriver(driver.value); else await updateDriverById({id:driver.value.id,data:driver.value});
+        if(new_driver.value && !old_driver.value)await createDriver(driver.value); else await updateDriverById({id:driver.value.id,data:driver.value});
 
         await getDriverList();
         driver.value = {};

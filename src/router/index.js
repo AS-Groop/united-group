@@ -82,7 +82,7 @@ const routes = [
                     },
                     {
                         path: ':id/drivers',
-                        component: () => import('../components/views/reports/drivers/ReportsDetailPage'),
+                        component: () => import('../components/views/drivers/DriversDetailPage'),
                     },
                     {
                         path: ':id/trucks',
