@@ -3,10 +3,11 @@ import {computed, ref} from "vue";
 import router from "@/router";
 import toast from "@/use/toast";
 
-const access_token = ref();
-const refresh_token = ref();
+export const access_token = ref();
+export const refresh_token = ref();
+export const get_dashboard = ref()
 
-refresh_token.value = computed(()=>{return localStorage.getItem('refresh_token') || []});
+    refresh_token.value = computed(()=>{return localStorage.getItem('refresh_token') || []});
 access_token.value = computed(()=>{return localStorage.getItem('refresh_token') || []});
 
 export async function useAuth (obj){
@@ -23,7 +24,16 @@ export async function useAuth (obj){
   }
 }
 
-export default {access_token, refresh_token, useAuth}
+export async function getDashboard(){
+  try {
+    get_dashboard.value = (await axios.get('/v1/dashboard/')).data;
+  } catch (e) {
+    console.log(e)
+    toast('400','error')
+  }
+}
+
+// export default {access_token, refresh_token, get_dashboard, useAuth}
 
 
 

@@ -1,6 +1,11 @@
 <template>
 
-  <v-table>
+  <v-table v-if="all_trucks_history_list?.history"
+      :count="count" :pages="pages"
+      v-model:limit="limit"
+      @update:limit="fetchList({type:'limit'})"
+      v-model:page="page"
+      @update:page="fetchList">
     <template v-slot:tool>
       <TableTool v-if="false" class="bt-0">
         <v-btn type="edit" size="md">Edit</v-btn>
@@ -12,28 +17,30 @@
       <TableHRow icon="true" :data="data_head"/>
     </template>
     <template v-slot:body-row>
-      <TableBRow v-for="(i,index) in data_body"
-                 icon="true"
-                 :id="index" cursor="pointer"
-                 :col1="{name:i.col1,type:'def'}"
-                 :col2="{name:i.col2,type:'def'}"
-                 :col3="{name:i.col3,type:'def'}"
-                 :col4="{name:i.col4,type:'def'}"
-                 :col5="{name:i.col5,type:'def'}"
-                 :col6="{name:i.col6,type:'def'}"
-                 :col7="{name:i.col7,type:'def',}"
-                 :col8="{name:i.col8,type:'def',}"
+      <TableBRow v-for="(i,index) in all_trucks_history_list.history"
+                 icon="true" :id="i.id" cursor="pointer"
+                 :col1="{name:i.truck_number || '--',type:'def'}"
+                 :col2="{name:i.truck_make || '--',type:'def'}"
+                 :col3="{name:i.truck_model || '--',type:'def'}"
+                 :col4="{name:i.truck_year_made || '--',type:'def'}"
+                 :col5="{name:i.truck_milage || '--',type:'def'}"
+                 :col6="{name:i.driver_name || '--',type:'def'}"
+                 :col7="{name:i.inspection_type || '--',type:'def',}"
+                 :col8="{name:i.created_at || '--',type:'def',}"
       >
         <template v-slot:end>
           <td class="w-150">
             <v-svg class="mx-1" id="download-table" width="32" height="26"/>
             <v-svg class="mx-1" @click="$router.push(`/reports/${i.id}/trucks`)" id="edit-table" width="32" height="26"/>
-            <v-svg class="mx-1 me-15" id="remove-table" width="32" height="26"/>
+            <v-svg class="mx-1 me-15" @click="modal_delete = i.id" id="remove-table" width="32" height="26"/>
           </td>
         </template>
       </TableBRow>
     </template>
   </v-table>
+  <teleport to="body">
+    <ModalDelete v-if="modal_delete" @close="modal_delete = null" @delete="deleteTruck"/>
+  </teleport>
 </template>
 <script>
 import VTable from "@/components/app/table/vTable";
@@ -41,16 +48,17 @@ import TableTool from "@/components/app/table/TableTool";
 import VBtn from "@/components/ui/vBtn";
 import TableHRow from "@/components/app/table/TableHRow";
 import TableBRow from "@/components/app/table/TableBRow";
-import {ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import VSvg from "@/components/ui/vSvg";
+import {all_trucks_history_list, deleteTruckHistoryById, getAllTrucksHistoryList} from "@/hooks/truck/useTruckHistory";
+import {getAllTrailersHistoryList} from "@/hooks/trailer/useTrailerHistory";
+import ModalDelete from "@/components/app/modals/ModalDelete";
 
 export default {
-  components: {VSvg, TableBRow, TableHRow, VBtn, TableTool, VTable},
+  components: {VSvg, TableBRow, TableHRow, VBtn, TableTool, VTable, ModalDelete},
   setup() {
-    let data_head = null;
-    let data_body = null;
-    data_head = [
-      {name:'Trailer Number'},
+    let data_head = [
+      {name:'Truck Number'},
       {name:'Make'},
       {name:'Model'},
       {name:'Year Made'},
@@ -60,82 +68,28 @@ export default {
       {name:'Date Created'},
       {class:'w-150',name:'Actions'}
     ];
-    data_body = [
-      {
-        id:1,
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: '350,000',
-        col6: 'Azodov Asror',
-        col7: 'Pick Up',
-        col8: '05/25/2022 11:24'
-      },{
-        id:2,
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: '350,000',
-        col6: 'Azodov Asror',
-        col7: 'Pick Up',
-        col8: '05/25/2022 11:24'
-      },{
-        id:3,
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: '350,000',
-        col6: 'Azodov Asror',
-        col7: 'Pick Up',
-        col8: '05/25/2022 11:24'
-      },{
-        id:4,
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: '350,000',
-        col6: 'Azodov Asror',
-        col7: 'Pick Up',
-        col8: '05/25/2022 11:24'
-      },{
-        id:5,
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: '350,000',
-        col6: 'Azodov Asror',
-        col7: 'Pick Up',
-        col8: '05/25/2022 11:24'
-      },{
-        id:6,
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: '350,000',
-        col6: 'Azodov Asror',
-        col7: 'Pick Up',
-        col8: '05/25/2022 11:24'
-      },{
-        id:7,
-        col1: '#120',
-        col2: 'Wabash',
-        col3: 'Dry',
-        col4: '2020',
-        col5: '350,000',
-        col6: 'Azodov Asror',
-        col7: 'Pick Up',
-        col8: '05/25/2022 11:24'
-      }
-    ];
-    return {data_head, data_body}
+    let data_body = null;
+    let modal_delete = ref(null)
+    let page = ref(1);
+    let limit = ref(10);
+    let count = computed(() => (all_trucks_history_list?.value?.count) ? all_trucks_history_list.value.count : 0);
+    let pages = computed(() => (all_trucks_history_list?.value?.count) ? Math.ceil(all_trucks_history_list.value.count / limit.value) : 0);
 
-  }
+    async function fetchList(obj) {
+      if (obj?.type === 'limit') page.value = 1;
+      await getAllTrucksHistoryList({limit: limit.value, page: page.value});
+    }
+
+    async function deleteTruck(){
+      await deleteTruckHistoryById(modal_delete.value)
+      await fetchList();
+      modal_delete.value = null;
+    }
+
+
+    return {data_head, data_body, all_trucks_history_list, page, deleteTruck, count, pages, modal_delete, fetchList, limit}
+
+  },
 
 }
 </script>

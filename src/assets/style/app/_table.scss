@@ -12,7 +12,13 @@
     height: calc(100% - 64px);
     overflow: auto;
     background: $bg-white;
+    &-not{
+      height: calc(100% - 35px);
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
   }
+
 
   &__tool {
     width: 100%;

@@ -73,7 +73,7 @@ export async function updateUserProfile(obj) {
 
 export async function deleteUserById(id) {
   try {
-    await axios.put(`/v1/user/${id}`,);
+    await axios.delete(`/v1/user/${id}`,);
     toast('100','success')
   } catch (e) {
     toast('400','error')

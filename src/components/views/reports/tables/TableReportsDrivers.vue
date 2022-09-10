@@ -1,7 +1,7 @@
 <template>
 
-  <v-table :count="count"
-  :pages="pages" v-if="driver_list?.drivers"
+  <v-table v-if="driver_list?.drivers"
+  :pages="pages" :count="count"
   v-model:limit="limit"
   @update:limit="fetchList({type:'limit'})"
   v-model:page="page"
@@ -56,7 +56,6 @@ export default {
   components: {VSvg, TableBRow, ModalDelete, TableHRow, VBtn, TableTool, VTable},
   setup() {
     let data_head = null;
-    let data_body = null;
     let modal_delete = ref(null);
     data_head = [
       {name:'Driver Name'},
@@ -66,65 +65,6 @@ export default {
       {name:'Assigned Trailer'},
       {name:'Date Created'},
       {class:'w-150',name:'Actions'}
-    ];
-    data_body = [
-      {
-        id:1,
-        col1: 'Ahmad Zokir',
-        col2: 'ahmadz@gmail.com',
-        col3: '+ 1 717 777 0707',
-        col4: '120',
-        col5: '596',
-        col7: '05/25/2022 11:24'
-      },{
-        id:2,
-        col1: 'Ahmad Zokir',
-        col2: 'ahmadz@gmail.com',
-        col3: '+ 1 717 777 0707',
-        col4: '120',
-        col5: '596',
-        col7: '05/25/2022 11:24'
-      },{
-        id:3,
-        col1: 'Ahmad Zokir',
-        col2: 'ahmadz@gmail.com',
-        col3: '+ 1 717 777 0707',
-        col4: '120',
-        col5: '596',
-        col7: '05/25/2022 11:24'
-      },{
-        id:4,
-        col1: 'Ahmad Zokir',
-        col2: 'ahmadz@gmail.com',
-        col3: '+ 1 717 777 0707',
-        col4: '120',
-        col5: '596',
-        col7: '05/25/2022 11:24'
-      },{
-        id:5,
-        col1: 'Ahmad Zokir',
-        col2: 'ahmadz@gmail.com',
-        col3: '+ 1 717 777 0707',
-        col4: '120',
-        col5: '596',
-        col7: '05/25/2022 11:24'
-      },{
-        id:6,
-        col1: 'Ahmad Zokir',
-        col2: 'ahmadz@gmail.com',
-        col3: '+ 1 717 777 0707',
-        col4: '120',
-        col5: '596',
-        col7: '05/25/2022 11:24'
-      },{
-        id:7,
-        col1: 'Ahmad Zokir',
-        col2: 'ahmadz@gmail.com',
-        col3: '+ 1 717 777 0707',
-        col4: '120',
-        col5: '596',
-        col7: '05/25/2022 11:24'
-      }
     ];
     let page = ref(1);
     let limit = ref(10);
@@ -142,7 +82,7 @@ export default {
       modal_delete.value = null;
     }
     onMounted(()=>fetchList())
-    return {data_head, data_body, limit, modal_delete, count, driver_list, page, deleteDriver, pages, fetchList,}
+    return {data_head, limit, modal_delete, count, driver_list, page, deleteDriver, pages, fetchList,}
 
   }
 

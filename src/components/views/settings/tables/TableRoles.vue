@@ -7,14 +7,14 @@
           <th></th>
         </tr>
       </thead>
-      <tbody>
-      <tr>
-        <td>Admin</td>
-        <td>Unrestricted access to all modules.</td>
+      <tbody v-if="all_roles_list?.roles">
+      <tr v-for="i in all_roles_list.roles">
+        <td>{{ i.name }}</td>
+        <td>{{ i.description }}</td>
         <td class="icon">
-          <v-svg class="mx-1" @click="$emit('editUser')" id="edit-table" width="32"
+          <v-svg class="mx-1 pointer" @click="$emit('editUser')" id="edit-table" width="32"
                  height="26"/>
-          <v-svg class="mx-1 me-15" @click="$emit('delete')"  id="remove-table" width="32" height="26"/>
+          <v-svg class="mx-1 me-15 pointer" @click="$emit('delete')"  id="remove-table" width="32" height="26"/>
         </td>
       </tr>
       </tbody>
@@ -22,7 +22,13 @@
 </template>
 <script>
 import VSvg from "@/components/ui/vSvg";
+import {all_roles_list} from "@/hooks/role/useRole";
 export default {
-  components: {VSvg}
+  components: {VSvg},
+  setup(){
+
+
+    return{all_roles_list}
+  }
 }
 </script>

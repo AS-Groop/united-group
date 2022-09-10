@@ -1,7 +1,7 @@
 <template>
   <div class="section__page drivers">
     <DetailNav>
-      <DeatilNavBack v-if="driver_by_id" :title="driver_by_id.first_name + ' ' +driver_by_id.last_name" path="/reports"/>
+      <DeatilNavBack v-if="driver_by_id" :title="driver_by_id.first_name + ' ' +driver_by_id.last_name" path="/drivers"/>
       <span class="detail__nav-item text-h6">
         <v-svg id="phone" width="18" height="18" />{{ driver_by_id ? driver_by_id.phone : '' }}
       </span>

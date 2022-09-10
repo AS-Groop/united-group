@@ -119,7 +119,7 @@ const routes = [
         children:[
             {
                 path: '',
-                component: ()=>import('../views/settings/users'),
+                redirect: '/users',
             },
             {
                 path: '/users',

@@ -12,7 +12,7 @@ export const role_by_id = ref(null);
 export async function getAllRoleList(obj) {
   try {
      all_roles_list.value  = (await axios
-         .get(`/v1/role/${location.query ? location.query + '&' : '?'}limit=${obj?.limit ? obj.limit : 10}&page=${obj?.page ? obj.page : 1}${obj?.search ? '&search='+obj.search : ''}`)).data;
+         .get(`/v1/role/${location.query ? location.query + '&' : '?'}limit=${obj?.limit ? obj.limit : 99}&page=${obj?.page ? obj.page : 1}${obj?.search ? '&search='+obj.search : ''}`)).data;
   } catch (e) {
     console.log(e)
   }

@@ -391,6 +391,23 @@
     .btn {
       margin-right: 8px;
     }
+    span {
+      color: $blue1;
+      padding: 11px;
+      padding-right: 25px;
+      position: relative;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 140px;
+      cursor: pointer;
+      svg {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        right: 0;
+      }
+    }
   }
 
   &__items {

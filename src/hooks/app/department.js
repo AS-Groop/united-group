@@ -19,8 +19,15 @@ export async function changeInput(val,field,step_id,commit){
         driver_id: router.currentRoute.value.params.id,
         step_id: step_id
     };
-    if(field.label !== 'Comments' && commit && val.length) await setFormFiledValue(obj)
-    if(field.label === 'Comments' && commit && val.length) {
+    if(field.label !== 'Comments' && field.label !== 'Attachments' && commit && val.length) await setFormFiledValue(obj)
+    if((field.label === 'Comments') && commit && val.length) {
+        loading_modal.value = true;
+        if (field.values) field.values.forEach(e => obj.fields[0].values.push(e.value));
+        await setFormFiledValue(obj)
+        await getFormStepDriver(obj2)
+        loading_modal.value = false
+    }
+    if(field.label === 'Attachments') {
         loading_modal.value = true;
         if (field.values) field.values.forEach(e => obj.fields[0].values.push(e.value));
         await setFormFiledValue(obj)

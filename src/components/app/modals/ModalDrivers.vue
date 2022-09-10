@@ -15,7 +15,7 @@
             <template v-if="data && data.groups" v-for="(item, index) in data.groups">
               <div :class="item.title!=='Attachments'?'col':'col-12'" >
                 <StandardItems @loading_modal="test" :title="item.title" v-if="item.title!=='Attachments'" :step_id="modal_data" v-model:fields="item.fields"></StandardItems>
-                <DownloadFiles v-else/>
+                <DownloadFiles v-model:item="item.fields" :step_id="modal_data" v-else/>
               </div>
               <template v-if="item.title ==='Comments' && item.fields[0].values">
                 <div class="col" v-for="i in item.fields[0].values">
