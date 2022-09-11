@@ -51,7 +51,7 @@ export async function updateCompanyById(obj) {
 
 export async function deleteCompanyById(id) {
   try {
-    await axios.put(`/v1/company/${id}`,);
+    await axios.delete(`/v1/company/${id}`,);
     toast('100','success')
   } catch (e) {
     toast('400','error')

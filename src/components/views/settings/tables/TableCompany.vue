@@ -1,16 +1,8 @@
 <template>
-    <table class="table__settings text-h2">
-      <thead>
-        <tr>
-          <th>Role Name</th>
-          <th>Description</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody v-if="all_roles_list?.roles">
-      <tr v-for="i in all_roles_list.roles">
+    <table class="table__settings company text-h2">
+      <tbody v-if="all_companys_list?.companies">
+      <tr v-for="i in all_companys_list.companies">
         <td>{{ i.name }}</td>
-        <td>{{ i.description }}</td>
         <td class="icon">
           <v-svg class="mx-1 pointer" @click="$emit('editRole',i.id)" id="edit-table" width="32"
                  height="26"/>
@@ -22,13 +14,11 @@
 </template>
 <script>
 import VSvg from "@/components/ui/vSvg";
-import {all_roles_list} from "@/hooks/role/useRole";
+import {all_companys_list} from "@/hooks/company/useCompany";
 export default {
   components: {VSvg},
   setup(){
-
-
-    return{all_roles_list}
+    return{all_companys_list}
   }
 }
 </script>

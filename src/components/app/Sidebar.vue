@@ -112,9 +112,9 @@
             <router-link active-class="active" exact to="/users" class="sidebar__dropdown-item text-h6 text-gray3">
               Users
             </router-link>
-            <router-link active-class="active" exact to="/tasks" class="sidebar__dropdown-item text-h6 text-gray3">
-              Tasks
-            </router-link>
+<!--            <router-link active-class="active" exact to="/tasks" class="sidebar__dropdown-item text-h6 text-gray3">-->
+<!--              Tasks-->
+<!--            </router-link>-->
             <router-link active-class="active" exact to="/company" class="sidebar__dropdown-item text-h6 text-gray3">
               Company
             </router-link>

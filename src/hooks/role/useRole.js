@@ -21,8 +21,22 @@ export async function getAllRoleList(obj) {
 export async function getAllRoleModulesList(obj) {
   try {
      all_role_modules_list.value  = (await axios
-         .get(`/v1/role/modules/`)).data;
-        //  .get(`/v1/role/${location.query ? location.query + '&' : '?'}limit=${obj?.limit ? obj.limit : 10}&page=${obj?.page ? obj.page : 1}${obj?.search ? '&search='+obj.search : ''}`)).data;
+         .get(`/v1/role/modules`)).data;
+     all_role_modules_list.value.modules.forEach(e=> {
+       e.check = false;
+       if(e.groups?.length){
+         e.groups.forEach(e=> {
+           e.check = false;
+           if(e.permissions?.length){
+             e.permissions.forEach(e=> {
+               e.check = false;
+             })
+           }
+         })
+       }
+     })
+    console.log(all_role_modules_list.value);
+    //  .get(`/v1/role/${location.query ? location.query + '&' : '?'}limit=${obj?.limit ? obj.limit : 10}&page=${obj?.page ? obj.page : 1}${obj?.search ? '&search='+obj.search : ''}`)).data;
   } catch (e) {
     console.log(e)
   }
@@ -40,7 +54,6 @@ export async function createRole(obj) {
 
 
 export async function getRoleById(obj) {
-  console.log(obj)
   try {
     role_by_id.value = (await axios.get(`/v1/role/${obj}`)).data;
   } catch (e) {
@@ -62,7 +75,7 @@ export async function updateRoleById(obj) {
 
 export async function deleteRoleById(id) {
   try {
-    await axios.put(`/v1/role/${id}`,);
+    await axios.delete(`/v1/role/${id}`,);
     toast('100','success')
   } catch (e) {
     toast('400','error')

@@ -1,15 +1,14 @@
 <template>
   <div class="section">
     <HeaderDefault/>
-    <SettingsMainPage/>
+    <CompanyMainPage/>
   </div>
 </template>
 <script>
 import HeaderDefault from "@/components/app/header/HeaderDefault";
-import ReportsMainPage from "@/components/views/reports/ReportsMainPage"
-import SettingsMainPage from "@/components/views/settings/SettingsMainPage";
+import CompanyMainPage from "@/components/views/settings/CompanyMainPage";
 
 export default {
-  components: {SettingsMainPage, HeaderDefault}
+  components: {CompanyMainPage, HeaderDefault}
 }
 </script>

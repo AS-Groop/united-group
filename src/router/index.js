@@ -126,6 +126,21 @@ const routes = [
                 component: ()=>import('../views/settings/users'),
             },
             {
+                path: '/role/:id',
+                component: ()=>import('../views/settings/role'),
+            },
+            {
+                path: '/role',
+                name:"SettingsRole",
+                component: ()=>import('../views/settings/role'),
+                children: [
+                    {
+                        path: '',
+                        component: ()=>import('../views/settings/role'),
+                    }
+                ]
+            },
+            {
                 path: '/tasks',
                 component: ()=>import('../views/settings/tasks'),
             },

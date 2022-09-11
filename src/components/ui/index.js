@@ -7,10 +7,11 @@ import vRadioInput from './vRadioInput'
 import vSelect from './vSelect'
 import vToggle from './vToggle'
 import vLoading from './vLoading'
+import vTextarea from './vTextarea'
 // import SvgIcon from "@/components/ui/SvgIcon";
 
 export default [
-  vBtn,
+  vBtn, vTextarea,
   HeaderDefault,
   vSearch,
   vChecked,
