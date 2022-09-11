@@ -7,20 +7,22 @@
         <v-svg class-name="arr" id="history-arr" width="27" height="27"/>
       </div>
     </div>
-    <div class="history__items" v-if="history">
-      <CarsHistoryItem v-for="i in 6"/>
+    <div class="history__items" v-if="history && car_history_id?.history">
+      <CarsHistoryItem :item="i" v-for="i in car_history_id.history"/>
     </div>
   </div>
 </template>
 <script>
 import VSvg from "@/components/ui/vSvg";
 import CarsHistoryItem from "@/components/views/cars/CarsHistoryItem";
-import {ref} from "vue";
+import {onMounted, ref, watch} from "vue";
+import {car_history_id, getCarHistory, getPickDropCar, pickDropCar} from "@/hooks/car/useCar";
 export default {
+  props:['id'],
   components: {CarsHistoryItem, VSvg},
-  setup(){
+  setup(props){
     const history = ref(false);
-    return {history}
+    return {history, car_history_id}
   }
 }
 </script>

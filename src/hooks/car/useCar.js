@@ -5,6 +5,7 @@ import toast from "@/use/toast";
 export const all_cars_list = ref(null);
 export const car_pick_drop = ref(null);
 export const car_by_id = ref(null);
+export const car_history_id = ref(null);
 
 
 
@@ -36,6 +37,18 @@ export async function pickDropCar(obj) {
          .post(`/v1/car/${obj.id}/pickup-dropoff`, obj.obj)).data;
     toast('100', 'success')
      return car_pick_drop.value
+  } catch (e) {
+    toast('400', 'error')
+    console.log(e)
+    return e
+  }
+}
+
+export async function getCarHistory(obj){
+  try{
+    car_history_id.value  = (await axios
+        .get(`/v1/car/${obj}/history?limit=999`)).data;
+    toast('100', 'success')
   } catch (e) {
     toast('400', 'error')
     console.log(e)

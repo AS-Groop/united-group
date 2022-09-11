@@ -8,7 +8,7 @@
         <div class="d-flex align-center justify-end my-15">
           <v-btn type="140" @click="save"> {{ content_car?.type === 'pickup' ? 'Drop Off' : 'Pick Up' }}</v-btn>
         </div>
-        <CarsHistory/>
+        <CarsHistory :id="car_id"/>
       </div>
     </div>
   </div>
@@ -22,7 +22,7 @@ import CarsDriverInfo from "@/components/views/cars/CarsDriverInfo";
 import CarsDateCards from "@/components/views/cars/CarsDateCards";
 import CarsHistory from "@/components/views/cars/CarsHistory";
 import {onMounted, ref} from "vue";
-import {car_id, car_pick_drop, getAllCarList, getPickDropCar, pickDropCar} from "@/hooks/car/useCar";
+import {car_id, car_pick_drop, getAllCarList, getCarHistory, getPickDropCar, pickDropCar} from "@/hooks/car/useCar";
 import {getFormListEntities} from "@/hooks/form/useForm";
 import {required} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
@@ -71,6 +71,7 @@ export default {
     async function selectCar(id){
       content_car.value = {};
       await getPickDropCar({id});
+      await getCarHistory(id)
       if(car_pick_drop.value)content_car.value = car_pick_drop.value;
       car_id.value = id;
     }
