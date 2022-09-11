@@ -22,8 +22,8 @@
               @close="new_user = false, modal_edit = null">
     <template v-slot:img>
       <div class="img-input">
-        <input type="file" accept="image/*">
-        <img v-if="false" src="@/assets/images/no-image.png" alt="">
+<!--        <input type="file" accept="image/*">-->
+        <img v-if="true" src="@/assets/images/person-icon.png" alt="">
         <v-svg v-else id="loaded-image" width="61" height="60"/>
       </div>
     </template>

@@ -1,7 +1,7 @@
 <template>
   <div class="header__profile">
     <div class="img">
-      <img src="@/assets/images/img.png" alt="">
+      <img src="@/assets/images/person-icon.png" alt="">
     </div>
     <span class="text-h4">Profile</span>
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -29,7 +29,7 @@
           <td>
             <div class="table__user">
               <div class="img me-15">
-                <img src="@/assets/images/img2.png" alt="">
+                <img src="@/assets/images/person-icon.png" alt="">
               </div>
               <div>
                 <div class="text-h6 text-gray2">{{i.first_name || ''}}  {{i.last_name || '--'}}</div>
