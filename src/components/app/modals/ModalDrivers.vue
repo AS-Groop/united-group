@@ -32,7 +32,6 @@
             </template>
           </div>
           <div class="save_btn">
-          <v-btn type="100">Save</v-btn>
         </div>
         </template>
       </div>
