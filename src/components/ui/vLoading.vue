@@ -8,7 +8,7 @@
 
 <script>
 export default {
-
+  name:'vLoading'
 }
 </script>
 <style lang="scss" scoped>

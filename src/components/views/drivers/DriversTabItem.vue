@@ -1,18 +1,11 @@
 <template>
   <div>
-      <template v-for="(item) in items">
+      <template v-for="(item) in items_list">
         <div v-for="i in item.steps"
-              class="drivers__detail-item" @click="$emit('openModal',i.id)"
-             v-if="item.status.alias === 'initial'" >
-          <v-checked
+              class="drivers__detail-item" @click="$emit('openModal',i.id)">
+          <v-my-checked
               @clickCheck="check(item.status.id, i.id)"
-              :id="i.name" class-name="check"/>
-          {{ i.name }}
-        </div>
-        <div v-for="i in item.steps"
-              class="drivers__detail-item" @click="$emit('openModal',i.id)"
-             v-if="item.status.alias === 'completed'" >
-          <v-checked @clickCheck="check(item.status.id, i.id)" :id="i.name" class-name="check" :check="true"/>
+              :id="i.name" class-name="check" :check="i.checked"/>
           {{ i.name }}
         </div>
       </template>
@@ -25,22 +18,26 @@ import router from "@/router";
 import {updateStepStatus} from "@/hooks/step/useStep";
 import {getDriverById} from "@/hooks/driver/useDriver";
 import {static_completed, static_initial} from "@/hooks/app/varables";
+import {computed} from "vue";
+import VMyChecked from "@/components/ui/vMyChecked";
 export default {
-  components: {VChecked},
+  components: {VMyChecked, VChecked},
   props:['name','id','items'],
-  setup(){
+  setup(props){
+    const items_list =computed(()=>props.items)
     async function check(status_id, step_id){
       let obj = {
         driver_id: router.currentRoute.value.params.id,
         status_id: status_id === static_completed ? static_initial : static_completed,
         step_id: step_id
       }
+      console.log(obj.status_id + '<=='+status_id)
       await updateStepStatus(obj)
+      await getDriverById(router.currentRoute.value.params.id)
       // await getDriverById(router.currentRoute.value.params.id)
-      console.log('test')
     }
 
-    return {check,static_completed,static_initial}
+    return {check,static_completed,static_initial,items_list}
   }
 }
 </script>

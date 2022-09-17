@@ -10,6 +10,7 @@
 </template>
 <script>
 export default {
+  name:'vRadioInput',
   props:['label','className', 'name', 'value']
 }
 </script>

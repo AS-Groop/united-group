@@ -6,6 +6,7 @@
 </template>
 <script>
 export default {
+  name:'vToggle',
   props:['id','label', 'className'],
   methods:{
     eventd(e){

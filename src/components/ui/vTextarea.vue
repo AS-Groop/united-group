@@ -7,6 +7,7 @@
 </template>
 <script>
 export default {
+  name:'vTextarea',
   props:['className', 'label','place', 'error', 'type', 'disabled','modelValue']
 }
 </script>

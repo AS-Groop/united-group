@@ -22,6 +22,7 @@
 import VSvg from "@/components/ui/vSvg";
 import {ref} from "vue";
 export default {
+  name:'vSelect',
   components: {VSvg},
   props: ['className', 'label', 'place', 'error', 'disabled', 'select', 'name', 'options','id'],
   setup(props,ctx){

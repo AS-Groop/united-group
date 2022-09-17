@@ -8,6 +8,7 @@ import vSelect from './vSelect'
 import vToggle from './vToggle'
 import vLoading from './vLoading'
 import vTextarea from './vTextarea'
+import vMyChecked from './vMyChecked'
 // import SvgIcon from "@/components/ui/SvgIcon";
 
 export default [
@@ -15,7 +16,7 @@ export default [
   HeaderDefault,
   vSearch,
   vChecked,
-  vSvg,
+  vSvg,vMyChecked,
   vRadioInput,
   vSelect,
   vToggle,

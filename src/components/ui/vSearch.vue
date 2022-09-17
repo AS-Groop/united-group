@@ -11,6 +11,7 @@
 
 <script>
 export default {
+  name:'vSearch',
   props:['modelValue']
 }
 </script>

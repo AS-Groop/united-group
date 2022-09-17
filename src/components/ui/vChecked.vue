@@ -6,6 +6,7 @@
 </template>
 <script>
 export default {
+  name:'vChecked',
   props:['id','label', 'className','check'],
   methods:{
     eventd(e){

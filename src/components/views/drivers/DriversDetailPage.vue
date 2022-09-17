@@ -15,16 +15,16 @@
         :tabs_content="tabs_content"
         @clicks="e=>tab=e"
     />
-    <template v-if="tab && !!steps">
+    <template v-if="tab && !!steps_list">
       <DriversTabItems @openModal="(val)=>modal_data=val"
                        :items="tab === 'dipatch_orientation'
-                      ? steps['dipatch_orientation'].steps
+                      ? steps_list['dipatch_orientation'].steps
                       : tab === 'hr'
-                      ? steps['hr'].steps
+                      ? steps_list['hr'].steps
                       : tab === 'safety'
-                      ? steps['safety'].steps
+                      ? steps_list['safety'].steps
                       : tab === 'fleet'
-                      ? steps['fleet'].steps
+                      ? steps_list['fleet'].steps
                       : ''" />
     </template>
   </div>
@@ -52,13 +52,14 @@ export default {
     const tab = ref(null);
     const modal_data = ref(null);
     const modal = ref(false);
+    const steps_list =computed(()=>steps.value)
     // !!steps.value || steps.value.length > 0 ? console.log(Object.entries(steps.value)[0][0]) :''
     // steps ? tab.value = Object.entries(steps.value) : ''
 
     onMounted(() => {
       getDriverById(router.currentRoute.value.params.id)
     });
-    return {tabs_content, tab, modal, modal_data, driver_by_id, steps};
+    return {tabs_content, tab, modal, modal_data, driver_by_id, steps_list};
   }
 }
 </script>
