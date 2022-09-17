@@ -27,10 +27,18 @@
                           icon="true" cursor="pointer" :key="i.id" :id="i.id"
                           :col1="{name:i.first_name + ' ' +i.last_name,type:'def'}"
                           :col2="{name:i.on_board_date ? i.on_board_date : '--',type:'def'}"
-                          :col3="{name:i.department_statistics ? (i.department_statistics.filter(e=>e.alias==='hr')[0].percentage * 100).toFixed() : '--' ,type:'progress',color_rank:i.department_statistics.filter(e=>e.alias==='hr')[0].gradient}"
-                          :col4="{name:i.department_statistics ? (i.department_statistics.filter(e=>e.alias==='safety')[0].percentage * 100).toFixed() : '--' ,type:'progress',color_rank:i.department_statistics.filter(e=>e.alias==='safety')[0].gradient}"
-                          :col5="{name:i.department_statistics ? (i.department_statistics.filter(e=>e.alias==='dipatch_orientation')[0].percentage * 100).toFixed() : '--' ,type:'progress',color_rank:i.department_statistics.filter(e=>e.alias==='dipatch_orientation')[0].gradient}"
-                          :col6="{name:i.department_statistics ? (i.department_statistics.filter(e=>e.alias==='fleet')[0].percentage * 100).toFixed() : '--' ,type:'progress',color_rank:i.department_statistics.filter(e=>e.alias==='fleet')[0].gradient}"
+                          :col3="{name:i.department_statistics ? (i.department_statistics.filter(e=>e.alias==='hr')[0].percentage * 100).toFixed() : '--' ,type:'progress',
+                                  size:(i.department_statistics.filter(e=>e.alias==='hr')[0].percentage * 100).toFixed()>85?'full'
+                                  :(i.department_statistics.filter(e=>e.alias==='hr')[0].percentage * 100).toFixed()>25?'half':'null'}"
+                          :col4="{name:i.department_statistics ? (i.department_statistics.filter(e=>e.alias==='safety')[0].percentage * 100).toFixed() : '--' ,type:'progress',
+                                  size:(i.department_statistics.filter(e=>e.alias==='safety')[0].percentage * 100).toFixed()>85?'full'
+                                  :(i.department_statistics.filter(e=>e.alias==='safety')[0].percentage * 100).toFixed()>25?'half':'null'}"
+                          :col5="{name:i.department_statistics ? (i.department_statistics.filter(e=>e.alias==='dipatch_orientation')[0].percentage * 100).toFixed() : '--' ,type:'progress',
+                                  size:(i.department_statistics.filter(e=>e.alias==='dipatch_orientation')[0].percentage * 100).toFixed()>85?'full'
+                                  :(i.department_statistics.filter(e=>e.alias==='dipatch_orientation')[0].percentage * 100).toFixed()>25?'half':'null'}"
+                          :col6="{name:i.department_statistics ? (i.department_statistics.filter(e=>e.alias==='fleet')[0].percentage * 100).toFixed() : '--' ,type:'progress',
+                                  size:(i.department_statistics.filter(e=>e.alias==='fleet')[0].percentage * 100).toFixed()>85?'full'
+                                  :(i.department_statistics.filter(e=>e.alias==='fleet')[0].percentage * 100).toFixed()>25?'half':'null'}"
                           :col7="{name:i.col7,type:'def'}"
                           :col8="{name:i.col8,type:'def'}"
                           :col9="{name:i.status.name ? i.status.name : '--',type:'status',size:'full'}"
