@@ -97,10 +97,12 @@ export default {
     const modal_delete_role = ref(null);
 
     async function addUser(){
-      modal_edit.value.role_id = roles.value.id;
-      modal_edit.value.company_id = company.value.id;
       if(new_user.value && !modal_edit.value)await createUser(modal_add.value);
-      if(!new_user.value && modal_edit.value)await updateUserById({id:modal_edit.value.id, data: modal_edit.value});
+      if(!new_user.value && modal_edit.value) {
+        modal_edit.value.role_id = roles.value.id;
+        modal_edit.value.company_id = company.value.id;
+        await updateUserById({id: modal_edit.value.id, data: modal_edit.value});
+      }
       await getAllUserList();
       new_user.value = false;
       modal_edit.value = null;
