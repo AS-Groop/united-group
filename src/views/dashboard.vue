@@ -11,7 +11,6 @@ import toast from "@/use/toast";
 export default {
   components: {DashboardMainPage, HeaderDefault},
   mounted() {
-    toast('100','success')
   }
 }
 </script>

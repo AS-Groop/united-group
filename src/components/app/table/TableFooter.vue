@@ -9,7 +9,7 @@
       />
       <p class="mx-1 table_select">
       </p>
-      recorde</div>
+      records</div>
     <v-pagination
         :pages='pages'
         v-model:page='page' @update:page="(val)=>{$emit('update:page',val)}" />

@@ -14,7 +14,7 @@
           <v-textarea v-model="data.description" class-name="form__control-md mb-4"  label="Description Name" place="Enter Description"/>
         </div>
       </div>
-
+      <div class="text-h4 mb-4">Permissions</div>
       <div class="row" v-if="all_role_modules_list?.modules">
         <div class="col-4 role__items">
           <div class="role__item head">Name</div>
