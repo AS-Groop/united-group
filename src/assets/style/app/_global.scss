@@ -149,8 +149,9 @@ body{
       text-overflow: ellipsis;
       span{
         display: flex;
+        align-items: center;
       }
-      svg{
+      .arrow{
         transition: all 0.3s ease;
         &.active{
           transform: rotate(-90deg);
@@ -158,7 +159,7 @@ body{
       }
       &:hover{
         background: $gray7;
-        svg{
+        .arrow{
           transform: rotate(-90deg);
         }
       }

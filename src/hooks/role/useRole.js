@@ -35,7 +35,6 @@ export async function getAllRoleModulesList(obj) {
          })
        }
      })
-    console.log(all_role_modules_list.value);
     //  .get(`/v1/role/${location.query ? location.query + '&' : '?'}limit=${obj?.limit ? obj.limit : 10}&page=${obj?.page ? obj.page : 1}${obj?.search ? '&search='+obj.search : ''}`)).data;
   } catch (e) {
     console.log(e)

@@ -20,27 +20,27 @@
           <div class="role__item head">Name</div>
           <div class="role__item" @mousemove="select_2 = item.groups, select_3 =null" v-for="item in all_role_modules_list.modules">
             <span>
-              <v-checked  :id="item.id" v-model:check="item.check" @update:check="$emit('update:check',item.check)"/>
+<!--              <v-checked  :id="item.id" v-model:check="item.check" @update:check="$emit('update:check',item.check)"/>-->
             {{ item.name }}
             </span>
-            <v-svg v-if="item.groups?.length" id="select-arrow"  width="24" height="24"/>
+            <v-svg class-name="arrow" v-if="item.groups?.length" id="select-arrow"  width="24" height="24"/>
           </div>
         </div>
         <div v-if="select_2?.length" class="col-4 role__items">
           <div class="role__item head">Groups</div>
           <div class="role__item" @mousemove="select_3 = item.permissions" v-for="item in select_2">
             <span>
-              <v-checked  :id="item.id" v-model:check="item.check" @update:check="$emit('update:check',item.check)"/>
+<!--              <v-my-checked class-name="me-1"  :id="item.id" :minus="false" :check="data.permissions.some(e=>e === item.id)"/>-->
             {{ item.name }}
             </span>
-            <v-svg v-if="item.permissions?.length" id="select-arrow"  width="24" height="24"/>
+            <v-svg class-name="arrow" v-if="item.permissions?.length" id="select-arrow"  width="24" height="24"/>
           </div>
         </div>
         <div v-if="select_3?.length" class="col-4 role__items">
           <div class="role__item head">Permission</div>
           <div class="role__item" v-for="item in select_3">
             <span>
-              <v-checked  :id="item.id" v-model:check="item.check" @update:check="checkPermission(item)"/>
+              <v-my-checked class-name="me-1"  :id="item.id" :check="data.permissions.some(e=>e === item.id)" @clickCheck="checkPermission(item)"/>
             {{ item.name }}
             </span>
           </div>
@@ -76,8 +76,11 @@ import {
   updateRoleById
 } from "@/hooks/role/useRole";
 import {useRoute} from "vue-router";
+import VMyChecked from "@/components/ui/vMyChecked";
+import router from "@/router";
 export default {
   components: {
+    VMyChecked,
     VTextarea,
     VBtn, VChecked,
     VInput,
@@ -98,22 +101,35 @@ export default {
         data.value.alias = role_by_id.value.alias
         data.value.name = role_by_id.value.name
         data.value.description = role_by_id.value.description
+        role_by_id.value?.permissions ? role_by_id.value?.permissions.forEach(e=>data.value.permissions.push(e.id)) : []
       }
     })
 
-    function checkPermission(val){
-      data.value.permissions.filter(e=>e!==val.id)
-      if(val.check){
-        data.value.permissions.push(val.id)
-      }
+    function test(){
+      return select_3.value.forEach(e => {
+        return data.value.permissions.forEach(i => {
+          if (i === e.id) {
+            console.log(i, e)
+            return i
+          }
+        })
+      })
     }
 
-    function save(){
+    function checkPermission(val){
+      data.value.permissions.some(e=>e === val.id)
+       ? data.value.permissions = data.value.permissions.filter(e=>e!==val.id)
+       : data.value.permissions.push(val.id)
+      console.log(test()  );
+    }
+
+    async function save(){
       if(router_id){
-        updateRoleById({id:role_by_id.value.id,data:data.value})
+        await updateRoleById({id:role_by_id.value.id,data:data.value})
       }else{
-        createRole(data.value)
+        await createRole(data.value)
       }
+      router.back()
     }
 
     return{all_role_modules_list, save, checkPermission, data, select_2, select_3}
