@@ -157,7 +157,7 @@ body{
           transform: rotate(-90deg);
         }
       }
-      &:hover{
+      &:hover, &.active{
         background: $gray7;
         .arrow{
           transform: rotate(-90deg);

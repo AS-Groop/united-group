@@ -18,7 +18,9 @@
       <div class="row" v-if="all_role_modules_list?.modules">
         <div class="col-4 role__items">
           <div class="role__item head">Name</div>
-          <div class="role__item" @mousemove="select_2 = item.groups, select_3 =null" v-for="item in all_role_modules_list.modules">
+          <div class="role__item"
+               :class="item?.groups?.length && select_2?.length && item?.groups[0]?.id === select_2[0]?.id ? 'active' : ''"
+               @mousemove="select_2 = item.groups, select_3 =null" v-for="item in all_role_modules_list.modules">
             <span>
 <!--              <v-checked  :id="item.id" v-model:check="item.check" @update:check="$emit('update:check',item.check)"/>-->
             {{ item.name }}
@@ -28,7 +30,7 @@
         </div>
         <div v-if="select_2?.length" class="col-4 role__items">
           <div class="role__item head">Groups</div>
-          <div class="role__item" @mousemove="select_3 = item.permissions" v-for="item in select_2">
+          <div class="role__item" :class="item?.permissions?.length && select_3?.length && item?.permissions[0]?.id === select_3[0]?.id ? 'active' : ''" @mousemove="select_3 = item.permissions" v-for="item in select_2">
             <span>
 <!--              <v-my-checked class-name="me-1"  :id="item.id" :minus="false" :check="data.permissions.some(e=>e === item.id)"/>-->
             {{ item.name }}
