@@ -30,7 +30,7 @@
       >
         <template v-slot:end>
           <td class="w-150">
-            <v-svg class="mx-1" id="download-table" width="32" height="26"/>
+            <v-svg class="mx-1"  @click="downloadZip(i.id,'truck')" id="download-table" width="32" height="26"/>
             <v-svg class="mx-1" @click="$router.push(`/reports/${i.id}/trucks`)" id="edit-table" width="32" height="26"/>
             <v-svg class="mx-1 me-15" @click="modal_delete = i.id" id="remove-table" width="32" height="26"/>
           </td>
@@ -38,6 +38,7 @@
       </TableBRow>
     </template>
   </v-table>
+  <v-table-none v-else></v-table-none>
   <teleport to="body">
     <ModalDelete v-if="modal_delete" @close="modal_delete = null" @delete="deleteTruck"/>
   </teleport>
@@ -53,9 +54,11 @@ import VSvg from "@/components/ui/vSvg";
 import {all_trucks_history_list, deleteTruckHistoryById, getAllTrucksHistoryList} from "@/hooks/truck/useTruckHistory";
 import {getAllTrailersHistoryList} from "@/hooks/trailer/useTrailerHistory";
 import ModalDelete from "@/components/app/modals/ModalDelete";
+import {downloadZip} from "@/hooks/app/downloadZip";
+import VTableNone from "@/components/app/table/vTableNone";
 
 export default {
-  components: {VSvg, TableBRow, TableHRow, VBtn, TableTool, VTable, ModalDelete},
+  components: {VSvg, TableBRow,VTableNone, TableHRow, VBtn, TableTool, VTable, ModalDelete},
   setup() {
     let data_head = [
       {name:'Truck Number'},
@@ -87,7 +90,7 @@ export default {
     }
 
 
-    return {data_head, data_body, all_trucks_history_list, page, deleteTruck, count, pages, modal_delete, fetchList, limit}
+    return {data_head, data_body, downloadZip, all_trucks_history_list, page, deleteTruck, count, pages, modal_delete, fetchList, limit}
 
   },
 

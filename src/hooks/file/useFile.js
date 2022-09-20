@@ -17,6 +17,29 @@ export async function uploadFile(file){
 		toast('400','error')
 	}
 }
+export async function returnsJobStatus(id){
+	return new Promise(((resolve, reject) => {
+		axios.get(`/v1/file/zip/a4423b00-6ffb-474c-bbae-ddf2d6fea821`).then(data=> {
+			resolve(data)
+		}).catch(err=>{
+			reject(err)
+			console.log(err)
+			toast('400','error')
+		})
+	}))
+}
+
+export async  function generatesZip(obj){
+	return new Promise(((resolve, reject) => {
+		axios.put(`/v1/file/zip`,obj).then(data=> {
+			resolve(data)
+		}).catch(err=>{
+			reject(err)
+			console.log(err)
+			toast('400','error')
+		})
+	}))
+}
 
 
 

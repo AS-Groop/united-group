@@ -29,7 +29,7 @@
       >
         <template v-slot:end>
           <td class="w-150">
-            <v-svg class="mx-1" id="download-table" width="32" height="26"/>
+            <v-svg class="mx-1"  @click="downloadZip(i.id,'trailer')" id="download-table" width="32" height="26"/>
             <v-svg class="mx-1" @click="$router.push(`/reports/${i.id}/trailers`)" id="edit-table" width="32" height="26"/>
             <v-svg class="mx-1 me-15" @click="modal_delete = i.id" id="remove-table" width="32" height="26"/>
           </td>
@@ -57,6 +57,7 @@ import {
 } from "@/hooks/trailer/useTrailerHistory";
 import ModalDelete from "@/components/app/modals/ModalDelete";
 import VTableNone from "@/components/app/table/vTableNone";
+import {downloadZip} from "@/hooks/app/downloadZip";
 
 export default {
   components: {VSvg, TableBRow, TableHRow, VBtn, TableTool, VTable, VTableNone, ModalDelete},
@@ -90,7 +91,7 @@ export default {
     }
 
 
-    return {data_head, data_body, all_trailers_history_list, page, deleteTrailer, count, pages, modal_delete, fetchList, limit}
+    return {data_head, data_body, all_trailers_history_list, downloadZip, page, deleteTrailer, count, pages, modal_delete, fetchList, limit}
 
   },
 

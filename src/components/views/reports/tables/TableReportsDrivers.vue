@@ -29,7 +29,7 @@
       >
         <template v-slot:end>
           <td>
-            <v-svg class="mx-1" id="download-table" width="32" height="26"/>
+            <v-svg class="mx-1" @click="downloadZip(i.id,'driver')" id="download-table" width="32" height="26"/>
             <v-svg class="mx-1" @click="$router.push(`/reports/${i.id}/drivers`)" id="edit-table" width="32" height="26"/>
             <v-svg class="mx-1" @click="modal_delete = i.id" id="remove-table" width="32" height="26"/>
           </td>
@@ -37,6 +37,7 @@
       </TableBRow>
     </template>
   </v-table>
+  <v-table-none v-else></v-table-none>
   <teleport to="body">
     <ModalDelete v-if="modal_delete" @close="modal_delete = null" @delete="deleteDriver"/>
   </teleport>
@@ -51,9 +52,11 @@ import {computed, onMounted, ref} from "vue";
 import VSvg from "@/components/ui/vSvg";
 import {deleteDriverById, driver_list, getDriverList} from "@/hooks/driver/useDriver";
 import ModalDelete from "@/components/app/modals/ModalDelete";
+import {downloadZip} from "@/hooks/app/downloadZip";
+import VTableNone from "@/components/app/table/vTableNone";
 
 export default {
-  components: {VSvg, TableBRow, ModalDelete, TableHRow, VBtn, TableTool, VTable},
+  components: {VSvg, TableBRow, ModalDelete, VTableNone, TableHRow, VBtn, TableTool, VTable},
   setup() {
     let data_head = null;
     let modal_delete = ref(null);
@@ -81,8 +84,10 @@ export default {
       await fetchList();
       modal_delete.value = null;
     }
+
+
     onMounted(()=>fetchList())
-    return {data_head, limit, modal_delete, count, driver_list, page, deleteDriver, pages, fetchList,}
+    return {data_head, limit, modal_delete, count, driver_list, page, downloadZip, deleteDriver, pages, fetchList,}
 
   }
 
