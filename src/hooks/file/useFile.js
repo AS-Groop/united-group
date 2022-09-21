@@ -19,7 +19,7 @@ export async function uploadFile(file){
 }
 export async function returnsJobStatus(id){
 	return new Promise(((resolve, reject) => {
-		axios.get(`/v1/file/zip/a4423b00-6ffb-474c-bbae-ddf2d6fea821`).then(data=> {
+		axios.get(`/v1/file/zip/${id}`).then(data=> {
 			resolve(data)
 		}).catch(err=>{
 			reject(err)
