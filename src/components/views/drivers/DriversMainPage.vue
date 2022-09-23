@@ -41,7 +41,7 @@
                                   :(i.department_statistics.filter(e=>e.alias==='fleet')[0].percentage * 100).toFixed()>25?'half':'null'}"
                           :col7="{name:i.col7,type:'def'}"
                           :col8="{name:i.col8,type:'def'}"
-                          :col9="{name:i.status.name ? i.status.name : '--',type:'status',size:'full'}"
+                          :col9="{name:i.status.name ? i.status.name : '--',type:'status',size:i.status?.alias==='#processing' ? 'half' : i.status?.alias==='#active' ? 'full' : 'null'}"
         />
       </template>
     </vTable>
