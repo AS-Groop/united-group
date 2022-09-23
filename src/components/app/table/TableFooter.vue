@@ -13,7 +13,7 @@
     <v-pagination
         :pages='pages'
         v-model:page='page' @update:page="(val)=>{$emit('update:page',val)}" />
-    <div class="text-h6">{{ count || 0 }} recordes</div>
+    <div class="text-h6">{{ count || 0 }} records</div>
   </div>
 </template>
 <script>
