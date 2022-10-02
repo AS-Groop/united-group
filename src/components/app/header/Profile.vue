@@ -58,7 +58,7 @@ export default {
     function profile(){
       update_profile.value.first_name = user_profile.value?.first_name || "";
       update_profile.value.last_name = user_profile.value?.last_name || "";
-      update_profile.value.username = user_profile.value?.username || "";\
+      update_profile.value.username = user_profile.value?.username || "";
     }
 
     function updateProfile(){
