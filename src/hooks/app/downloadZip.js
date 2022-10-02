@@ -8,6 +8,8 @@ const fileDownload = (value) => getFileById(value).then((response) => {
     link.setAttribute('download', 'file.zip'); //or any other extension
     document.body.appendChild(link);
     link.click();
+    link.remove();
+    console.log(response)
 })
 
 const jobStatus = (id)=>{

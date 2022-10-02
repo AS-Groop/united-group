@@ -5,6 +5,7 @@ import toast from "@/use/toast";
 export const all_users_list = ref(null);
 export const user_by_id = ref(null);
 export const user_profile = ref(null);
+export const user_permissions = ref(null);
 
 
 
@@ -48,11 +49,22 @@ export async function updateUserById(obj) {
   }
 }
 
-
-
-export async function getUserProfile(id) {
+export async function updateUserStatus(obj) {
   try {
-    user_profile.value = (await axios.get(`/v1/user/profile/${id}`)).data;
+    user_by_id.value  = (await axios.patch(`/v1/user/${obj.id}`,obj.data)).data;
+    toast('100', 'success')
+  } catch (e) {
+    toast('400','error')
+    console.log(e)
+  }
+}
+
+
+
+export async function getUserProfile() {
+  try {
+    user_profile.value = (await axios.get(`/v1/user/profile`)).data;
+    user_permissions.value = user_profile.value?.role?.permissions || null;
   } catch (e) {
     console.log(e)
   }
@@ -61,7 +73,8 @@ export async function getUserProfile(id) {
 
 export async function updateUserProfile(obj) {
   try {
-    user_profile.value = (await axios.get(`/v1/user/profile/${obj.id}`,obj.data)).data;
+    user_profile.value = (await axios.put(`/v1/user/profile`,obj)).data;
+    user_permissions.value = user_profile.value?.role?.permissions || null;
     toast('100','success')
   } catch (e) {
     toast('400','error')

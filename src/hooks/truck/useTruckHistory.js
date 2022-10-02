@@ -14,7 +14,7 @@ export async function getAllTrucksHistoryList(obj) {
   try {
     all_trucks_history_list.value = (await axios
         .get(`/v1/truck/inspection-history${location.query ? location.query + '&' : '?'}limit=${obj?.limit ? obj.limit : 10}&page=${obj?.page ? obj.page : 1}${obj?.search ? '&search=' + obj.search : ''}${obj?.status_id ? '&status_id=' + obj.status_id : ''}`)).data;
-    all_trucks_history_list.value.trucks.map(e=>{e.checked = false; return e})
+    all_trucks_history_list.value?.trucks?.map(e=>{e.checked = false; return e})
   } catch (e) {
     console.log(e)
   }

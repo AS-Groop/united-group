@@ -9,9 +9,9 @@
         class="bb-0"
     />
 
-    <TableReportsDrivers tabs="tabs" v-if="index === 0" />
-    <TableReportsTrucks tabs="tabs" v-if="index === 1" />
-    <TableTrailer tabs="tabs" v-if="index === 2" />
+    <TableReportsDrivers  v-if="index === 0" />
+    <TableReportsTrucks  v-if="index === 1" />
+    <TableTrailer v-if="index === 2" />
   </div>
 </template>
 

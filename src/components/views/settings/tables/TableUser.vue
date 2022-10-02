@@ -16,11 +16,10 @@
       </TableTool>
     </template>
     <template v-slot:head-row>
-      <TableHRow icon="true" :data="data_head"/>
+      <TableHRow :data="data_head"/>
     </template>
     <template v-if="all_users_list?.users" v-slot:body-row>
       <TableBRow v-for="(i,index) in all_users_list.users"
-                 icon="true"
                  :id="index" cursor="pointer"
                  :col2="{name:i.phone || '--',type:'def'}"
                  :col3="{name:i.role?.name || '--',type:'def'}"
@@ -28,7 +27,7 @@
         <template v-slot:start>
           <td>
             <div class="table__user">
-              <div class="img me-15">
+              <div class="img mx-15">
                 <img src="@/assets/images/person-icon.png" alt="">
               </div>
               <div>
@@ -41,7 +40,7 @@
         <template v-slot:end>
           <td>
             <div>
-              <v-toggle :id="i.id"/>
+              <v-toggle :id="i.id" @check="val=>check(i.id,val)" :check="i.status === 'active'"/>
             </div>
           </td>
           <td class="w-150 text-end">
@@ -63,7 +62,7 @@ import TableBRow from "@/components/app/table/TableBRow";
 // import {ref} from "vue";
 import VSvg from "@/components/ui/vSvg";
 import vToggle from "@/components/ui/vToggle";
-import {all_users_list, getAllUserList} from "@/hooks/user/useUser";
+import {all_users_list, getAllUserList, updateUserById, updateUserStatus} from "@/hooks/user/useUser";
 import {computed, ref} from "vue";
 
 export default {
@@ -86,7 +85,11 @@ export default {
       if(obj?.type==='limit') page.value = 1
       getAllUserList({limit:limit.value,page:page.value})
     }
-    return {data_head, data_body, fetchList, page, limit, all_users_list, count, pages}
+    async function check(id,val){
+      await updateUserStatus({id: id, data: {status: val ? "active" : "inactive" }});
+      await getAllUserList();
+    }
+    return {data_head, data_body, fetchList, page, limit, check, all_users_list, count, pages}
 
   }
 
