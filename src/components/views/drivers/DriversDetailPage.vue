@@ -1,5 +1,6 @@
 <template>
-  <div class="section__page drivers">
+  <v-loading v-if="load"/>
+  <div v-else class="section__page drivers">
     <DetailNav>
       <DeatilNavBack v-if="driver_by_id" :title="driver_by_id.first_name + ' ' +driver_by_id.last_name" path="/drivers"/>
       <span class="detail__nav-item text-h6">
@@ -17,6 +18,7 @@
     />
     <template v-if="tab && !!steps_list">
       <DriversTabItems @openModal="(val)=>modal_data=val"
+                       @updateList="fetchList"
                        :items="tab === 'dipatch_orientation'
                       ? steps_list['dipatch_orientation'].steps
                       : tab === 'hr'
@@ -43,23 +45,31 @@ import VSvg from "@/components/ui/vSvg";
 import {driver_by_id, getDriverById, tabs_content} from "@/hooks/driver/useDriver";
 import {steps} from "@/hooks/driver/useStep";
 import router from "@/router";
+import VLoading from "@/components/ui/vLoading";
 export default {
   components: {
+    VLoading,
     VSvg,
     DriversTabMenu,ModalDrivers,
     DeatilNavBack,DriversTabItems, TableTool, DetailNav},
   setup(){
     const tab = ref(null);
+    const load = ref(false);
     const modal_data = ref(null);
     const modal = ref(false);
     const steps_list =computed(()=>steps.value)
     // !!steps.value || steps.value.length > 0 ? console.log(Object.entries(steps.value)[0][0]) :''
     // steps ? tab.value = Object.entries(steps.value) : ''
 
+    async function fetchList(){
+      load.value = true;
+      await getDriverById(router.currentRoute.value.params.id)
+      load.value = false;
+    }
     onMounted(() => {
-      getDriverById(router.currentRoute.value.params.id)
+      fetchList()
     });
-    return {tabs_content, tab, modal, modal_data, driver_by_id, steps_list};
+    return {tabs_content, tab, modal, modal_data, driver_by_id, steps_list, load, fetchList};
   }
 }
 </script>

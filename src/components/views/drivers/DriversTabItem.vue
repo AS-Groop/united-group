@@ -23,7 +23,7 @@ import VMyChecked from "@/components/ui/vMyChecked";
 export default {
   components: {VMyChecked, VChecked},
   props:['name','id','items'],
-  setup(props){
+  setup(props, ctx){
     const items_list =computed(()=>props.items)
     async function check(status_id, step_id){
       let obj = {
@@ -33,7 +33,8 @@ export default {
       }
       console.log(obj.status_id + '<=='+status_id)
       await updateStepStatus(obj)
-      await getDriverById(router.currentRoute.value.params.id)
+      ctx.emit('updateList')
+      // await getDriverById(router.currentRoute.value.params.id)
       // await getDriverById(router.currentRoute.value.params.id)
     }
 

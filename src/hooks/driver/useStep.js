@@ -11,7 +11,7 @@ export async function getSteps(id,items){
               if(e.status.alias === 'completed')e.steps.map(i => i.checked = true)
               else e.steps.map(i => i.checked = false)
           });
-          console.log(steps.value[e.alias].steps)
+          // console.log(steps.value[e.alias].steps)
       })
 
   });

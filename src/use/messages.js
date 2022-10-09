@@ -3,5 +3,6 @@ export default {
     '101':"Your profile has been successfully modified",
     '215':"Number of images exceeded",
     '400':"Something went wrong",
-    'warning': "Warning"
+    'warning': "Warning",
+    'not_inspect':'Not selected truck or trailer'
 }

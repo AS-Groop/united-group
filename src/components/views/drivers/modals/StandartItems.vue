@@ -18,8 +18,9 @@
 
       <!--      For Inspect Button-->
       <template v-if="field.type === 'text' && (field.alias === '#truck-inspection-inspect' || field.alias === '#trailer-inspection-inspect')">
-        <v-btn v-if="modelVal['text'+index]=== 'Inspected'" type="disabled">Inspected</v-btn>
-        <v-btn v-else @click="changeInput('Inspected',field,step_id,true)">Inspected</v-btn>
+        <v-btn v-if="modelVal['text'+index]=== 'Inspected'" @click="inspected(field.alias)">Inspected</v-btn>
+<!--        <v-btn v-else @click="changeInput('Inspected',field,step_id,true)">Inspected</v-btn>-->
+        <v-btn v-else @click="inspected(field.alias)">Not Inspected</v-btn>
 <!--        <v-input v-if="field.type === 'text'" v-model="modelVal['text'+index] " @onChange="changeInput(modelVal['text'+index],field,step_id,true)" class-name="mb-15" :place="field.hint"/>-->
       </template>
 
@@ -60,20 +61,46 @@ import router from "@/router";
 import {useRoute, useRouter} from "vue-router";
 import ModalSelect from "@/components/views/drivers/modals/ModalSelect";
 import {changeInput, changeRadio} from "@/hooks/app/department";
+import toast from "@/use/toast";
 export default {
   props:['title','fields','step_id','loading'],
   components: {RadioSelect, VInputModal,VInput, ModalSelect, VSelect, DownloadFiles},
   setup(props,ctx){
-    let select = ref({})
+    let select = ref({});
     let valIn = ref('');
-    let modelVal=ref({})
+    let modelVal = ref({});
+    let insTruckId = ref(null)
     props.fields?.forEach((e,i)=>{
       if(e.type === 'text' && e.values){
         modelVal.value['text'+i] = e.values[0].value
+        if((e.values[0].value === 'Inspected'
+            || e.values[0].value === 'Not Inspected'
+            || e.values[1].value === 'Inspected'
+            || e.values[1].value === 'Not Inspected')
+            && !!e.values[1].value){
+          if(e.values[1].value === 'Inspected' || e.values[1].value === 'Not Inspected') {
+            insTruckId.value = e.values[0].value
+            modelVal.value['text'+i] = e.values[1].value
+          } else {
+            insTruckId.value = e.values[1].value;
+            modelVal.value['text' + i] = e.values[0].value;
+          }
+        }
       }
     })
     function changeRadioLoc(val, field) {
       ctx.emit('update:fields',changeRadio(val,field,props.step_id, props.fields, 'simple'))
+    }
+    function inspected(val){
+      if(insTruckId.value) {
+        if (val === '#trailer-inspection-inspect'){
+          router.push(`/trailers/${insTruckId.value}`)
+        } else if (val === '#truck-inspection-inspect'){
+          router.push(`/trucks/${insTruckId.value}`)
+        }
+      }else {
+        toast('not_inspect','info')
+      }
     }
     return {
       changeRadioLoc,
@@ -82,7 +109,7 @@ export default {
       select,
       changeRadio,
       changeInput,
-      valIn
+      valIn, inspected
     }
   }
 }
