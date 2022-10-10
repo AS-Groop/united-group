@@ -3,7 +3,7 @@
   <div v-else class="section__page">
     <FilterBar v-model="searchList">
 <!--      <v-btn type="outline" svg="filter" @click="new_driver = false, old_driver = true">Filter</v-btn>-->
-      <v-btn svg="plus" @click="new_driver = true, old_driver = false">Add driver</v-btn>
+      <v-btn svg="plus" @click="new_driver = true, old_driver = false" v-if="user_permissions?.some(e=>e.alias==='create_driver')">Add driver</v-btn>
     </FilterBar>
     <vTable :count="count"
             :pages="pages"
@@ -75,6 +75,7 @@ import VInput from "@/components/ui/vInput";
 import useVuelidate from '@vuelidate/core'
 import { required, email } from '@vuelidate/validators'
 import VLoading from "@/components/ui/vLoading";
+import {user_permissions} from "@/hooks/user/useUser";
 
 export default {
   components: {VInput, VLoading, ModalAdded, TableBRowDrivers, TableHRowDrivers, TableTool, vTable, VBtn, FilterBar},
@@ -166,8 +167,8 @@ export default {
 
     const v$ = useVuelidate(rules, driver);
 
-
-    return {limit, count, searchList, editDriver, location, checked, fetchList, new_driver, old_driver, driver_list, v$, driver, addNewDriver, page, pages, loading, data_head};
+    return {limit, count, searchList, editDriver, location, checked, fetchList, new_driver, user_permissions,
+      old_driver, driver_list, v$, driver, addNewDriver, page, pages, loading, data_head};
   }
 }
 </script>

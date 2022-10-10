@@ -5,7 +5,7 @@ import toast from "@/use/toast";
 export const all_users_list = ref(null);
 export const user_by_id = ref(null);
 export const user_profile = ref(null);
-export const user_permissions = ref(null);
+export const user_permissions = ref([]);
 
 
 

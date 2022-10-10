@@ -9,17 +9,18 @@ import vToggle from './vToggle'
 import vLoading from './vLoading'
 import vTextarea from './vTextarea'
 import vMyChecked from './vMyChecked'
+import vNotPermissions from './vNotPermissions'
 // import SvgIcon from "@/components/ui/SvgIcon";
 
 export default [
   vBtn, vTextarea,
   HeaderDefault,
-  vSearch,
+  vSearch, vNotPermissions,
   vChecked,
   vSvg,vMyChecked,
   vRadioInput,
   vSelect,
   vToggle,
-  vLoading
+  vLoading,
   // SvgIcon
 ];

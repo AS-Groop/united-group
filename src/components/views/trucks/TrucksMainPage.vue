@@ -3,7 +3,7 @@
   <div v-else class="section__page">
     <FilterBar  v-model="searchList">
       <!--      <v-btn type="outline" svg="filter">Filter</v-btn>-->
-      <v-btn svg="plus" @click="new_truck = true, old_truck = false">Add Truck</v-btn>
+      <v-btn svg="plus" @click="new_truck = true, old_truck = false" v-if="user_permissions?.some(e=>e.alias==='get_all_truck')">Add Truck</v-btn>
     </FilterBar>
     <vTable v-if="trucks_list && trucks_list.trucks"
             :count="count" :pages="pages"
@@ -67,6 +67,7 @@ import {computed, onMounted, ref, watch} from "vue";
 import {all_trucks_list, createTruck, getAllTrucksList, updateTruckById} from "@/hooks/truck/useTruck";
 import useVuelidate from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
+import {user_permissions} from "@/hooks/user/useUser";
 
 export default {
   components: {VInput, vLoading, ModalAdded, TableBRowDrivers, TableHRowDrivers, TableTool, vTable, VBtn, FilterBar},
@@ -169,7 +170,7 @@ export default {
       trucks_list,
       loading,
       page,
-      v$,
+      v$, user_permissions,
       count,
       limit,
       pages

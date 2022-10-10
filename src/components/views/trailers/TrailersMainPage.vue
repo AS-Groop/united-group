@@ -3,7 +3,7 @@
   <div v-else class="section__page">
     <FilterBar v-model="searchList">
 <!--      <v-btn type="outline" svg="filter">Filter</v-btn>-->
-      <v-btn svg="plus" @click="trailer_modal = true, old_trailer = false">Add Trailer</v-btn>
+      <v-btn svg="plus" @click="trailer_modal = true, old_trailer = false" v-if="user_permissions?.some(e=>e.alias==='create_trailer')">Add Trailer</v-btn>
     </FilterBar>
     <vTable v-if="trailer_list && trailer_list.trailers"
             :count="count" :pages="pages"
@@ -67,6 +67,7 @@ import {all_trailers_list, createTrailer, getAllTrailersList, updateTrailerById}
 import VLoading from "@/components/ui/vLoading";
 import useVuelidate from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
+import {user_permissions} from "@/hooks/user/useUser";
 
 export default {
   components: {VLoading, VInput, ModalAdded, TableBRow, TableHRow, TableTool, vTable, VBtn, FilterBar},
@@ -160,7 +161,7 @@ export default {
 
 
 
-    return{ page, limit, count, searchList, checked, pages, v$, editTrailer, old_trailer, fetchList, loading, trailer_modal, trailer_list, addNewTrailer, new_trailer }
+    return{ page, limit, count, searchList, checked, pages, v$, user_permissions, editTrailer, old_trailer, fetchList, loading, trailer_modal, trailer_list, addNewTrailer, new_trailer }
   }
 
 }

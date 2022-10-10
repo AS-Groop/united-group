@@ -1,8 +1,8 @@
 <template>
   <div class="section__page">
-    <FilterBar>
-      <v-btn svg="plus" @click="new_user = true, modal_edit = null" v-if="index === 0" >Add user</v-btn>
-      <v-btn svg="plus" v-if="index === 1" @click="$router.push('/role')" >Add role</v-btn>
+    <FilterBar :not-search="true">
+      <v-btn svg="plus" @click="new_user = true, modal_edit = null" v-if="user_permissions?.some(e=>e.alias==='create_user') && index === 0" >Add user</v-btn>
+      <v-btn svg="plus" v-if="user_permissions?.some(e=>e.alias==='create_role') && index === 1" @click="$router.push('/role')" >Add role</v-btn>
     </FilterBar>
     <DriversTabMenu
         :index="index"
@@ -12,8 +12,12 @@
     />
 
     <TableUser @editUser="(item)=>{modal_edit = item; roles = item.role; company = item.company?.id ? item.company : null;}"
-               @delete="(id)=>modal_delete = id" tabs="tabs" v-if="index === 0" />
-    <TableRoles @editRole="id=>$router.push(`/role/${id}`)" @delete="(id)=>modal_delete_role = id" tabs="tabs" v-if="index === 1" />
+               @delete="(id)=>modal_delete = id" tabs="tabs"
+               v-if="(user_permissions?.some(e=>e.alias==='get_all_user') || user_profile?.username==='admin') && index === 0" />
+    <v-not-permissions v-else-if="index === 0"/>
+    <TableRoles @editRole="id=>$router.push(`/role/${id}`)" @delete="(id)=>modal_delete_role = id" tabs="tabs"
+                v-if="(user_permissions?.some(e=>e.alias==='get_all_role') || user_profile?.username==='admin') && index === 1" />
+    <v-not-permissions v-else-if="index === 1"/>
   </div>
 
   <ModalAdded v-if="(!new_user && modal_edit) || (new_user && !modal_edit)"
@@ -58,13 +62,21 @@ import VSelect from "@/components/ui/vSelect";
 import ModalDelete from "@/components/app/modals/ModalDelete";
 import ModalSuccess from "@/components/app/modals/ModalSuccess";
 import VSvg from "@/components/ui/vSvg";
-import {all_users_list, createUser, deleteUserById, getAllUserList, updateUserById} from "@/hooks/user/useUser";
+import {
+  all_users_list,
+  createUser,
+  deleteUserById,
+  getAllUserList,
+  updateUserById,
+  user_permissions, user_profile
+} from "@/hooks/user/useUser";
 import {all_roles_list, deleteRoleById, getAllRoleList} from "@/hooks/role/useRole";
-import {all_companys_list, getAllCompanyList} from "@/hooks/company/useCompany";
 import {form_list_entities, getFormListEntities} from "@/hooks/form/useForm";
+import VNotPermissions from "@/components/ui/vNotPermissions";
 
 export default {
   components: {
+    VNotPermissions,
     VSvg,
     ModalSuccess,
     ModalDelete,
@@ -135,7 +147,7 @@ export default {
     })
 
 
-    return { index, modal_delete_role, modal_add, new_user,all_users_list, deleteUser, roles, company, form_list_entities, all_roles_list, addUser, modal_delete, modal_edit }
+    return { index, modal_delete_role, modal_add, new_user,all_users_list, user_profile, user_permissions, deleteUser, roles, company, form_list_entities, all_roles_list, addUser, modal_delete, modal_edit }
   }
 
 }
