@@ -13,11 +13,11 @@ module.exports = defineConfig({
     }
   },
   devServer:{
-    // proxy: {
-    //   "^/v1": {
-    //     target: 'https://internal.lhbrokerage.com',
-    //     changeOrigin: true,
-    //   }
-    // }
+    proxy: {
+      "^/v1": {
+        target: 'https://resonant-fudge-28d027.netlify.app',
+        changeOrigin: true,
+      }
+    }
   }
 })
