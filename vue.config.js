@@ -15,7 +15,7 @@ module.exports = defineConfig({
   devServer:{
     proxy: {
       "^/v1": {
-        target: 'https://resonant-fudge-28d027.netlify.app',
+        target: 'https://internal.lhbrokerage.com',
         changeOrigin: true,
       }
     }
