@@ -173,7 +173,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory('https://internal.lhbrokerage.com'),
+  history: createWebHistory(),
   routes
 })
 
