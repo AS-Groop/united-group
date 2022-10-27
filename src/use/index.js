@@ -25,10 +25,6 @@ app.use(i18n)
 
 
 
-/// Router
-app.use(router)
-
-
 /// Axios
 import axios from 'axios';
 import VueAxios from 'vue-axios';
@@ -73,5 +69,7 @@ axios.interceptors.response.use(config => {
 app.use(VueAxios, axios);
 
 
+/// Router
+app.use(router)
 
 export {app}
