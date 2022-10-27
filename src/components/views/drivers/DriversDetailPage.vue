@@ -10,10 +10,10 @@
         <v-svg id="massage" width="18" height="18" />{{ driver_by_id ? driver_by_id.email : '' }}
       </span>
       <span class="detail__nav-item text-h6">
-        <v-svg id="truck" width="18" height="18" />{{ driver_by_id?.assigned_truck?.number || '#NoTruck' }}
+        <v-svg id="truck" width="18" height="18" />{{ driver_by_id?.assigned_truck?.number || '#' }}
       </span>
       <span class="detail__nav-item text-h6">
-        <v-svg id="trailer" width="18" height="18" />{{ driver_by_id?.assigned_trailer?.number || '#NoTrailer' }}
+        <v-svg id="trailer" width="18" height="18" />{{ driver_by_id?.assigned_trailer?.number || '#' }}
       </span>
     </DetailNav>
     <DriversTabMenu
@@ -22,19 +22,12 @@
         :tabs_content="tabs_content"
         @clicks="e=>tab=e"
     />
-    <template v-if="tab && !!steps_list">
+    <template v-if="tab && !!steps_list && tab!=='road_test'">
       <DriversTabItems @openModal="(val)=>modal_data=val"
                        @updateList="fetchList"
-                       :items="tab === 'dipatch_orientation'
-                      ? steps_list['dipatch_orientation'].steps
-                      : tab === 'hr'
-                      ? steps_list['hr'].steps
-                      : tab === 'safety'
-                      ? steps_list['safety'].steps
-                      : tab === 'fleet'
-                      ? steps_list['fleet'].steps
-                      : ''" />
-
+                       :items="steps_list[tab]"
+                       :tab="tab"
+                      />
       <div v-if="tabs_content.find(i=>i.alias===tab)?.finished_at" class="drivers__detail-item justify-end">
         {{tabs_content.find(i=>i.alias===tab)?.finished_at}}
       </div>
@@ -53,7 +46,7 @@ import TableTool from "@/components/app/table/TableTool";
 import {computed, onMounted, ref} from "vue";
 import VSvg from "@/components/ui/vSvg";
 import {driver_by_id, getDriverById, tabs_content} from "@/hooks/driver/useDriver";
-import {steps} from "@/hooks/driver/useStep";
+import {my_steps, steps} from "@/hooks/driver/useStep";
 import router from "@/router";
 import VLoading from "@/components/ui/vLoading";
 export default {
@@ -67,7 +60,7 @@ export default {
     const load = ref(false);
     const modal_data = ref(null);
     const modal = ref(false);
-    const steps_list =computed(()=>steps.value)
+    const steps_list =computed(()=>my_steps.value)
     // !!steps.value || steps.value.length > 0 ? console.log(Object.entries(steps.value)[0][0]) :''
     // steps ? tab.value = Object.entries(steps.value) : ''
 

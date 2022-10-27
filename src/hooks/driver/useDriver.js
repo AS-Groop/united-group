@@ -35,7 +35,7 @@ export async function getDriverById(obj) {
   try {
     driver_by_id.value = (await axios.get(`/v1/driver/${obj}`)).data;
     if(driver_by_id.value && driver_by_id.value.department_statistics) tabs_content.value = driver_by_id.value.department_statistics;
-    await getSteps(driver_by_id.value.id, driver_by_id.value.department_statistics)
+    // await getSteps(driver_by_id.value.id, driver_by_id.value.department_statistics)
   } catch (e) {
     console.log(e)
   }
