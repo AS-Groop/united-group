@@ -168,6 +168,23 @@
       min-height: 46px;
       text-align: left;
 
+      .name{
+        span:nth-child(1){
+          width: 100%;
+          display: inline-block;
+        }
+        span:nth-child(2) {
+          display: inline-block;
+          font-size: 8px;
+          line-height: 12px;
+          font-weight: 400;
+          padding: 0 8px;
+          border-radius: 5px;
+          color: white;
+        }
+
+      }
+
       &.center {
         justify-content: center;
       }

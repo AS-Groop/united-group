@@ -65,7 +65,6 @@ export default {
         step_id: props.modal_data
       }
       await getFormStepDriver(obj);
-      console.log(data.value)
       data.value.groups.forEach(e=>{
         e.fields.forEach(i=>{
           if(i.list_type && i.list_type.length){

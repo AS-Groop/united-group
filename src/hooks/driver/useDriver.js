@@ -12,7 +12,7 @@ export const tabs_content = ref(null);
 
 export async function getDriverList(obj) {
   try {
-    driver_list.value = (await axios.get(`/v1/driver/${location.query ? location.query + '&' : '?'}limit=${obj?.limit ? obj.limit : 10}&page=${obj?.page ? obj.page : 1}${obj?.search ? '&search=' + obj.search : ''}`)).data;
+    driver_list.value = (await axios.get(`/v1/driver/${location.query ? location.query + '&' : '?'}limit=${obj?.limit ? obj.limit : 10}&page=${obj?.page ? obj.page : 1}${obj?.search ? '&search=' + obj.search : ''}${obj?.company_id ? '&company_id=' + obj.company_id : ''}`)).data;
     driver_list.value.drivers.map(e=>{e.checked = false; return e})
   } catch (e) {
     console.log(e)

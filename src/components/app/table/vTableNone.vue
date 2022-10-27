@@ -13,7 +13,7 @@ import TableTool from "@/components/app/table/TableTool";
 import VBtn from "@/components/ui/vBtn";
 
 export default {
-  name: 'vTable',
+  name: 'vTableNone',
   components: {VBtn, TableTool, TableFooter, TableHRowDrivers, TableBRowDrivers},
   props:['tabs','page','pages', 'limit', 'count']
 };

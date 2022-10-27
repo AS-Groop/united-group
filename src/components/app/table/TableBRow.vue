@@ -9,7 +9,10 @@
         <span v-if="col1.type==='progress'" class="progress-span text-h8" :style="col1.color_rank ? `color: #fff;background: linear-gradient(90deg,${col1.color_rank.start_color},${col1.color_rank.end_color})` :''" :class="col1.size" >{{col1.name}}</span>
         <span v-if="col1.type==='status'" class="status-btn text-h8" :class="col1.size" >{{col1.name}}</span>
         <template v-if="col1.type==='def'">
-          {{col1.name}}
+          <div class="name">
+            <span class="text-h6">{{col1.name}}</span>
+            <span v-if="col1?.company?.name" :style="`background: ${col1?.company?.color}`">{{col1?.company?.name}}</span>
+          </div>
         </template>
       </div>
     </td>

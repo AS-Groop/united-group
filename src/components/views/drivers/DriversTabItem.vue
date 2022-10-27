@@ -22,7 +22,7 @@ import {computed} from "vue";
 import VMyChecked from "@/components/ui/vMyChecked";
 export default {
   components: {VMyChecked, VChecked},
-  props:['name','id','items'],
+  props:['name','id','items','finish'],
   setup(props, ctx){
     const items_list =computed(()=>props.items)
     async function check(status_id, step_id){

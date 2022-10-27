@@ -9,6 +9,12 @@
       <span class="detail__nav-item text-h6">
         <v-svg id="massage" width="18" height="18" />{{ driver_by_id ? driver_by_id.email : '' }}
       </span>
+      <span class="detail__nav-item text-h6">
+        <v-svg id="truck" width="18" height="18" />{{ driver_by_id?.assigned_truck?.number || '#NoTruck' }}
+      </span>
+      <span class="detail__nav-item text-h6">
+        <v-svg id="trailer" width="18" height="18" />{{ driver_by_id?.assigned_trailer?.number || '#NoTrailer' }}
+      </span>
     </DetailNav>
     <DriversTabMenu
         v-if="tabs_content"
@@ -28,6 +34,10 @@
                       : tab === 'fleet'
                       ? steps_list['fleet'].steps
                       : ''" />
+
+      <div v-if="tabs_content.find(i=>i.alias===tab)?.finished_at" class="drivers__detail-item justify-end">
+        {{tabs_content.find(i=>i.alias===tab)?.finished_at}}
+      </div>
     </template>
   </div>
   <ModalDrivers v-if="modal_data" :modal_data="modal_data" title="Recruited By" @close="modal_data = null"/>
