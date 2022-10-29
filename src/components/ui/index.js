@@ -10,13 +10,14 @@ import vLoading from './vLoading'
 import vTextarea from './vTextarea'
 import vMyChecked from './vMyChecked'
 import vNotPermissions from './vNotPermissions'
+import vCloseIcon from './vCloseIcon'
 // import SvgIcon from "@/components/ui/SvgIcon";
 
 export default [
   vBtn, vTextarea,
   HeaderDefault,
   vSearch, vNotPermissions,
-  vChecked,
+  vChecked, vCloseIcon,
   vSvg,vMyChecked,
   vRadioInput,
   vSelect,

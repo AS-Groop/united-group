@@ -184,7 +184,7 @@
     .control__input {
       width: 100%;
       border-radius: 14px;
-      padding: 7px 15px;
+      padding: 7px 7px 7px 15px;
       border: 1px solid $gray5;
       outline: none;
       color: $gray2;
@@ -482,8 +482,10 @@
     color: $gray2;
     cursor: pointer;
 
-    .text-h3{
+    .text-h3 {
       color: $gray2;
+      min-height: 24px;
+      line-height: 24px;
     }
 
     [type="radio"] {

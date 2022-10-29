@@ -32,6 +32,9 @@
         {{tabs_content.find(i=>i.alias===tab)?.finished_at}}
       </div>
     </template>
+    <template v-if="tab==='road_test'">
+      <DriverRoadTest/>
+    </template>
   </div>
   <ModalDrivers v-if="modal_data" :modal_data="modal_data" title="Recruited By" @close="modal_data = null"/>
 </template>
@@ -49,14 +52,15 @@ import {driver_by_id, getDriverById, tabs_content} from "@/hooks/driver/useDrive
 import {my_steps, steps} from "@/hooks/driver/useStep";
 import router from "@/router";
 import VLoading from "@/components/ui/vLoading";
+import DriverRoadTest from "@/components/views/drivers/DriverRoadTest";
 export default {
   components: {
     VLoading,
-    VSvg,
+    VSvg, DriverRoadTest,
     DriversTabMenu,ModalDrivers,
     DeatilNavBack,DriversTabItems, TableTool, DetailNav},
   setup(){
-    const tab = ref(null);
+    const tab = ref('road_test');
     const load = ref(false);
     const modal_data = ref(null);
     const modal = ref(false);
