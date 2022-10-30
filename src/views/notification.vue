@@ -6,9 +6,9 @@
         <DeatilNavBack title="Notification" path="/"/>
       </DetailNav>
       <div class="notification-item head">
-        <div class="text-h2-med">Road Test</div>
-        <div class="text-h2-med">Road Test</div>
-        <div class="text-h2-med">Road Test</div>
+        <div class="text-h2-med">Message</div>
+        <div class="text-h2-med">Department</div>
+        <div class="text-h2-med">Date</div>
       </div>
       <template v-if="notification_list?.notifications">
         <div v-for="i in notification_list.notifications" class="notification-item text-h2-med">
