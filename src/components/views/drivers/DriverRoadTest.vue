@@ -59,7 +59,7 @@
           <v-input :error="validate && !by_user_test.examiner_name" v-model="by_user_test.examiner_name"
                    class-name="my-15" label="Examiner Name" place="Enter Examiner Name"/>
           <div class="title"><span class="text-h1">Company representative Signature</span></div>
-          <div class="box box-img" @click="image_draw=true">
+          <div class="box box-img" :class="{'error':validate && !by_user_test.signature_id}" @click="image_draw=true">
             <div class="img" ref="img"></div>
           </div>
         </div>

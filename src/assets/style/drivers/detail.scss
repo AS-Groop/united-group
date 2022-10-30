@@ -154,6 +154,9 @@
             height: 100%;
             object-fit: contain;
           }
+          &.error{
+            border-color: red;
+          }
         }
 
         &-file {
