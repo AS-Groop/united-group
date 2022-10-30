@@ -7,7 +7,10 @@ import { ref } from "vue";
 const getFile = ref(null)
 const fetchFile = ref(null)
 
+export const fetchImg = ref(null);
+
 export async function uploadFile(file){
+	fetchImg.value = null
 	try{
 		// console.log('file',file)
 		fetchFile.value = (await axios.post(`/v1/file/`, file)).data;

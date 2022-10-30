@@ -48,8 +48,8 @@ import VBtn from "@/components/ui/vBtn";
 import CheckListItem from "@/components/app/modals/modal-check-list/CheckListItem";
 import LoadPhotoItem from "@/components/app/modals/modal-load-photo/LoadPhotoItem";
 import VueDrawingCanvas from "vue-drawing-canvas";
-import {computed, ref} from "vue";
-import {uploadFile} from "@/hooks/file/useFile";
+import {computed, ref, watch} from "vue";
+import {fetchImg, uploadFile} from "@/hooks/file/useFile";
 export default {
   components: {LoadPhotoItem, CheckListItem, VBtn, VSvg,VueDrawingCanvas},
   props: ['title','data_target','id'],
@@ -89,19 +89,22 @@ export default {
             const fil = new File([blob], "filename.jpeg");
             fd.append('file', fil)
             uploadFile(fd).then(data => {
-              props.data_target[props.id] = props.data_target[props.id] || '';
-              props.data_target[props.id] = data.file_id;
-              ctx.emit('update:data_target', props.data_target)
-              console.log(props.data_target);
+              fetchImg.value = data;
+              if(props?.data_target) {
+                props.data_target[props.id] = props.data_target[props.id] || '';
+                props.data_target[props.id] = data.file_id;
+                ctx.emit('update:data_target', props.data_target)
+              }
             });
-          }).then(e=>{ctx.emit('close')})
+          })
+          .then(e => {
+            ctx.emit('close')
+          })
     }
     return {
       initialImage,
       image,
       save,
-
-
       VueCanvasDrawing,
       getCoordinate,
     }

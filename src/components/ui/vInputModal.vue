@@ -1,7 +1,7 @@
 <template>
   <div class="form__input">
     <v-svg id="pen" width="25" height="24" v-if="pen && !!!val" />
-    <input type="text" @change="$emit('onChange',$event.target.value)" @focus="pen=false" class="text-h3" v-model="val"  @focusout="pen = true" placeholder="" />
+    <input type="text" :class="{'error':error}" @change="$emit('onChange',$event.target.value)" @focus="pen=false" class="text-h3" v-model="val"  @focusout="pen = true" placeholder="" />
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 import VSvg from "@/components/ui/vSvg";
 export default {
   components: {VSvg},
-  props:['inputValue'],
+  props:['inputValue','error'],
   data(){
     return{
       pen: true,
