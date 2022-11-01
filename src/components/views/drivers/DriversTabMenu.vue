@@ -15,7 +15,7 @@ setup(props){
   return {
     fetchList(item){
       getSteps(router.currentRoute.value.params.id, item);
-      // getDriverById(router.currentRoute.value.params.id);
+      getDriverById(router.currentRoute.value.params.id);
     }
   }
 }

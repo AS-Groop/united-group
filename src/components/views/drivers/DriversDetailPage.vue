@@ -29,7 +29,7 @@
                        :tab="tab"
                       />
       <div v-if="tabs_content.find(i=>i.alias===tab)?.finished_at" class="drivers__detail-item justify-end">
-        {{tabs_content.find(i=>i.alias===tab)?.finished_at}}
+        {{changeTimezone(tabs_content.find(i=>i.alias===tab)?.finished_at)}}
       </div>
     </template>
     <template v-if="tab==='road_test'">
@@ -73,10 +73,13 @@ export default {
       await getDriverById(router.currentRoute.value.params.id)
       load.value = false;
     }
+
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const changeTimezone =(date)=> new Date(date).toLocaleString('en-En',{timeZone})
     onMounted(() => {
-      fetchList()
+      fetchList();
     });
-    return {tabs_content, tab, modal, modal_data, driver_by_id, steps_list, load, fetchList};
+    return {tabs_content, tab, modal, modal_data, driver_by_id, steps_list, load, fetchList, changeTimezone};
   }
 }
 </script>
