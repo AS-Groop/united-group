@@ -5,8 +5,8 @@
       <div class="trucks__pick-location">
         <v-input :error="!validate && !data_target.location" v-model="data_target.location"  label="Location" place="Enter Location"/>
         <div class="trucks__pick-radios">
-          <v-radio-input label="Empty" name="location" value=""/>
-          <v-radio-input label="Loaded" name="location" value=""/>
+<!--          <v-radio-input label="Empty" name="location" value=""/>--> <!--  -->
+<!--          <v-radio-input label="Loaded" name="location" value=""/>-->
         </div>
       </div>
       <div class="trucks__pick-loads">

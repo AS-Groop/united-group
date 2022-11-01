@@ -16,11 +16,11 @@ export default {
   setup(){
     const data_info =computed(()=> [
       {title:'Truck Number', value: truck_by_id.value?.number || '--'},
-      {title:'Plate number', value:truck_by_id.value?.plate_number || '--'},
+      {title:'Attached Trailer', value:truck_by_id.value?.assigned_trailer?.number || '--'},
       {title:'Make', value:truck_by_id.value?.make || '--'},
       {title:'Milage', value:truck_by_id.value?.milage || '--'},
       {title:'Model', value:truck_by_id.value?.model || '--'},
-      {title:'With Driver Since', value:truck_by_id.value?.driver_since || '--'},
+      {title:'With Driver Since', value:truck_by_id.value?.assigned_driver?.since || '--'},
       {title:'Year Made', value:truck_by_id.value?.year_made || '--'},
       {title:'Assigned Driver', value:truck_by_id.value?.assigned_driver?.name.trim() || '--'},
     ])

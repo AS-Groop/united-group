@@ -17,11 +17,11 @@ export default {
     // const data_info = ref([]);
     const data_info = computed(()=>[
       {title:'Trailer Number', value:trailer_by_id.value?.number || '---'},
-      {title:'Plate number', value:trailer_by_id.value?.plate_number || '---'},
+      {title:'Assigned Truck', value:trailer_by_id.value?.assigned_truck?.number || '---'},
       {title:'Make & Model', value:trailer_by_id.value?.make || '---'},
       {title:'Assigned Driver', value:trailer_by_id.value?.assigned_driver?.name || '---'},
-      {title:'Model',value:trailer_by_id.value?.model || '---'},
-      {title:'With Driver Since',value:trailer_by_id.value?.driver_since || '---'},
+      {title:'Type',value:trailer_by_id.value?.trailer_type || '---'},
+      {title:'With Driver Since',value:trailer_by_id.value?.assigned_driver?.since || '---'},
       {title:'Year Made', value:trailer_by_id.value?.year_made || '---'},
     ])
 
