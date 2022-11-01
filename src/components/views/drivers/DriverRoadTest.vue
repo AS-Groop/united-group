@@ -27,7 +27,7 @@
                 <v-close-icon @click="()=>test.status='unchecked'" :check="test?.status==='unchecked'"/>
               </div>
             </div>
-            <pre class="body" v-if="test.body" v-html="test.body"></pre>
+            <pre class="body text-h4" v-if="test.body" v-html="test.body"></pre>
           </div>
         </template>
       </div>
@@ -165,6 +165,7 @@ export default {
       if (by_user_test.value.name &&
           by_user_test.value.date_of_test &&
           by_user_test.value.license &&
+          by_user_test.value.signature_id &&
           by_user_test.value.state &&
           by_user_test.value.truck &&
           by_user_test.value.trailer &&

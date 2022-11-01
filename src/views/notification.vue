@@ -14,7 +14,7 @@
         <div v-for="i in notification_list.notifications" class="notification-item text-h2-med">
           <div class="notification-text">{{ i.title }}</div>
           <div class="notification-department">{{ i.author }}</div>
-          <div class="notification-date">{{ i.created_at }}</div>
+          <div class="notification-date">{{ changeTimezone(i.created_at+' GMT+0:00') }}</div>
         </div>
         <TableFooter
             :count="count"
@@ -44,12 +44,14 @@ export default {
     let limit = ref(10);
     let count = computed(() => (notification_list?.value?.count) ? notification_list.value.count : 0);
     let pages = computed(() => (notification_list?.value?.count) ? Math.ceil(notification_list.value.count / limit.value) : 0);
-    onMounted(()=>getAllNotification({page:page.value,limit:limit.value}))
+    onMounted(() => getAllNotification({page: page.value, limit: limit.value}));
+    const changeTimezone =(date)=> new Date(date).toLocaleString('en-US',{timeZone:'America/Chicago'})
     watch([limit,page],()=>{
       getAllNotification({page:page.value,limit:limit.value})
     })
     return {
       notification_list,
+      changeTimezone,
       page,
       limit,
       count,

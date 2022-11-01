@@ -4,7 +4,7 @@ import toast from "@/use/toast";
 
 
 export const by_user_test = ref({
-  attachment_ids: ['a755ae3c-b54c-4222-91b6-9f298777368a'],
+  attachment_ids: [],
   comments: [],
   date_of_test: "",
   driver_id: "",
@@ -12,7 +12,7 @@ export const by_user_test = ref({
   license: "",
   name: "",
   note: "",
-  signature_id: "a755ae3c-b54c-4222-91b6-9f298777368a",
+  signature_id: "",
   state: "",
   test_status: "pass",
   tests: [
@@ -40,13 +40,13 @@ export const by_user_test = ref({
     {
       "title": "6) Operating in Traffic Passing And Turning",
       "body":
-        "A. Turing\nB. Traffic Signs and Signals\nC. Intersections\nD. Grade Crossings\nE. Passing\nF. Speed",
+        "A. Turning\nB. Traffic Signs and Signals\nC. Intersections\nD. Grade Crossings\nE. Passing\nF. Speed",
       "status": "unchecked"
     },
     {
       "title": "7) Miscellaneous",
       "body":
-        "A. General driving Ability and Habits\nB. handling of Freight\nC. rules and Regulations",
+        "A. General driving Ability and Habits\nB. Handling of Freight\nC. Rules and Regulations",
       "status": "unchecked"
     }
   ],
