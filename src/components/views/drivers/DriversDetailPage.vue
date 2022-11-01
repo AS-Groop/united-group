@@ -29,7 +29,7 @@
                        :tab="tab"
                       />
       <div v-if="tabs_content.find(i=>i.alias===tab)?.finished_at" class="drivers__detail-item justify-end">
-        {{changeTimezone(tabs_content.find(i=>i.alias===tab)?.finished_at)}}
+        {{changeTimezone((tabs_content.find(i=>i.alias===tab)?.finished_at)+' GMT+0:00')}}
       </div>
     </template>
     <template v-if="tab==='road_test'">
@@ -74,8 +74,8 @@ export default {
       load.value = false;
     }
 
-    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const changeTimezone =(date)=> new Date(date).toLocaleString('en-En',{timeZone})
+    // const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const changeTimezone =(date)=> new Date(date).toLocaleString('en-US',{timeZone:'America/Chicago'})
     onMounted(() => {
       fetchList();
     });
