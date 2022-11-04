@@ -125,9 +125,9 @@ import VInput from "@/components/ui/vInput";
 import CheckListItem from "@/components/app/modals/modal-check-list/CheckListItem";
 import VRadioInput from "@/components/ui/vRadioInput";
 import VCloseIcon from "@/components/ui/vCloseIcon";
-import {onMounted, ref, watch} from "vue";
+import {onMounted, onUnmounted, ref, watch} from "vue";
 import VInputModal from "@/components/ui/vInputModal";
-import {by_user_test, getUserTest, updateUserTest} from "@/hooks/road_test/useRoadTest";
+import {by_user_test, by_user_test0, getUserTest, updateUserTest} from "@/hooks/road_test/useRoadTest";
 import router from "@/router";
 import VBtn from "@/components/ui/vBtn";
 import {user_profile} from "@/hooks/user/useUser";
@@ -217,14 +217,21 @@ export default {
       by_user_test.value.driver_id = router.currentRoute.value.params.id
       getUserTest(router.currentRoute.value.params.id)
           .then(data => {
-            by_user_test.value = data.data;
-            getImage();
+            if(data?.data){
+              console.log(data)
+              by_user_test.value = data.data;
+              getImage();
+            }
+
           })
           .catch(e => {
             console.log(e);
           });
     });
 
+    onUnmounted(()=> {
+      by_user_test.value = by_user_test0;
+    })
 
     return {
       validate, save, img, fileDownload,uploadImage,

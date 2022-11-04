@@ -3,7 +3,9 @@ import axios from "axios";
 import toast from "@/use/toast";
 
 
-export const by_user_test = ref({
+
+
+export const by_user_test0 = {
   attachment_ids: [],
   comments: [],
   date_of_test: "",
@@ -52,7 +54,10 @@ export const by_user_test = ref({
   ],
   trailer: "",
   truck: ""
-});
+};
+
+
+export const by_user_test =ref(by_user_test0)
 
 export function getUserTest(id) {
   return new Promise((resolve, reject) => {
