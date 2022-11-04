@@ -60,7 +60,7 @@ export function getUserTest(id) {
       // by_user_test.value = response?.data;
       resolve(response)
     })
-      .catch(e=>resolve(e))
+      .catch(e=>reject(e))
   })
 }
 
