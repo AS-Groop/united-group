@@ -4,10 +4,11 @@
     <DetailNav>
       <DeatilNavBack v-if="driver_by_id" :title="driver_by_id.first_name + ' ' +driver_by_id.last_name" path="/drivers"/>
       <span class="detail__nav-item text-h6">
-        <v-svg id="phone" width="18" height="18" />{{ driver_by_id ? driver_by_id.phone : '' }}
+<!--        <v-svg id="massage" width="18" height="18" />{{ driver_by_id ? driver_by_id.email : '' }}-->
+         <v-toggle :id="'saf'" @check="check" :check="driver_by_id?.status?.alias === 'active'"/>
       </span>
       <span class="detail__nav-item text-h6">
-        <v-svg id="massage" width="18" height="18" />{{ driver_by_id ? driver_by_id.email : '' }}
+        <v-svg id="phone" width="18" height="18" />{{ driver_by_id ? driver_by_id.phone : '' }}
       </span>
       <span class="detail__nav-item text-h6">
         <v-svg id="truck" width="18" height="18" />{{ driver_by_id?.assigned_truck?.number || '#' }}
@@ -48,7 +49,14 @@ import DriversTabItems from "@/components/views/drivers/DriversTabItem";
 import TableTool from "@/components/app/table/TableTool";
 import {computed, onMounted, ref} from "vue";
 import VSvg from "@/components/ui/vSvg";
-import {driver_by_id, getDriverById, tabs_content} from "@/hooks/driver/useDriver";
+import {
+  driver_by_id,
+  driver_statuses,
+  getDriverById,
+  getDriverStatuses,
+  tabs_content,
+  updateStatusDriver
+} from "@/hooks/driver/useDriver";
 import {my_steps, steps} from "@/hooks/driver/useStep";
 import router from "@/router";
 import VLoading from "@/components/ui/vLoading";
@@ -69,17 +77,25 @@ export default {
     // steps ? tab.value = Object.entries(steps.value) : ''
 
     async function fetchList(){
-      load.value = true;
       await getDriverById(router.currentRoute.value.params.id)
-      load.value = false;
+    }
+
+    async function check(val) {
+      let id = '';
+      val ? id = driver_statuses?.value?.find(e => e.alias === 'active')?.id
+          : id = driver_statuses?.value?.find(e => e.alias === 'inactive')?.id;
+      await updateStatusDriver({driver_id: driver_by_id.value.id, status_id:id})
     }
 
     // const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const changeTimezone =(date)=> new Date(date).toLocaleString('en-US',{timeZone:'America/Chicago'})
     onMounted(() => {
+      load.value = true;
       fetchList();
+      getDriverStatuses();
+      load.value = false;
     });
-    return {tabs_content, tab, modal, modal_data, driver_by_id, steps_list, load, fetchList, changeTimezone};
+    return {tabs_content, check, tab, modal, modal_data, driver_by_id, steps_list, load, fetchList, changeTimezone};
   }
 }
 </script>

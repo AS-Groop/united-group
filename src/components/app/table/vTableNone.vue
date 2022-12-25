@@ -1,7 +1,7 @@
 <template>
   <div class="table">
     <div class="table__responsive table__responsive-not">
-      <div class="text-h1">Not List</div>
+      <div class="text-h1">No List</div>
     </div>
   </div>
 </template>

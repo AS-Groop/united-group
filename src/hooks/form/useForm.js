@@ -19,7 +19,6 @@ export async function getFormListEntities(obj){
   form_list_entities.value[obj.entities] = {}
   try{
     form_list_entities.value[obj.entities] = (await axios.get(`/v1/form/entities?entity_type=${obj.entities}${obj?.limit ? '&limit=' + obj.limit : '&limit=20'}${obj?.page ? '&page=' + obj.page : ''}${obj?.search ? '&search=' + obj.search : ''}`)).data;
-    console.log(form_list_entities.value)
   } catch (e){
     console.log(e)
   }

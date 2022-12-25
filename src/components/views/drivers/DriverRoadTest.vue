@@ -213,7 +213,6 @@ export default {
 
 
     onMounted(() => {
-      console.log(user_profile.value)
       by_user_test.value.driver_id = router.currentRoute.value.params.id
       getUserTest(router.currentRoute.value.params.id)
           .then(data => {

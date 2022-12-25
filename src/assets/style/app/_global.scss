@@ -210,6 +210,7 @@ body{
 
 .my_dropdown {
   position: relative;
+  margin-left: 15px;
   &-wrapper:before{
     content: '';
     position: absolute;
@@ -293,6 +294,10 @@ body{
 
   span {
     margin-right: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 140px;
   }
 }
 

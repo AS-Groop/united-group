@@ -12,7 +12,7 @@
       <RadioSelect @radioChange="()=>$emit('radioChange',i.id)" :name="listType" v-for="i in form_list_entities[listType].entities" :radio-checked="listValue && i.id === listValue[0]?.value" :title="i.name"/>
     </div>
     <div v-else class="modal_select">
-      NOT LIST
+      NO LIST
     </div>
   </div>
 </template>
@@ -24,7 +24,6 @@ export default {
   props:['name','listType','listValue'],
   components: {RadioSelect},
   setup(props){
-    console.log(form_list_entities.value)
     return{
       form_list_entities,
       getFormListEntities
