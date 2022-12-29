@@ -11,11 +11,12 @@ import {getDriverById} from "@/hooks/driver/useDriver";
 
 export default {
   props:['index','tabs_content'],
-setup(props){
+setup(props,ctx){
   return {
-    fetchList(item){
-      getSteps(router.currentRoute.value.params.id, item);
-      getDriverById(router.currentRoute.value.params.id);
+    async fetchList(item){
+      await getSteps(router.currentRoute.value.params.id, item);
+      await getDriverById(router.currentRoute.value.params.id);
+      ctx.emit('fetch');
     }
   }
 }

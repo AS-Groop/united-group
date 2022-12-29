@@ -10,6 +10,14 @@ export const driver_statuses = ref(null);
 
 
 
+export function tabsContentPer(){
+  let percentage = 1;
+  return computed(()=> {
+    tabs_content.value?.forEach(e=>percentage = e.percentage < percentage ? e.percentage : percentage)
+    return percentage
+  })
+}
+
 
 export async function getDriverList(obj) {
   try {
@@ -25,7 +33,6 @@ export function getDriverStatuses() {
     axios.get(`/v1/driver/status-statistics`).then(data => {
       resolve(data);
       driver_statuses.value = data.data;
-      console.log(driver_statuses.value)
     }).catch(e => {
       reject(e)
     });
@@ -59,7 +66,6 @@ export async function createDriver(obj) {
 
 
 export async function getDriverById(obj) {
-  console.log(obj)
   try {
     driver_by_id.value = (await axios.get(`/v1/driver/${obj}`)).data;
     if(driver_by_id.value && driver_by_id.value.department_statistics) tabs_content.value = driver_by_id.value.department_statistics;
@@ -82,5 +88,11 @@ export async function updateDriverById(obj) {
 
 
 export async function deleteDriverById(id){
-  await axios.delete(`/v1/driver/${id}`)
+  try {
+    await axios.delete(`/v1/driver/${id}`);
+    toast('100', 'success');
+  } catch (e) {
+    toast('400', 'error');
+    console.log(e)
+  }
 }

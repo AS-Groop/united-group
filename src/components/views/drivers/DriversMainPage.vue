@@ -187,7 +187,7 @@ export default {
     const rules = {
       first_name: { required },
       last_name: { required },
-      email: { required, email },
+      email: {  email },
       phone: { required }
     }
 

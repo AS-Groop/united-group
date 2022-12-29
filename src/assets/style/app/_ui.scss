@@ -63,6 +63,16 @@
       border-color: $blue1;
       color: $bg-white;
     }
+    &.delete{
+      border-color: $red;
+      color: $red;
+      &:hover{
+        box-shadow: none;
+        background: $red;
+        border-color: $red;
+        color: $bg-white;
+      }
+    }
   }
   &-100{
     width: 100%;
